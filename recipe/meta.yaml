@@ -1,4 +1,4 @@
-{% set version = "0.3.9" %}
+{% set version = "0.3.10" %}
 
 package:
   name: micromamba
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/TheSnakePit/mamba/archive/{{ version }}.tar.gz
-  sha256: 96affcbb0b0dbc6718801a81d68cb6740c8bfe3b209174b1d50efdb592f91497
+  sha256: 4e23a935d9f90f8963ede454d7df619ee6bd4acb2e599fd4a5bfb3f2475b9b06
 
 build:
   number: 0
