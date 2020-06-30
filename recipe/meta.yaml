@@ -35,7 +35,7 @@ requirements:
     - libopenssl-static  # [unix]
     - krb5  # [win]
     - libsolv  # [win]
-    - libopenssl  # [win]
+    - openssl  # [win]
 
 test:
   commands:
