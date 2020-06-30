@@ -12,7 +12,7 @@ source:
     - placeholder.patch
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     - libcurl
     - libarchive
