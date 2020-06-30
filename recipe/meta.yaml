@@ -30,9 +30,12 @@ requirements:
     # static libs
     - libcurl
     - libarchive
-    - krb5-static
-    - libsolv-static
-    - libopenssl-static
+    - krb5-static  # [unix]
+    - libsolv-static  # [unix]
+    - libopenssl-static  # [unix]
+    - krb5  # [win]
+    - libsolv  # [win]
+    - libopenssl  # [win]
 
 test:
   commands:
