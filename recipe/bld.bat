@@ -1,9 +1,11 @@
 mkdir build
 cd build
 
-cmake .. -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
-		 -DCMAKE_BUILD_TYPE="Release" ^
-		 -DBUILD_EXE=ON ^
-		 -DBUILD_BINDINGS=OFF
+cmake .. ^
+ 	-D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+	-D CMAKE_BUILD_TYPE="Release" ^
+	-D BUILD_EXE=ON ^
+	-D BUILD_BINDINGS=OFF ^
+	-G "Ninja"
 
 ninja install
