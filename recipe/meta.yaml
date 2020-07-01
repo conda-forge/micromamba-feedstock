@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/TheSnakePit/mamba/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - static_libgcc.patch  # [unix]
 
 build:
   number: 1
