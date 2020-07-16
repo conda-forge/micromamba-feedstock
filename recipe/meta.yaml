@@ -28,7 +28,7 @@ requirements:
     - cli11
     - nlohmann_json
     # static libs
-    - libcurl
+    - libcurl 7.71.0 *_0
     - libarchive
     - krb5-static  # [unix]
     - libsolv-static  # [unix]
