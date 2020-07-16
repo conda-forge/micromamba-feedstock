@@ -28,9 +28,9 @@ requirements:
     # static libs
     - libcurl 7.71.0 *_0
     - libarchive
-    - krb5-static       # [unix]
-    - libsolv-static    # [unix]
-    - libopenssl-static # [unix]
+    - krb5-static        # [unix]
+    - libsolv-static     # [unix]
+    - libopenssl-static  # [unix]
     - krb5     # [win]
     - libsolv  # [win]
     - openssl  # [win]
