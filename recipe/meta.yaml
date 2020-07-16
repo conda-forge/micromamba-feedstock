@@ -8,8 +8,6 @@ package:
 source:
   url: https://github.com/TheSnakePit/mamba/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - static_libgcc.patch  # [unix]
 
 build:
   number: 0
@@ -30,10 +28,10 @@ requirements:
     # static libs
     - libcurl 7.71.0 *_0
     - libarchive
-    - krb5-static  # [unix]
-    - libsolv-static  # [unix]
-    - libopenssl-static  # [unix]
-    - krb5  # [win]
+    - krb5-static       # [unix]
+    - libsolv-static    # [unix]
+    - libopenssl-static # [unix]
+    - krb5     # [win]
     - libsolv  # [win]
     - openssl  # [win]
 
