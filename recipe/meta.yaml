@@ -1,5 +1,5 @@
-{% set version = "0.4.1" %}
-{% set sha256 = "985e8de16d64ec1bc90104f0c701500fa70f7f2eb1c7b79c7aea9a6876248e8d" %}
+{% set version = "0.4.2" %}
+{% set sha256 = "76d40ceac03ba6d05856f2a277a89bb3ee59e4f27c5a8d2c3cbf7031979a0ab5" %}
 
 package:
   name: micromamba
@@ -12,7 +12,7 @@ source:
     - static_libgcc.patch  # [unix]
 
 build:
-  number: 1
+  number: 0
   ignore_run_exports:
     - libcurl  # [unix]
     - libarchive  # [unix]
