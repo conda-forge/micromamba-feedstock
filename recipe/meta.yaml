@@ -27,6 +27,8 @@ requirements:
     - nlohmann_json
     # static libs
     - libcurl 7.71.0 *_0
+    - xz 5.2.4 *_4
+    - libssh2 1.9.0 *_2
     - libarchive
     - krb5-static        # [unix]
     - libsolv-static     # [unix]
