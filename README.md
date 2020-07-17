@@ -5,7 +5,7 @@ Home: https://github.com/TheSnakePit/mamba
 
 Package license: BSD-3-Clause
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: Micromamba is a tiny version of mamba, the fast conda package installer.
 
