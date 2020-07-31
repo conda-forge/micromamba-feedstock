@@ -1,5 +1,5 @@
-{% set version = "0.4.2" %}
-{% set sha256 = "76d40ceac03ba6d05856f2a277a89bb3ee59e4f27c5a8d2c3cbf7031979a0ab5" %}
+{% set version = "0.4.4" %}
+{% set sha256 = "2798b642d4c93e0ae453a3dc55db86b29684b2e71ed73bf341c8f5a3cd660d53" %}
 
 package:
   name: micromamba
