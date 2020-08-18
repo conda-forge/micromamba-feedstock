@@ -33,6 +33,7 @@ requirements:
     - krb5-static        # [unix]
     - libsolv-static     # [unix]
     - libopenssl-static  # [unix]
+    - zstd-static  # [unix]
     - krb5     # [win]
     - libsolv  # [win]
     - openssl  # [win]
