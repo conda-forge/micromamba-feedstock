@@ -26,6 +26,7 @@ requirements:
     - cli11
     - nlohmann_json
     # static libs
+    - libcurl
     - libcurl-static
     - xz-static
     - libssh2-static
