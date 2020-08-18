@@ -26,9 +26,9 @@ requirements:
     - cli11
     - nlohmann_json
     # static libs
-    - libcurl 7.71.0 *_0
-    - xz 5.2.5 *_0
-    - libssh2 1.9.0 *_2
+    - libcurl-static
+    - xz-static
+    - libssh2-static
     - libarchive
     - krb5-static        # [unix]
     - libsolv-static     # [unix]
@@ -54,6 +54,7 @@ about:
     - LIBOPENSSL_LICENSE.txt
     - CLI11_LICENSE.txt
     - NLOHMANN_JSON_LICENSE.txt
+    - ZSTD_LICENSE.txt
   license: BSD-3-Clause
   license_family: BSD
   summary: Micromamba is a tiny version of mamba, the fast conda package installer.
