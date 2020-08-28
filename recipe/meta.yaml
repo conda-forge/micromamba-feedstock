@@ -36,6 +36,7 @@ requirements:
     - libopenssl-static  # [unix]
     - zstd-static  # [unix]
     - libnghttp2-static  # [unix]
+    - lz4-c-static  # [unix]
     - krb5     # [win]
     - libsolv  # [win]
     - openssl  # [win]
@@ -58,6 +59,11 @@ about:
     - CLI11_LICENSE.txt
     - NLOHMANN_JSON_LICENSE.txt
     - ZSTD_LICENSE.txt
+    - LIBLZ4_LICENSE.txt
+    - C_ARES_LICENSE.txt
+    - LIBEV_LICENSE.txt
+    - CPP_FILESYSTEM_LICENSE.txt
+    - LIBNGHTTP2_LICENSE.txt
   license: BSD-3-Clause AND MIT AND OpenSSL
   license_family: BSD
   summary: Micromamba is a tiny version of mamba, the fast conda package installer.
