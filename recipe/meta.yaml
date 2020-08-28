@@ -39,6 +39,7 @@ requirements:
     - krb5     # [win]
     - libsolv  # [win]
     - openssl  # [win]
+    - cpp-filesystem
 
 test:
   commands:
