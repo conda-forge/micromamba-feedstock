@@ -1,5 +1,5 @@
-{% set version = "0.4.2" %}
-{% set sha256 = "76d40ceac03ba6d05856f2a277a89bb3ee59e4f27c5a8d2c3cbf7031979a0ab5" %}
+{% set version = "0.5.1" %}
+{% set sha256 = "2c719d2fa623205672652cc21af15b052434ce5330fcbed01b4b921f22ba9e62" %}
 
 package:
   name: micromamba
@@ -26,16 +26,21 @@ requirements:
     - cli11
     - nlohmann_json
     # static libs
-    - libcurl 7.71.0 *_0
-    - xz 5.2.5 *_0
-    - libssh2 1.9.0 *_2
+    - libcurl
+    - libcurl-static
+    - xz-static
+    - libssh2-static
     - libarchive
     - krb5-static        # [unix]
     - libsolv-static     # [unix]
     - libopenssl-static  # [unix]
+    - zstd-static  # [unix]
+    - libnghttp2-static  # [unix]
+    - lz4-c-static  # [unix]
     - krb5     # [win]
     - libsolv  # [win]
     - openssl  # [win]
+    - cpp-filesystem
 
 test:
   commands:
@@ -53,7 +58,13 @@ about:
     - LIBOPENSSL_LICENSE.txt
     - CLI11_LICENSE.txt
     - NLOHMANN_JSON_LICENSE.txt
-  license: BSD-3-Clause
+    - ZSTD_LICENSE.txt
+    - LIBLZ4_LICENSE.txt
+    - C_ARES_LICENSE.txt
+    - LIBEV_LICENSE.txt
+    - CPP_FILESYSTEM_LICENSE.txt
+    - LIBNGHTTP2_LICENSE.txt
+  license: BSD-3-Clause AND MIT AND OpenSSL
   license_family: BSD
   summary: Micromamba is a tiny version of mamba, the fast conda package installer.
   dev_url: https://github.com/TheSnakePit/mamba
