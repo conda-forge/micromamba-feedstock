@@ -1,13 +1,15 @@
 mkdir build
 cd build
 
-cmake .. -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-		 -DCMAKE_BUILD_TYPE="Release" \
-		 -DBUILD_EXE=ON \
-		 -DBUILD_BINDINGS=OFF \
-		 -DLINK_STATIC=ON
+cmake ${CMAKE_ARGS} .. -DCMAKE_INSTALL_PREFIX=${PREFIX} \
+         -DCMAKE_BUILD_TYPE="Release" \
+         -DBUILD_EXE=ON \
+         -DBUILD_BINDINGS=OFF \
+         -DBUILD_STATIC=ON \
+         -DBUILD_SHARED=OFF \
+         -DSTATIC_DEPENDENCIES=ON \
 
 make -j${CPU_COUNT}
 make install
 
-strip ${PREFIX}/bin/micromamba
+${STRIP:-strip} ${PREFIX}/bin/micromamba
