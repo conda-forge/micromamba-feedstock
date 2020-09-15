@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   ignore_run_exports:
-    - libcurl  # [unix]
+    - libcurl     # [unix]
     - libarchive  # [unix]
 
 requirements:
@@ -22,24 +22,9 @@ requirements:
     - cmake
     - make  # [unix]
     - ninja  # [win]
+    - vcpkg
   host:
     - cli11
-    - nlohmann_json
-    # static libs
-    - libcurl
-    - libcurl-static
-    - xz-static
-    - libssh2-static
-    - libarchive
-    - krb5-static        # [unix]
-    - libsolv-static     # [unix]
-    - libopenssl-static  # [unix]
-    - zstd-static  # [unix]
-    - libnghttp2-static  # [unix]
-    - lz4-c-static  # [unix]
-    - krb5     # [win]
-    - libsolv  # [win]
-    - openssl  # [win]
     - cpp-filesystem
 
 test:
