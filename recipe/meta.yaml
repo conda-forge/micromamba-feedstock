@@ -7,6 +7,8 @@ package:
 source:
   url: https://github.com/TheSnakePit/mamba/archive/{{ version }}.tar.gz
   sha256: 8da181d651a6e034070a5043c587161dccd7dc64d4c8df13557e49a6156b8c97
+  patches:
+    - fixing_link.patch
 
 build:
   number: 0
