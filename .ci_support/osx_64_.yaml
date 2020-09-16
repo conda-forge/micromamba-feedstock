@@ -18,8 +18,6 @@ libcurl:
 - '7'
 macos_machine:
 - x86_64-apple-darwin13.4.0
-macos_min_version:
-- '10.9'
 pin_run_as_build:
   libcurl:
     max_pin: x

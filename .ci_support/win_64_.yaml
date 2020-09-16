@@ -10,11 +10,15 @@ krb5:
 - 1.17.1
 libarchive:
 - '3.3'
+libcurl:
+- '7'
 openssl:
 - 1.1.1
 pin_run_as_build:
   krb5:
     max_pin: x.x
+  libcurl:
+    max_pin: x
   openssl:
     max_pin: x.x.x
 target_platform:
