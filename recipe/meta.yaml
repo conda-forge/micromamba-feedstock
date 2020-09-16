@@ -26,6 +26,7 @@ requirements:
     - cli11
     - cpp-filesystem
     - yaml-cpp-static    # [unix]
+    - libcurl            # [unix]
     - libcurl-static     # [unix]
     - xz-static          # [unix]
     - libssh2-static     # [unix]
