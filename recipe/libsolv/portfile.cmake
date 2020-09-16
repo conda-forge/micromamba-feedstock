@@ -5,6 +5,7 @@ vcpkg_from_github(
     SHA512 34c8d6ad6b978d857b1f7825ad79f18bbcca9f00cde26c9ce9a0384bb1c0ad0b29f5c996de52cc18725943cb1f95a115103053a01d6a61f64e28f183562000e7
     HEAD_REF master
     PATCHES
+        win_static_build.patch
 )
 
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" BUILD_DYNAMIC_LIBS)

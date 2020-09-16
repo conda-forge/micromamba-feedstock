@@ -1,8 +1,17 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index bc95660..dd211a5 100644
+index bc95660..821b788 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -69,53 +69,55 @@ find_package(OpenSSL REQUIRED)
+@@ -13,6 +13,8 @@ endif()
+ #endif()
+ project(mamba)
+ 
++set(CMAKE_PREFIX_PATH "$ENV{CONDA_PREFIX}/Library/share/vcpkg/installed/x64-windows-static/")
++
+ set(MAMBA_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+ set(MAMBA_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+ 
+@@ -69,53 +71,55 @@ find_package(OpenSSL REQUIRED)
  find_package(nlohmann_json REQUIRED)
  
  if (STATIC_DEPENDENCIES)
@@ -96,7 +105,7 @@ index bc95660..dd211a5 100644
  else ()
      set(MAMBA_DEPENDENCIES_LIBS
          ${LIBSOLV_LIBRARIES}
-@@ -248,11 +250,11 @@ endmacro()
+@@ -248,11 +252,11 @@ endmacro()
  
  set(mamba_targets "")
  
@@ -113,10 +122,20 @@ index bc95660..dd211a5 100644
  
  if (BUILD_STATIC)
      message(STATUS "BUILDING STATIC")
-@@ -286,6 +288,32 @@ if (BUILD_EXE)
- 
+@@ -283,9 +287,48 @@ if (BUILD_EXE)
+     set(MAMBA_EXE
+         ${CMAKE_SOURCE_DIR}/src/main.cpp
+     )
+-
      add_executable(micromamba ${MAMBA_EXE})
-     target_link_libraries(micromamba PUBLIC mamba-static)
+-    target_link_libraries(micromamba PUBLIC mamba-static)
++
++    if (MSVC)
++        add_definitions("-DLIBARCHIVE_STATIC -DCURL_STATICLIB")
++        # string(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS_RELEASE CMAKE_CXX_FLAGS_RELEASE)
++        set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
++        include_directories($ENV{CONDA_PREFIX}/Library/include/)
++    endif()
 +
 +    find_package(LibArchive REQUIRED)
 +    find_package(CURL CONFIG REQUIRED)
@@ -126,11 +145,16 @@ index bc95660..dd211a5 100644
 +    find_library(LZ4_LIBRARY NAMES lz4)
 +    find_library(LZO2_LIBRARY NAMES lzo2)
 +    find_package(zstd CONFIG REQUIRED)
-+    find_library(LIBSOLV_LIBRARIES NAMES solv)
 +    find_library(BZIP2_LIBRARIES NAMES bz2)
-+    find_library(LIBSOLVEXT_LIBRARIES NAMES solvext)
 +
-+    target_link_libraries(micromamba PRIVATE 
++    if (WIN32)
++        find_library(LIBSOLV_LIBRARIES NAMES solv_static)
++        find_library(LIBSOLVEXT_LIBRARIES NAMES solvext_static)
++    else()
++        find_library(LIBSOLV_LIBRARIES NAMES solv)
++        find_library(LIBSOLVEXT_LIBRARIES NAMES solvext)
++    endif()
++    target_link_libraries(micromamba PRIVATE
 +        ${LibArchive_LIBRARY}
 +        libzstd
 +        ${LZ4_LIBRARY}
@@ -141,7 +165,10 @@ index bc95660..dd211a5 100644
 +        nlohmann_json
 +        nlohmann_json::nlohmann_json
 +        yaml-cpp
++        mamba-static
 +    )
++
++    # target_link_libraries(micromamba PUBLIC )
 +
      set_property(TARGET micromamba PROPERTY CXX_STANDARD 17)
  
