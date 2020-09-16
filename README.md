@@ -3,7 +3,7 @@ About micromamba
 
 Home: https://github.com/TheSnakePit/mamba
 
-Package license: BSD-3-Clause
+Package license: BSD-3-Clause AND MIT AND OpenSSL
 
 Feedstock license: BSD-3-Clause
 

@@ -1,5 +1,4 @@
-{% set version = "0.5.1" %}
-{% set sha256 = "2c719d2fa623205672652cc21af15b052434ce5330fcbed01b4b921f22ba9e62" %}
+{% set version = "0.5.2" %}
 
 package:
   name: micromamba
@@ -7,12 +6,14 @@ package:
 
 source:
   url: https://github.com/TheSnakePit/mamba/archive/{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 8da181d651a6e034070a5043c587161dccd7dc64d4c8df13557e49a6156b8c97
+  patches:
+    - fixing_link.patch
 
 build:
   number: 0
   ignore_run_exports:
-    - libcurl  # [unix]
+    - libcurl     # [unix]
     - libarchive  # [unix]
 
 requirements:
@@ -22,25 +23,23 @@ requirements:
     - cmake
     - make  # [unix]
     - ninja  # [win]
+    - vcpkg  # [win]
   host:
     - cli11
+    - cpp-filesystem
     - nlohmann_json
-    # static libs
-    - libcurl
-    - libcurl-static
-    - xz-static
-    - libssh2-static
-    - libarchive
+    - yaml-cpp-static    # [unix]
+    - libcurl            # [unix]
+    - libcurl-static     # [unix]
+    - xz-static          # [unix]
+    - libssh2-static     # [unix]
+    - libarchive         # [unix]
     - krb5-static        # [unix]
     - libsolv-static     # [unix]
     - libopenssl-static  # [unix]
-    - zstd-static  # [unix]
+    - zstd-static        # [unix]
     - libnghttp2-static  # [unix]
-    - lz4-c-static  # [unix]
-    - krb5     # [win]
-    - libsolv  # [win]
-    - openssl  # [win]
-    - cpp-filesystem
+    - lz4-c-static       # [unix]
 
 test:
   commands:
