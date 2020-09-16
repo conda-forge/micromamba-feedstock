@@ -25,6 +25,7 @@ requirements:
   host:
     - cli11
     - cpp-filesystem
+    - nlohmann_json
     - yaml-cpp-static    # [unix]
     - libcurl            # [unix]
     - libcurl-static     # [unix]
