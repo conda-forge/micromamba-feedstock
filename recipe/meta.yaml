@@ -1,14 +1,14 @@
-{% set version = "0.5.2" %}
+{% set version = "0.5.3" %}
 
 package:
   name: micromamba
   version: {{ version }}
 
 source:
-  url: https://github.com/TheSnakePit/mamba/archive/{{ version }}.tar.gz
-  sha256: 8da181d651a6e034070a5043c587161dccd7dc64d4c8df13557e49a6156b8c97
-  patches:
-    - fixing_link.patch
+  - url: https://github.com/TheSnakePit/mamba/archive/{{ version }}.tar.gz
+    sha256: 2c1db1eb1b762a673c7e2aba06c3f7586c1fe2a9c941a8c01b9663ed4ce54196
+  - path: CLI11.hpp
+    folder: include/mamba/CLI.hpp
 
 build:
   number: 0
