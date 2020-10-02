@@ -14,14 +14,15 @@ vcpkg install yaml-cpp --triplet x64-windows-static
 set CMAKE_PREFIX_PATH=%VCPKG_ROOT%\installed\x64-windows-static\;%CMAKE_PREFIX_PATH%
 
 cmake .. ^
- 	-D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
- 	-D CMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows-static\;%CMAKE_PREFIX_PATH%" ^
-	-D CMAKE_BUILD_TYPE="Release" ^
-	-D BUILD_EXE=ON ^
-	-D BUILD_STATIC=ON ^
+    -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+    -D CMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows-static\;%CMAKE_PREFIX_PATH%" ^
+    -D CMAKE_BUILD_TYPE="Release" ^
+    -D BUILD_EXE=ON ^
+    -D BUILD_STATIC=ON ^
     -D BUILD_SHARED=OFF ^
     -D STATIC_DEPENDENCIES=ON ^
-	-D BUILD_BINDINGS=OFF ^
-	-G "Ninja"
+    -D BUILD_BINDINGS=OFF ^
+    -D USE_VENDORED_CLI11=ON ^
+    -G "Ninja"
 
 ninja install
