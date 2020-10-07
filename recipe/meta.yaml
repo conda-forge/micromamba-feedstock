@@ -11,10 +11,12 @@ source:
     folder: include/mamba/CLI.hpp
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
-    - libcurl     # [unix]
-    - libarchive  # [unix]
+    - libcurl        # [unix]
+    - libarchive     # [unix]
+    - libgcc-ng      # [linux]
+    - libstdcxx-ng   # [linux]
 
 requirements:
   build:
