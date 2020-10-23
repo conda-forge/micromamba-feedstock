@@ -49,6 +49,7 @@ test:
     - micromamba --help
     - "export TMPDIR=\"${TMPDIR:-/tmp}\""                                               # [unix]
     - "if [ ! -d \"${TMPDIR}\" ]; then mkdir -p \"${TMPDIR}\"; fi"                      # [unix]
+    - stat $TMPDIR                                                                      # [unix]
     - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                            # [unix]
     - micromamba create -p $TMPDIR/testenv -c conda-forge -c defaults --yes python=3.9  # [unix]
     - $TMPDIR/testenv/bin/python --version                                              # [unix]
