@@ -47,10 +47,11 @@ test:
   commands:
     - test -f $PREFIX/bin/micromamba  # [unix]
     - micromamba --help
-    - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                        # [unix]
+    - "export TMPDIR=\"${TMPDIR:-/tmp}\""                                               # [unix]
+    - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                            # [unix]
     - micromamba create -p $TMPDIR/testenv -c conda-forge -c defaults --yes python=3.9  # [unix]
-    - $TMPDIR/testenv/bin/python --version                                            # [unix]
-    - $TMPDIR/testenv/bin/python -c 'import ssl'                                      # [unix]
+    - $TMPDIR/testenv/bin/python --version                                              # [unix]
+    - $TMPDIR/testenv/bin/python -c 'import ssl'                                        # [unix]
 
     - "set MAMBA_ROOT_PREFIX \"%TMPDIR%\\mamba\""                                               # [win]
     - "micromamba create -p \"%TMPDIR%\\testenv\" -c conda-forge -c defaults --yes python=3.9"  # [win]
