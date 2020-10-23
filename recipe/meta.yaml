@@ -47,12 +47,15 @@ test:
   commands:
     - test -f $PREFIX/bin/micromamba  # [unix]
     - micromamba --help
-    - micromamba create -p ./testenv python=3.9   # [unix]
-    - micromamba create -p .\\testenv python=3.9  # [win]
-    - testenv/bin/python --version          # [unix]
-    - "testenv/bin/python -c 'import ssl'"  # [unix]
-    - testenv\\python.exe --version          # [win]
-    - "testenv\\python.exe -c 'import ssl'"  # [win]
+    - export MAMBA_ROOT_PREFIX=$PREFIX            # [unix]
+    - micromamba create -p testenv python=3.9     # [unix]
+    - testenv/bin/python --version                # [unix]
+    - "testenv/bin/python -c 'import ssl'"        # [unix]
+
+    - "set MAMBA_ROOT_PREFIX=\"%PREFIX%\""        # [win]
+    - micromamba create -p testenv python=3.9     # [win]
+    - testenv\\python.exe --version               # [win]
+    - "testenv\\python.exe -c 'import ssl'"       # [win]
 
 
 
