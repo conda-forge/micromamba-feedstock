@@ -1,12 +1,12 @@
-{% set version = "0.5.3" %}
+{% set version = "0.6.1" %}
 
 package:
   name: micromamba
   version: {{ version }}
 
 source:
-  - url: https://github.com/TheSnakePit/mamba/archive/{{ version }}.tar.gz
-    sha256: 2c1db1eb1b762a673c7e2aba06c3f7586c1fe2a9c941a8c01b9663ed4ce54196
+  - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
+    sha256: 597d1a3dd3834678e292943672749b2e1ee40d32f6c4f4454ccc915699253d38
   - path: CLI11.hpp
     folder: include/mamba/CLI.hpp
 
@@ -49,7 +49,7 @@ test:
     - micromamba --help
 
 about:
-  home: https://github.com/TheSnakePit/mamba
+  home: https://github.com/mamba-org/mamba
   license_file:
     - LICENSE
     - CURL_LICENSE.txt
@@ -68,10 +68,11 @@ about:
   license: BSD-3-Clause AND MIT AND OpenSSL
   license_family: BSD
   summary: Micromamba is a tiny version of mamba, the fast conda package installer.
-  dev_url: https://github.com/TheSnakePit/mamba
+  dev_url: https://github.com/mamba-org/mamba
 
 extra:
   recipe-maintainers:
     - wolfv
     - SylvainCorlay
     - JohanMabille
+    - mariusvniekerk
