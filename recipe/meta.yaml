@@ -53,10 +53,10 @@ test:
     - $TMPDIR/testenv/bin/python --version                                              # [unix]
     - $TMPDIR/testenv/bin/python -c 'import ssl'                                        # [unix]
 
-    - "set MAMBA_ROOT_PREFIX \"%TMPDIR%\\mamba\""                                               # [win]
-    - "micromamba create -p \"%TMPDIR%\\testenv\" -c conda-forge -c defaults --yes python=3.9"  # [win]
-    - "%TMPDIR%\\testenv\\python.exe --version"                                                 # [win]
-    - "%TMPDIR%\\testenv\\python.exe -c 'import ssl'"                                           # [win]
+    - "set MAMBA_ROOT_PREFIX \"%TMP%\\mamba\""                                               # [win]
+    - "micromamba create -p \"%TMP%\\testenv\" -c conda-forge -c defaults --yes python=3.9"  # [win]
+    - "%TMP%\\testenv\\python.exe --version"                                                 # [win]
+    - "%TMP%\\testenv\\python.exe -c 'import ssl'"                                           # [win]
 
 about:
   home: https://github.com/mamba-org/mamba
