@@ -47,15 +47,15 @@ test:
   commands:
     - test -f $PREFIX/bin/micromamba  # [unix]
     - micromamba --help
-    - export MAMBA_ROOT_PREFIX=$PREFIX                                    # [unix]
-    - micromamba create -p testenv -c conda-forge -c defaults python=3.9  # [unix]
-    - testenv/bin/python --version                                        # [unix]
-    - "testenv/bin/python -c 'import ssl'"                                # [unix]
+    - export MAMBA_ROOT_PREFIX=$PREFIX                                          # [unix]
+    - micromamba create -p testenv -c conda-forge -c defaults --yes python=3.9  # [unix]
+    - testenv/bin/python --version                                              # [unix]
+    - "testenv/bin/python -c 'import ssl'"                                      # [unix]
 
-    - "set MAMBA_ROOT_PREFIX=\"%PREFIX%\""                                # [win]
-    - micromamba create -p testenv -c conda-forge -c defaults python=3.9  # [win]
-    - testenv\\python.exe --version                                       # [win]
-    - "testenv\\python.exe -c 'import ssl'"                               # [win]
+    - "set MAMBA_ROOT_PREFIX=\"%PREFIX%\""                                      # [win]
+    - micromamba create -p testenv -c conda-forge -c defaults --yes python=3.9  # [win]
+    - testenv\\python.exe --version                                             # [win]
+    - "testenv\\python.exe -c 'import ssl'"                                     # [win]
 
 about:
   home: https://github.com/mamba-org/mamba
