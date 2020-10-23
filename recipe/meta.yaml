@@ -47,6 +47,13 @@ test:
   commands:
     - test -f $PREFIX/bin/micromamba  # [unix]
     - micromamba --help
+    - micromamba create -p testenv python=3.9
+    - testenv/bin/python --version          # [unix]
+    - "testenv/bin/python -c 'import ssl'"  # [unix]
+    - testenv\\python.exe --version          # [win]
+    - "testenv\\python.exe -c 'import ssl'"  # [win]
+
+
 
 about:
   home: https://github.com/mamba-org/mamba
