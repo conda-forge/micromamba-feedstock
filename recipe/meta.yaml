@@ -47,18 +47,13 @@ test:
   commands:
     - test -f $PREFIX/bin/micromamba  # [unix]
     - micromamba --help
-    - "export TMPDIR=\"${TMPDIR:-/tmp}\""                                               # [unix]
-    - "if [ ! -d \"${TMPDIR}\" ]; then mkdir -p \"${TMPDIR}\"; fi"                      # [unix]
-    - stat $TMPDIR                                                                      # [unix]
-    - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                            # [unix]
-    - micromamba create -p $TMPDIR/testenv -c conda-forge -c defaults --yes python=3.9  # [unix]
-    - $TMPDIR/testenv/bin/python --version                                              # [unix]
-    - $TMPDIR/testenv/bin/python -c 'import ssl'                                        # [unix]
-
-    - "set MAMBA_ROOT_PREFIX \"%TMP%\\mamba\""                                               # [win]
-    - "micromamba create -p \"%TMP%\\testenv\" -c conda-forge -c defaults --yes python=3.9"  # [win]
-    - "%TMP%\\testenv\\python.exe --version"                                                 # [win]
-    - "%TMP%\\testenv\\python.exe -c 'import ssl'"                                           # [win]
+    - "export TMPDIR=\"${TMPDIR:-/tmp}\""                                               # [unix and not (ppc64le or aarch64)]
+    - "if [ ! -d \"${TMPDIR}\" ]; then mkdir -p \"${TMPDIR}\"; fi"                      # [unix and not (ppc64le or aarch64)]
+    - stat $TMPDIR                                                                      # [unix and not (ppc64le or aarch64)]
+    - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                            # [unix and not (ppc64le or aarch64)]
+    - micromamba create -p $TMPDIR/testenv -c conda-forge -c defaults --yes python=3.9  # [unix and not (ppc64le or aarch64)]
+    - $TMPDIR/testenv/bin/python --version                                              # [unix and not (ppc64le or aarch64)]
+    - $TMPDIR/testenv/bin/python -c 'import ssl'                                        # [unix and not (ppc64le or aarch64)]
 
 about:
   home: https://github.com/mamba-org/mamba
