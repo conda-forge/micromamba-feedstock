@@ -1,15 +1,15 @@
 About micromamba
 ================
 
-Home: https://github.com/TheSnakePit/mamba
+Home: https://github.com/mamba-org/mamba
 
 Package license: BSD-3-Clause AND MIT AND OpenSSL
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/micromamba-feedstock/blob/master/LICENSE.txt)
 
 Summary: Micromamba is a tiny version of mamba, the fast conda package installer.
 
-
+Development: https://github.com/mamba-org/mamba
 
 Current build status
 ====================
@@ -186,5 +186,6 @@ Feedstock Maintainers
 
 * [@JohanMabille](https://github.com/JohanMabille/)
 * [@SylvainCorlay](https://github.com/SylvainCorlay/)
+* [@mariusvniekerk](https://github.com/mariusvniekerk/)
 * [@wolfv](https://github.com/wolfv/)
 
