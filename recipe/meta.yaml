@@ -5,16 +5,18 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-    sha256: 70194c6a0e3905b1426004df3f889ae6768559f24037631c644dc9208a072611
+  - git_url: https://github.com/wolfv/mamba.git
+    git_rev: master
+  # - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
+  #   sha256: 70194c6a0e3905b1426004df3f889ae6768559f24037631c644dc9208a072611
   - path: CLI11.hpp
     folder: include/mamba/CLI.hpp
 
 build:
   number: 0
   ignore_run_exports_from:
-    - libcurl        # [unix]
-    - libarchive     # [unix]
+    - libcurl                  # [unix]
+    - libarchive               # [unix]
     - {{ compiler('c') }}      # [linux]
     - {{ compiler('cxx') }}    # [linux]
 
@@ -23,7 +25,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
-    - make  # [unix]
+    - make   # [unix]
     - ninja  # [win]
     - vcpkg  # [win]
   host:
@@ -42,6 +44,7 @@ requirements:
     - zstd-static        # [unix]
     - libnghttp2-static  # [unix]
     - lz4-c-static       # [unix]
+    - reproc-cpp-static  # [unix]
 
 test:
   commands:
