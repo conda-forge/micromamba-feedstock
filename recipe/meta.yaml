@@ -1,14 +1,12 @@
-{% set version = "0.6.5" %}
+{% set version = "0.7.0" %}
 
 package:
   name: micromamba
   version: {{ version }}
 
 source:
-  - git_url: https://github.com/wolfv/mamba.git
-    git_rev: master
-  # - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-  #   sha256: 70194c6a0e3905b1426004df3f889ae6768559f24037631c644dc9208a072611
+  - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
+    sha256: e01a6f77a7c5d49b35033307360bbd22c34560b9ef21048bc742bf644692bddc
   - path: CLI11.hpp
     folder: include/mamba/CLI.hpp
 
@@ -44,6 +42,8 @@ requirements:
     - zstd-static        # [unix]
     - libnghttp2-static  # [unix]
     - lz4-c-static       # [unix]
+    - reproc-static      # [unix]
+    - reproc-cpp         # [unix]
     - reproc-cpp-static  # [unix]
 
 test:
