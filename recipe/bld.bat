@@ -3,6 +3,7 @@ cd build
 
 ROBOCOPY %RECIPE_DIR%\libsolv %VCPKG_ROOT%\ports\libsolv
 ROBOCOPY %RECIPE_DIR%\curl %VCPKG_ROOT%\ports\curl
+ROBOCOPY %RECIPE_DIR%\reproc %VCPKG_ROOT%\ports\reproc
 
 SET VCPKG_BUILD_TYPE=release
 
