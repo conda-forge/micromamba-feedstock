@@ -9,7 +9,7 @@ SET VCPKG_BUILD_TYPE=release
 
 vcpkg install libsolv[conda] --triplet x64-windows-static
 vcpkg install libarchive --triplet x64-windows-static
-vcpkg install curl --triplet x64-windows-static
+vcpkg install curl[schannel] --triplet x64-windows-static
 vcpkg install yaml-cpp --triplet x64-windows-static
 vcpkg install reproc --triplet x64-windows-static
 

@@ -1,4 +1,4 @@
-{% set version = "0.7.0" %}
+{% set version = "0.7.2" %}
 
 package:
   name: micromamba
@@ -6,7 +6,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-    sha256: e01a6f77a7c5d49b35033307360bbd22c34560b9ef21048bc742bf644692bddc
+    sha256: da47d89595a02d759943888c590113b1131c03f3ab01a4aa679a45154a737d20
   - path: CLI11.hpp
     folder: include/mamba/CLI.hpp
 
@@ -48,7 +48,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/micromamba  # [unix]
+    - test -f $PREFIX/bin/micromamba                                                    # [unix]
     - micromamba --help
     - "export TMPDIR=\"${TMPDIR:-/tmp}\""                                               # [unix and not (ppc64le or aarch64)]
     - "if [ ! -d \"${TMPDIR}\" ]; then mkdir -p \"${TMPDIR}\"; fi"                      # [unix and not (ppc64le or aarch64)]
