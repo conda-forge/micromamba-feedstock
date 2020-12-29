@@ -22,9 +22,8 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cmake
+    - cmake  # [unix]
     - make   # [unix]
-    - ninja  # [win]
     - vcpkg  # [win]
   host:
     - cli11
