@@ -8,7 +8,7 @@ ROBOCOPY %RECIPE_DIR%\reproc %VCPKG_ROOT%\ports\reproc
 SET VCPKG_BUILD_TYPE=release
 
 vcpkg install libsolv[conda] --triplet x64-windows-static
-vcpkg install libarchive --triplet x64-windows-static
+vcpkg install libarchive[bzip2,lz4,lzma,lzo,openssl,zstd] --triplet x64-windows-static
 vcpkg install curl --triplet x64-windows-static
 vcpkg install yaml-cpp --triplet x64-windows-static
 vcpkg install reproc --triplet x64-windows-static
