@@ -1,0 +1,20 @@
+diff --git a/src/micromamba/CMakeLists.txt b/src/micromamba/CMakeLists.txt
+index 8654ed5..bf2da64 100644
+--- a/src/micromamba/CMakeLists.txt
++++ b/src/micromamba/CMakeLists.txt
+@@ -82,6 +82,7 @@ elseif (STATIC_DEPENDENCIES AND WIN32)
+     find_package(yaml-cpp CONFIG REQUIRED)
+     find_package(nlohmann_json CONFIG REQUIRED)
+     find_package(LibLZMA CONFIG REQUIRED)
++    find_package(LibXml2 CONFIG REQUIRED)
+     find_library(LZ4_LIBRARY NAMES lz4)
+     find_library(LZO2_LIBRARY NAMES lzo2)
+     find_package(zstd CONFIG REQUIRED)
+@@ -94,6 +95,7 @@ elseif (STATIC_DEPENDENCIES AND WIN32)
+ 
+     target_link_libraries(micromamba PRIVATE
+         ${CRYPTO_LIBRARIES}
++        ${LIBXML2_LIBRARIES}
+         ${LibArchive_LIBRARY}
+         libzstd
+         ${LZ4_LIBRARY}
