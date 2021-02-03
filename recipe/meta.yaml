@@ -1,4 +1,4 @@
-{% set version = "0.7.11" %}
+{% set version = "0.7.12" %}
 
 package:
   name: micromamba
@@ -6,7 +6,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-    sha256: a6ab659cd88b90d097e0a904647d174ed7a1eb564fcc2d47d538eddc7a5306a9
+    sha256: 7ceec5aa2fa98f266f37c9cc5d3f00292150d1dba2d21117171d818ab252b202
   - path: CLI11.hpp
     folder: include/mamba/CLI.hpp
 
