@@ -12,11 +12,14 @@ bash $MINIFORGE_FILE -b
 endgroup "Installing a fresh version of Miniforge"
 
 startgroup "Configuring conda"
+GET_BOA=boa
+BUILD_CMD=mambabuild
+
 source ${HOME}/miniforge3/etc/profile.d/conda.sh
 conda activate base
 
 echo -e "\n\nInstalling conda-forge-ci-setup=3 and conda-build."
-conda install -n base --quiet --yes "conda-forge-ci-setup=3" conda-build pip
+conda install -n base --quiet --yes "conda-forge-ci-setup=3" conda-build pip ${GET_BOA:-}
 
 
 
@@ -36,7 +39,7 @@ endgroup "Configuring conda"
 
 set -e
 
-startgroup "Running conda build"
+startgroup "Running conda $BUILD_CMD"
 echo -e "\n\nMaking the build clobber file"
 make_build_number ./ ./recipe ./.ci_support/${CONFIG}.yaml
 
@@ -44,14 +47,10 @@ if [[ "${HOST_PLATFORM}" != "${BUILD_PLATFORM}" ]]; then
     EXTRA_CB_OPTIONS="${EXTRA_CB_OPTIONS:-} --no-test"
 fi
 
-conda build ./recipe -m ./.ci_support/${CONFIG}.yaml --suppress-variables --clobber-file ./.ci_support/clobber_${CONFIG}.yaml ${EXTRA_CB_OPTIONS:-}
+conda $BUILD_CMD ./recipe -m ./.ci_support/${CONFIG}.yaml --suppress-variables --clobber-file ./.ci_support/clobber_${CONFIG}.yaml ${EXTRA_CB_OPTIONS:-}
 endgroup "Running conda build"
 startgroup "Validating outputs"
 validate_recipe_outputs "${FEEDSTOCK_NAME}"
 endgroup "Validating outputs"
-
-if [[ "${UPLOAD_PACKAGES}" != "False" ]]; then
-  startgroup "Uploading packages"
-  upload_package --validate --feedstock-name="${FEEDSTOCK_NAME}" ./ ./recipe ./.ci_support/${CONFIG}.yaml
-  endgroup "Uploading packages"
-fi
+# we're building with mambabuild, so fail here and DO NOT UPLOAD packages
+exit 1

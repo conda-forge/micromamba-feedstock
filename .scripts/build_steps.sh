@@ -24,8 +24,10 @@ conda-build:
  root-dir: ${FEEDSTOCK_ROOT}/build_artifacts
 
 CONDARC
+GET_BOA=boa
+BUILD_CMD=mambabuild
 
-conda install --yes --quiet "conda-forge-ci-setup=3" conda-build pip -c conda-forge
+conda install --yes --quiet "conda-forge-ci-setup=3" conda-build pip ${GET_BOA:-} -c conda-forge
 
 # set up the condarc
 setup_conda_rc "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
@@ -53,14 +55,16 @@ if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
     # Drop into an interactive shell
     /bin/bash
 else
-    startgroup "Running conda build"
-    conda build "${RECIPE_ROOT}" -m "${CI_SUPPORT}/${CONFIG}.yaml" \
+    startgroup "Running conda $BUILD_CMD"
+    conda $BUILD_CMD "${RECIPE_ROOT}" -m "${CI_SUPPORT}/${CONFIG}.yaml" \
         --suppress-variables ${EXTRA_CB_OPTIONS:-} \
         --clobber-file "${CI_SUPPORT}/clobber_${CONFIG}.yaml"
     endgroup "Running conda build"
     startgroup "Validating outputs"
     validate_recipe_outputs "${FEEDSTOCK_NAME}"
     endgroup "Validating outputs"
+    # we are building with mambabuild, so exit with an error code for now
+    exit 1
 
     if [[ "${UPLOAD_PACKAGES}" != "False" ]]; then
         startgroup "Uploading packages"
