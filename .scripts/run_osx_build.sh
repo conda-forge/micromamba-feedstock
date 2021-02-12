@@ -1,25 +1,29 @@
 #!/usr/bin/env bash
 
-source .scripts/logging_utils.sh
-
 set -x
 
-startgroup "Installing a fresh version of Miniforge"
+echo -e "\n\nInstalling a fresh version of Miniforge."
+if [[ ${CI} == "travis" ]]; then
+  echo -en 'travis_fold:start:install_miniforge\\r'
+fi
 MINIFORGE_URL="https://github.com/conda-forge/miniforge/releases/latest/download"
 MINIFORGE_FILE="Miniforge3-MacOSX-x86_64.sh"
 curl -L -O "${MINIFORGE_URL}/${MINIFORGE_FILE}"
 bash $MINIFORGE_FILE -b
-endgroup "Installing a fresh version of Miniforge"
+if [[ ${CI} == "travis" ]]; then
+  echo -en 'travis_fold:end:install_miniforge\\r'
+fi
 
-startgroup "Configuring conda"
-GET_BOA=boa
-BUILD_CMD=mambabuild
+echo -e "\n\nConfiguring conda."
+if [[ ${CI} == "travis" ]]; then
+  echo -en 'travis_fold:start:configure_conda\\r'
+fi
 
 source ${HOME}/miniforge3/etc/profile.d/conda.sh
 conda activate base
 
 echo -e "\n\nInstalling conda-forge-ci-setup=3 and conda-build."
-conda install -n base --quiet --yes "conda-forge-ci-setup=3" conda-build pip ${GET_BOA:-}
+conda install -n base --quiet --yes "conda-forge-ci-setup=3" conda-build pip
 
 
 
@@ -35,22 +39,23 @@ echo -e "\n\nRunning the build setup script."
 source run_conda_forge_build_setup
 
 
-endgroup "Configuring conda"
+if [[ ${CI} == "travis" ]]; then
+  echo -en 'travis_fold:end:configure_conda\\r'
+fi
 
 set -e
 
-startgroup "Running conda $BUILD_CMD"
-echo -e "\n\nMaking the build clobber file"
+echo -e "\n\nMaking the build clobber file and running the build."
 make_build_number ./ ./recipe ./.ci_support/${CONFIG}.yaml
 
 if [[ "${HOST_PLATFORM}" != "${BUILD_PLATFORM}" ]]; then
     EXTRA_CB_OPTIONS="${EXTRA_CB_OPTIONS:-} --no-test"
 fi
 
-conda $BUILD_CMD ./recipe -m ./.ci_support/${CONFIG}.yaml --suppress-variables --clobber-file ./.ci_support/clobber_${CONFIG}.yaml ${EXTRA_CB_OPTIONS:-}
-endgroup "Running conda build"
-startgroup "Validating outputs"
+conda build ./recipe -m ./.ci_support/${CONFIG}.yaml --suppress-variables --clobber-file ./.ci_support/clobber_${CONFIG}.yaml ${EXTRA_CB_OPTIONS:-}
 validate_recipe_outputs "${FEEDSTOCK_NAME}"
-endgroup "Validating outputs"
-# we're building with mambabuild, so fail here and DO NOT UPLOAD packages
-exit 1
+
+if [[ "${UPLOAD_PACKAGES}" != "False" ]]; then
+  echo -e "\n\nUploading the packages."
+  upload_package --validate --feedstock-name="${FEEDSTOCK_NAME}" ./ ./recipe ./.ci_support/${CONFIG}.yaml
+fi
