@@ -42,7 +42,6 @@ requirements:
     - libnghttp2-static  # [unix]
     - lz4-c-static       # [unix]
     - reproc-static      # [unix]
-    - reproc-cpp         # [unix]
     - reproc-cpp-static  # [unix]
 
 test:
