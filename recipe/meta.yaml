@@ -15,6 +15,7 @@ build:
   ignore_run_exports_from:
     - libcurl                  # [unix]
     - libarchive               # [unix]
+    - reproc-cpp               # [unix]
     - {{ compiler('c') }}      # [linux]
     - {{ compiler('cxx') }}    # [linux]
 
@@ -42,6 +43,7 @@ requirements:
     - libnghttp2-static  # [unix]
     - lz4-c-static       # [unix]
     - reproc-static      # [unix]
+    - reproc-cpp         # [unix]
     - reproc-cpp-static  # [unix]
 
 test:
