@@ -28,6 +28,8 @@ requirements:
     - cmake  # [unix]
     - make   # [unix]
     - vcpkg  # [win]
+    # force a recent curl version for windows
+    - curl >=7.75  # [win]
   host:
     - cli11
     - cpp-filesystem

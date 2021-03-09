@@ -1,8 +1,8 @@
 mkdir build
 cd build
 
-where /R C:\ curl.h
-where /R D:\ curl.h
+rem where /R C:\ curl.h
+rem where /R D:\ curl.h
 
 ROBOCOPY %RECIPE_DIR%\libsolv %VCPKG_ROOT%\ports\libsolv
 ROBOCOPY %RECIPE_DIR%\curl %VCPKG_ROOT%\ports\curl
