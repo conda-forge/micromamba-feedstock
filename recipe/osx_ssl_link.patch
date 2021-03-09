@@ -1,0 +1,75 @@
+diff --git a/src/fetch.cpp b/src/fetch.cpp
+index 5c8b3a8..9a9f808 100644
+--- a/src/fetch.cpp
++++ b/src/fetch.cpp
+@@ -76,6 +76,11 @@ namespace mamba
+                 }
+             }
+ 
++            if (Context::instance().ssl_verify == "<system>" && (on_mac || on_win))
++            {
++                curl_easy_setopt(handle, CURLOPT_CAINFO, nullptr);
++            }
++
+             curl_easy_cleanup(handle);
+         }
+     }
+@@ -158,6 +163,10 @@ namespace mamba
+                 curl_easy_setopt(m_handle, CURLOPT_SSL_VERIFYPEER, 0L);
+                 curl_easy_setopt(m_handle, CURLOPT_SSL_VERIFYHOST, 0L);
+             }
++            else if (ssl_verify == "<system>")
++            {
++                curl_easy_setopt(m_handle, CURLOPT_CAINFO, nullptr);
++            }
+             else
+             {
+                 if (!fs::exists(ssl_verify))
+diff --git a/src/micromamba/CMakeLists.txt b/src/micromamba/CMakeLists.txt
+index 5176731..bd1287e 100644
+--- a/src/micromamba/CMakeLists.txt
++++ b/src/micromamba/CMakeLists.txt
+@@ -86,6 +86,13 @@ if (STATIC_DEPENDENCIES AND UNIX)
+         list(APPEND FINAL_LIBS "${TMP_LIB}")
+     endforeach(LIB)
+ 
++    if (APPLE)
++        find_library(SECURITY_LIBRARY Security)
++        find_library(COREFOUNDATION_LIBRARY CoreFoundation)
++        message("Found library: ${SECURITY_LIBRARY}\n${COREFOUNDATION_LIBRARY}")
++        list(APPEND FINAL_LIBS ${COREFOUNDATION_LIBRARY} ${SECURITY_LIBRARY})
++    endif()
++
+     message("  Found static dependencies:")
+     foreach(LIB ${FINAL_LIBS})
+         message("   - ${LIB}")
+diff --git a/src/micromamba/parsers.cpp b/src/micromamba/parsers.cpp
+index ccc90cd..43c6e13 100644
+--- a/src/micromamba/parsers.cpp
++++ b/src/micromamba/parsers.cpp
+@@ -166,8 +166,6 @@ init_network_parser(CLI::App* subcom)
+ void
+ load_network_options(Context& ctx)
+ {
+-    init_curl_ssl();
+-
+     // ssl verify can be either an empty string (regular SSL verification),
+     // the string "<false>" to indicate no SSL verification, or a path to
+     // a directory with cert files, or a cert file.
+@@ -205,10 +203,16 @@ load_network_options(Context& ctx)
+                 exit(1);
+             }
+         }
++        else
++        {
++            ctx.ssl_verify = "<system>";
++        }
+     }
+ 
+     ctx.ssl_no_revoke = network_options.ssl_no_revoke;
+     ctx.local_repodata_ttl = network_options.repodata_ttl;
++
++    init_curl_ssl();
+ }
+ 
+ void
