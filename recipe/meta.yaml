@@ -1,4 +1,4 @@
-{% set version = "0.8.0" %}
+{% set version = "0.8.2" %}
 
 package:
   name: micromamba
@@ -6,9 +6,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-    sha256: 1b2c99df3964331465541862549f868d0f31684f5307151595c541ec6459c7b9
-    patches:
-      - osx_ssl_link.patch  # [osx or win]
+    sha256: d331dc3af9a111e0a9c27f5067ad7d2f29ee7827952a92fecd4a713771c59d28
   - path: CLI11.hpp
     folder: include/mamba/CLI.hpp
 
