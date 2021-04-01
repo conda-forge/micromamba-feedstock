@@ -1,13 +1,11 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO openSUSE/libsolv
-    REF 0.7.15
-    SHA512 34c8d6ad6b978d857b1f7825ad79f18bbcca9f00cde26c9ce9a0384bb1c0ad0b29f5c996de52cc18725943cb1f95a115103053a01d6a61f64e28f183562000e7
+    REF 0.7.18
+    SHA512 834234b94513a2d141e1a4f6be47103046cba710a024bc36b40e2fc88f0647fc5881ff4e31d251e360b51bde1d2f0dcc0ea23412c871f4164ee17126b8756f77
     HEAD_REF master
     PATCHES
         win_static_build.patch
-        use-only-tar-bz2.patch
-        fix-win32-regex.patch
 )
 
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" BUILD_DYNAMIC_LIBS)
