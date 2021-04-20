@@ -9,7 +9,7 @@ source:
   - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
     sha256: c5c4fa88efa2b69f3cc6dc0ba4e86a50d4771cf53868c5f0c92e62ea4eda68cd
   - path: CLI11.hpp
-    folder: include/mamba/CLI.hpp
+    folder: include/mamba/core/CLI.hpp
 
 build:
   number: {{ build_num }}
