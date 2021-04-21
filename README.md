@@ -187,6 +187,7 @@ Feedstock Maintainers
 
 * [@JohanMabille](https://github.com/JohanMabille/)
 * [@SylvainCorlay](https://github.com/SylvainCorlay/)
+* [@adriendelsalle](https://github.com/adriendelsalle/)
 * [@mariusvniekerk](https://github.com/mariusvniekerk/)
 * [@wolfv](https://github.com/wolfv/)
 
