@@ -58,7 +58,7 @@ test:
     - "if [ ! -d \"${TMPDIR}\" ]; then mkdir -p \"${TMPDIR}\"; fi"            # [unix and not (ppc64le or aarch64)]
     - stat $TMPDIR                                                            # [unix and not (ppc64le or aarch64)]
     - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                  # [unix and not (ppc64le or aarch64)]
-    - micromamba create -p $TMPDIR/testenv -c conda-forge --yes python=3.9    # [unix and not (ppc64le or aarch64)]
+    - micromamba create -p $TMPDIR/testenv --override-channels -c conda-forge --yes python=3.9    # [unix and not (ppc64le or aarch64)]
     - $TMPDIR/testenv/bin/python --version                                    # [unix and not (ppc64le or aarch64)]
     - $TMPDIR/testenv/bin/python -c 'import ssl'                              # [unix and not (ppc64le or aarch64)]
 
