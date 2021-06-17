@@ -1,4 +1,4 @@
-{% set version = "0.13.1" %}
+{% set version = "0.14.0" %}
 {% set build_num = 0 %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-    sha256: ebf59ed0cb3d8a7716c22fd792e7c71c36b98264599bba723159f34bc08352c2
+    sha256: 969617db9b31961d02714abe25bbc283f580cdd4418f15efdc2fd58daeca14e0
   - path: CLI11.hpp
     folder: include/mamba/core/CLI.hpp
 
@@ -32,7 +32,7 @@ requirements:
     - curl >=7.75  # [win]
   host:
     - cli11
-    - cpp-filesystem
+    - cpp-filesystem >=1.5.8
     - nlohmann_json
     - yaml-cpp-static              # [unix]
     - libcurl 7.76.1 *_0           # [unix]
@@ -52,15 +52,15 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/micromamba                                                    # [unix]
+    - test -f $PREFIX/bin/micromamba                                          # [unix]
     - micromamba --help
-    - "export TMPDIR=\"${TMPDIR:-/tmp}\""                                               # [unix and not (ppc64le or aarch64)]
-    - "if [ ! -d \"${TMPDIR}\" ]; then mkdir -p \"${TMPDIR}\"; fi"                      # [unix and not (ppc64le or aarch64)]
-    - stat $TMPDIR                                                                      # [unix and not (ppc64le or aarch64)]
-    - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                            # [unix and not (ppc64le or aarch64)]
-    - micromamba create -p $TMPDIR/testenv -c conda-forge -c defaults --yes python=3.9  # [unix and not (ppc64le or aarch64)]
-    - $TMPDIR/testenv/bin/python --version                                              # [unix and not (ppc64le or aarch64)]
-    - $TMPDIR/testenv/bin/python -c 'import ssl'                                        # [unix and not (ppc64le or aarch64)]
+    - "export TMPDIR=\"${TMPDIR:-/tmp}\""                                     # [unix and not (ppc64le or aarch64)]
+    - "if [ ! -d \"${TMPDIR}\" ]; then mkdir -p \"${TMPDIR}\"; fi"            # [unix and not (ppc64le or aarch64)]
+    - stat $TMPDIR                                                            # [unix and not (ppc64le or aarch64)]
+    - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                  # [unix and not (ppc64le or aarch64)]
+    - micromamba create -p $TMPDIR/testenv --override-channels -c conda-forge --yes python=3.9    # [unix and not (ppc64le or aarch64)]
+    - $TMPDIR/testenv/bin/python --version                                    # [unix and not (ppc64le or aarch64)]
+    - $TMPDIR/testenv/bin/python -c 'import ssl'                              # [unix and not (ppc64le or aarch64)]
 
 about:
   home: https://github.com/mamba-org/mamba
