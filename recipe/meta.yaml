@@ -1,4 +1,4 @@
-{% set version = "0.14.0" %}
+{% set version = "0.15.0" %}
 {% set build_num = 0 %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-    sha256: 969617db9b31961d02714abe25bbc283f580cdd4418f15efdc2fd58daeca14e0
+    sha256: 52133f941c1c60f3c05ad856fa195f5e3a2c8d30d2baebc727738aa305171971
   - path: CLI11.hpp
     folder: include/mamba/core/CLI.hpp
 
