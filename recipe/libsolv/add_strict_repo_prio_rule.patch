@@ -89,7 +89,7 @@ index a6b9394f..a4960ef4 100644
        s = pool_tmpjoin(pool, "package ", pool_solvid2str(pool, source), 0);
        s = pool_tmpappend(pool, s, " has constraint ", pool_dep2str(pool, dep));
 diff --git a/src/rules.c b/src/rules.c
-index b1b5f09c..a2b6c23f 100644
+index b1b5f09c..0dcce68e 100644
 --- a/src/rules.c
 +++ b/src/rules.c
 @@ -2992,6 +2992,12 @@ solver_ruleinfo(Solver *solv, Id rid, Id *fromp, Id *top, Id *depp)
@@ -116,38 +116,63 @@ index b1b5f09c..a2b6c23f 100644
    if (rid >= solv->learntrules && rid < solv->nrules)
      return SOLVER_RULE_LEARNT;
    return SOLVER_RULE_UNKNOWN;
-@@ -4135,6 +4141,29 @@ solver_addrecommendsrules(Solver *solv)
+@@ -4135,6 +4141,54 @@ solver_addrecommendsrules(Solver *solv)
    solv->recommendsrules_end = solv->nrules;
  }
  
 +/* add rules to exclude solvables provided by lower
 + * precedence repositories */
-+void solver_addstrictrepopriorules(struct s_Solver *solv)
++void solver_addstrictrepopriorules(struct s_Solver *solv, Map *addedmap)
 +{
 +  Pool *pool = solv->pool;
-+  Solvable *s;
-+  Id sid, p, pp;
++	Solvable *s;
++	Id p, p2, pp2;
++	Map priomap;
++	int max_prio;
 +
-+  solv->strictrepopriorules = solv->nrules;
-+  FOR_POOL_SOLVABLES(sid)
-+  {
-+	s = pool->solvables + sid;
-+	int max_prio = 0;
-+	FOR_PROVIDES(p, pp, s->name)
-+	  if ((pool->solvables + p)->repo->priority > max_prio)
-+	    max_prio = (pool->solvables + p)->repo->priority;
++	map_init_clone(&priomap, addedmap);
++	solv->strictrepopriorules = solv->nrules;
 +
-+	if (s->repo->priority < max_prio)
-+	  solver_addrule(solv, -sid, 0, 0);
-+  }
-+  solv->strictrepopriorules_end = solv->nrules;
++	FOR_POOL_SOLVABLES(p)
++	{
++		if (!MAPTST(&priomap, p))
++		  	continue;
++
++		s = pool->solvables + p;
++		max_prio = s->repo->priority;
++		FOR_PROVIDES(p2, pp2, s->name)
++		{
++		Solvable *s2 = pool->solvables + p2;
++		if (s->name != s2->name)
++		{
++		MAPCLR(&priomap, p2);
++			continue;
++		}
++		if (s2->repo->priority > max_prio)
++			max_prio = s2->repo->priority;
++		}
++		
++    FOR_PROVIDES(p2, pp2, s->name)
++		{
++		Solvable *s2 = pool->solvables + p2;
++		if (!MAPTST(&priomap, p2))
++	    continue;
++		MAPCLR(&priomap, p2);
++		if (pool->installed && s2->repo == pool->installed)
++			continue;
++		if (s2->repo->priority < max_prio)
++			solver_addrule(solv, -p2, 0, 0);
++		}
++	}
++	solv->strictrepopriorules_end = solv->nrules;
++	map_free(&priomap);
 +}
 +
  void
  solver_breakorphans(Solver *solv)
  {
 diff --git a/src/rules.h b/src/rules.h
-index 3fcede07..8b255422 100644
+index 3fcede07..043d0a0b 100644
 --- a/src/rules.h
 +++ b/src/rules.h
 @@ -74,7 +74,8 @@ typedef enum {
@@ -165,13 +190,13 @@ index 3fcede07..8b255422 100644
  extern void solver_addrecommendsrules(struct s_Solver *solv);
  
 +/* channel priority rules */
-+extern void solver_addstrictrepopriorules(struct s_Solver *solv);
++extern void solver_addstrictrepopriorules(struct s_Solver *solv, Map *addedmap);
 +
  /* policy rule disabling/reenabling */
  extern void solver_disablepolicyrules(struct s_Solver *solv);
  extern void solver_reenablepolicyrules(struct s_Solver *solv, int jobidx);
 diff --git a/src/solver.c b/src/solver.c
-index 89a2ed10..4288013f 100644
+index 89a2ed10..25ff2d40 100644
 --- a/src/solver.c
 +++ b/src/solver.c
 @@ -1473,6 +1473,8 @@ solver_get_flag(Solver *solv, int flag)
@@ -198,7 +223,7 @@ index 89a2ed10..4288013f 100644
      solv->recommendsrules = solv->recommendsrules_end = solv->nrules;
  
 +  if (solv->strict_repo_priority)
-+    solver_addstrictrepopriorules(solv);
++    solver_addstrictrepopriorules(solv, &addedmap);
 +  else
 +    solv->strictrepopriorules = solv->strictrepopriorules_end = solv->nrules;
 +
