@@ -26,6 +26,8 @@ requirements:
     - cmake  # [unix]
     - make   # [unix]
     - vcpkg  # [win]
+    # we need an older cmake for vcpkg right now...
+    - cmake 3.20.*  # [win]
     # force a recent curl version for windows
     - curl >=7.75  # [win]
   host:
