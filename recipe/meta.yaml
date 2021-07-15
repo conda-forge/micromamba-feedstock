@@ -1,5 +1,5 @@
-{% set version = "0.15.0" %}
-{% set build_num = 1 %}
+{% set version = "0.15.1" %}
+{% set build_num = 0 %}
 
 package:
   name: micromamba
@@ -7,9 +7,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-    sha256: 52133f941c1c60f3c05ad856fa195f5e3a2c8d30d2baebc727738aa305171971
-  - path: CLI11.hpp
-    folder: include/mamba/core/CLI.hpp
+    sha256: deb802e25c2408262b597f13786a5c320b09bf6ee439318ed869e9dc09dd3332
 
 build:
   number: {{ build_num }}
@@ -28,10 +26,12 @@ requirements:
     - cmake  # [unix]
     - make   # [unix]
     - vcpkg  # [win]
+    # we need an older cmake for vcpkg right now...
+    - cmake 3.20.*  # [win]
     # force a recent curl version for windows
     - curl >=7.75  # [win]
   host:
-    - cli11
+    - cli11 >=2.0,<3
     - cpp-filesystem >=1.5.8
     - nlohmann_json
     - yaml-cpp-static              # [unix]

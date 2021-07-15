@@ -1,9 +1,6 @@
 mkdir build
 cd build
 
-rem where /R C:\ curl.h
-rem where /R D:\ curl.h
-
 ROBOCOPY %RECIPE_DIR%\libsolv %VCPKG_ROOT%\ports\libsolv
 ROBOCOPY %RECIPE_DIR%\curl %VCPKG_ROOT%\ports\curl
 ROBOCOPY %RECIPE_DIR%\reproc %VCPKG_ROOT%\ports\reproc
@@ -27,7 +24,6 @@ cmake .. ^
     -D BUILD_SHARED=OFF ^
     -D STATIC_DEPENDENCIES=ON ^
     -D BUILD_BINDINGS=OFF ^
-    -D USE_VENDORED_CLI11=ON ^
     -G "Ninja"
 
 ninja install --verbose
