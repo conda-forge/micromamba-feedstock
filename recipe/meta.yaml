@@ -54,8 +54,8 @@ test:
   commands:
     - test -f $PREFIX/bin/micromamba                                          # [unix]
     - micromamba --help
-    - "export TMPDIR=\"${TMPDIR:-/tmp}\""                                     # [unix and not (ppc64le or aarch64)]
-    - "if [ ! -d \"${TMPDIR}\" ]; then mkdir -p \"${TMPDIR}\"; fi"            # [unix and not (ppc64le or aarch64)]
+    - export TMPDIR="${TMPDIR:-/tmp}"                                         # [unix and not (ppc64le or aarch64)]
+    - if [ ! -d "${TMPDIR}" ]; then mkdir -p "${TMPDIR}"; fi                  # [unix and not (ppc64le or aarch64)]
     - stat $TMPDIR                                                            # [unix and not (ppc64le or aarch64)]
     - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                  # [unix and not (ppc64le or aarch64)]
     - micromamba create -p $TMPDIR/testenv --override-channels -c conda-forge --yes python=3.9    # [unix and not (ppc64le or aarch64)]
