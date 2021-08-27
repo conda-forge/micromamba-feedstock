@@ -25,7 +25,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake  # [unix]
     - make   # [unix]
-    - vcpkg  # [win]
+    - vcpkg 2020.11 # [win]
     # we need an older cmake for vcpkg right now...
     - cmake 3.20.*  # [win]
     # force a recent curl version for windows
