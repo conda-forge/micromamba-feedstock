@@ -1,4 +1,4 @@
-{% set version = "0.15.2" %}
+{% set version = "0.15.3" %}
 {% set build_num = 0 %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-    sha256: 1dc8cfb8373379b9957c798291deac68eeb41200b3cdbc9552a2f30f3c7897bf
+    sha256: f2ad92625954cd029b84725bc33f658020a589cefda0b18adb1b7825ab7d4a1f
 
 build:
   number: {{ build_num }}
@@ -25,7 +25,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake  # [unix]
     - make   # [unix]
-    - vcpkg  # [win]
+    - vcpkg 2020.11  # [win]
     # we need an older cmake for vcpkg right now...
     - cmake 3.20.*  # [win]
     # force a recent curl version for windows
@@ -54,8 +54,8 @@ test:
   commands:
     - test -f $PREFIX/bin/micromamba                                          # [unix]
     - micromamba --help
-    - "export TMPDIR=\"${TMPDIR:-/tmp}\""                                     # [unix and not (ppc64le or aarch64)]
-    - "if [ ! -d \"${TMPDIR}\" ]; then mkdir -p \"${TMPDIR}\"; fi"            # [unix and not (ppc64le or aarch64)]
+    - export TMPDIR="${TMPDIR:-/tmp}"                                         # [unix and not (ppc64le or aarch64)]
+    - if [ ! -d "${TMPDIR}" ]; then mkdir -p "${TMPDIR}"; fi                  # [unix and not (ppc64le or aarch64)]
     - stat $TMPDIR                                                            # [unix and not (ppc64le or aarch64)]
     - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                  # [unix and not (ppc64le or aarch64)]
     - micromamba create -p $TMPDIR/testenv --override-channels -c conda-forge --yes python=3.9    # [unix and not (ppc64le or aarch64)]
