@@ -43,7 +43,7 @@ requirements:
     - krb5-static        # [unix]
     - libsolv-static     # [unix]
     - openssl 1.1.1*     # [unix]
-    - libopenssl-static 1.1.1* # [unix]
+    - libopenssl-static 1.1.1*  # [unix]
     - zstd-static        # [unix]
     - libnghttp2-static  # [unix]
     - lz4-c-static       # [unix]
