@@ -8,6 +8,8 @@ package:
 source:
   - url: https://github.com/mamba-org/mamba/archive/micromamba-{{ version }}.tar.gz
     sha256: a9f9c0f9b93fc3b007d0456f2b276e03826d6cb1a601102b9eef3f4647d11344
+    patches:
+      - libmamba_win.patch  # [win]
 
 build:
   number: {{ build_num }}
@@ -25,6 +27,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake  # [unix]
     - make   # [unix]
+    - ninja  # [win]
     - vcpkg 2020.11  # [win]
     # we need an older cmake for vcpkg right now...
     - cmake 3.20.*  # [win]
