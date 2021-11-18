@@ -11,3 +11,17 @@ index 06857a4..dd7cc6a 100644
                  ${CRYPTO_LIBRARIES}
                  ${LibArchive_LIBRARY}
                  ${LIBXML2_LIBRARY}
+diff --git a/micromamba/CMakeLists.txt b/micromamba/CMakeLists.txt
+index ef0558d..5490d84 100644
+--- a/micromamba/CMakeLists.txt
++++ b/micromamba/CMakeLists.txt
+@@ -59,6 +59,9 @@ message(STATUS "Micromamba linkage: ${MICROMAMBA_LINKAGE}")
+
+ if (${MICROMAMBA_LINKAGE} STREQUAL "FULL_STATIC")
+     target_link_libraries(micromamba PRIVATE libmamba-full-static)
++    if (WIN32)
++        set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
++    endif ()
+ elseif (${MICROMAMBA_LINKAGE} STREQUAL "STATIC")
+     target_link_libraries(micromamba PRIVATE libmamba-static)
+ else ()
