@@ -1,6 +1,8 @@
 mkdir build
 cd build
 
+export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY=1"
+
 cmake ${CMAKE_ARGS} .. \
          -DCMAKE_INSTALL_PREFIX=${PREFIX} \
          -DCMAKE_BUILD_TYPE="Release" \
