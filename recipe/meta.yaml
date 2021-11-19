@@ -1,5 +1,5 @@
 {% set version = "0.18.0" %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 package:
   name: micromamba
@@ -18,6 +18,8 @@ build:
     - libcurl                  # [unix]
     - libarchive               # [unix]
     - reproc-cpp               # [unix]
+    - openssl                  # [unix]
+    - spdlog
     - {{ compiler('c') }}      # [linux]
     - {{ compiler('cxx') }}    # [linux]
 
