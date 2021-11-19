@@ -12,6 +12,6 @@ cmake ${CMAKE_ARGS} .. \
          -DMICROMAMBA_LINKAGE=FULL_STATIC
 
 make -j${CPU_COUNT}
-make install micromamba
+make install
 
 ${STRIP:-strip} ${PREFIX}/bin/micromamba

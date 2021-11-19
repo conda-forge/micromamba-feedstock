@@ -25,4 +25,4 @@ cmake .. ^
     -D MICROMAMBA_LINKAGE=FULL_STATIC ^
     -G "Ninja"
 
-ninja install --verbose micromamba
+ninja install --verbose
