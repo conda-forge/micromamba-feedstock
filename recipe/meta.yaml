@@ -1,13 +1,15 @@
-{% set version = "0.17.0" %}
-{% set build_num = 0 %}
+{% set version = "0.18.0" %}
+{% set build_num = 1 %}
 
 package:
   name: micromamba
   version: {{ version }}
 
 source:
-  - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-    sha256: c5f4add077f41ca9ff905d95003cf793c59e9d6959f19a139325dc66c904733a
+  - url: https://github.com/mamba-org/mamba/archive/micromamba-{{ version }}.tar.gz
+    sha256: a9f9c0f9b93fc3b007d0456f2b276e03826d6cb1a601102b9eef3f4647d11344
+    patches:
+      - libmamba.patch
 
 build:
   number: {{ build_num }}
@@ -16,6 +18,8 @@ build:
     - libcurl                  # [unix]
     - libarchive               # [unix]
     - reproc-cpp               # [unix]
+    - openssl                  # [unix]
+    - spdlog
     - {{ compiler('c') }}      # [linux]
     - {{ compiler('cxx') }}    # [linux]
 
@@ -25,6 +29,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake  # [unix]
     - make   # [unix]
+    - ninja  # [win]
     - vcpkg 2020.11  # [win]
     # we need an older cmake for vcpkg right now...
     - cmake 3.20.*  # [win]
@@ -34,6 +39,8 @@ requirements:
     - cli11 >=2.0,<3
     - cpp-filesystem >=1.5.8
     - nlohmann_json
+    - spdlog
+    - termcolor-cpp
     - yaml-cpp-static              # [unix]
     - libcurl 7.76.1 *_0           # [unix]
     - libcurl-static  7.76.1 *_0   # [unix]
@@ -81,6 +88,8 @@ about:
     - CPP_FILESYSTEM_LICENSE.txt
     - LIBNGHTTP2_LICENSE.txt
     - REPROC_LICENSE.txt
+    - TERMCOLOR_CPP_LICENSE.txt
+    - SPDLOG_LICENSE.txt
   license: BSD-3-Clause AND MIT AND OpenSSL
   license_family: BSD
   summary: Micromamba is a tiny version of mamba, the fast conda package installer.
