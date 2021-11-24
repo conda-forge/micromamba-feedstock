@@ -1,4 +1,4 @@
-{% set version = "0.18.1" %}
+{% set version = "2021.11.24" %}
 {% set build_num = 0 %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/{{ version }}.tar.gz
-    sha256: e659f097b8fd34185a64d91f0e46c9179d81e0ade29eb8975ba163214c9a8228
+    sha256: 6e42c9cc20c74e00b9e6771231f7f57adeeff273fe3913cf28c59c3ee2118161
     patches:
       - libmamba.patch
 
