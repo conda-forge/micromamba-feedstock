@@ -1,4 +1,4 @@
-{% set version = "0.19.0" %}
+{% set version = "0.19.1" %}
 {% set build_num = 0 %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/micromamba-{{ version }}.tar.gz
-    sha256: 4052a8b16860dc7f631a6c100ec7c0f0fb97ba618a644d7ecc702152156f6221
+    sha256: 9340321e9e0ba8570e1c7e89aa96f731c4d03f06cba583c3faafdf747c62a50e
     patches:
       - libmamba.patch
 
@@ -57,6 +57,7 @@ requirements:
     - reproc-static      # [unix]
     - reproc-cpp         # [unix]
     - reproc-cpp-static  # [unix]
+    - winreg             # [win]
 
 test:
   commands:
