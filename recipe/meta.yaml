@@ -30,9 +30,7 @@ requirements:
     - cmake  # [unix]
     - make   # [unix]
     - ninja  # [win]
-    - vcpkg 2020.11  # [win]
-    # we need an older cmake for vcpkg right now...
-    - cmake 3.20.*  # [win]
+    - vcpkg  # [win]
     # force a recent curl version for windows
     - curl >=7.75  # [win]
   host:
@@ -42,15 +40,18 @@ requirements:
     - spdlog
     - termcolor-cpp
     - yaml-cpp-static              # [unix]
-    - libcurl 7.76.1 *_0           # [unix]
-    - libcurl-static  7.76.1 *_0   # [unix]
+    # we pin an older curl build for darwin-ssl support
+    - libcurl 7.76.1 *_0           # [osx]
+    - libcurl-static  7.76.1 *_0   # [osx]
+    - libcurl                      # [linux]
+    - libcurl-static               # [linux]
     - xz-static          # [unix]
     - libssh2-static     # [unix]
     - libarchive         # [unix]
     - krb5-static        # [unix]
     - libsolv-static     # [unix]
-    - openssl 1.1.1*     # [unix]
-    - libopenssl-static 1.1.1*  # [unix]
+    - openssl            # [unix]
+    - libopenssl-static  # [unix]
     - zstd-static        # [unix]
     - libnghttp2-static  # [unix]
     - lz4-c-static       # [unix]
