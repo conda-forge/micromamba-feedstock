@@ -2,8 +2,6 @@ mkdir build
 cd build
 
 ROBOCOPY %RECIPE_DIR%\libsolv %VCPKG_ROOT%\ports\libsolv
-ROBOCOPY %RECIPE_DIR%\curl %VCPKG_ROOT%\ports\curl
-ROBOCOPY %RECIPE_DIR%\reproc %VCPKG_ROOT%\ports\reproc
 
 @rem Looks like the .vcpkg-root file is missing in vcpkg package
 TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
