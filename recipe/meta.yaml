@@ -81,6 +81,7 @@ about:
     - KRB5_LICENSE.txt
     - LIBSOLV_LICENSE.txt
     - LIBOPENSSL_LICENSE.txt
+    - LIBOPENSSL_3_LICENSE.txt
     - CLI11_LICENSE.txt
     - NLOHMANN_JSON_LICENSE.txt
     - ZSTD_LICENSE.txt
