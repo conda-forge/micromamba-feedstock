@@ -1,2 +1,6 @@
 libarchive:
 - '3.3'
+c_compiler:
+- vs2019
+cxx_compiler:
+- vs2019

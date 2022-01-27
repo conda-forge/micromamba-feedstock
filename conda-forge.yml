@@ -3,3 +3,7 @@ conda_forge_output_validation: true
 provider: {linux_aarch64: default, linux_ppc64le: default}
 test_on_native_only: true
 channel_priority: false
+azure:
+  settings_win:
+      pool:
+          vmImage: windows-2019
