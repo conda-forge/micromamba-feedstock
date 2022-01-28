@@ -2,13 +2,14 @@ mkdir build
 cd build
 
 ROBOCOPY %RECIPE_DIR%\libsolv %VCPKG_ROOT%\ports\libsolv
-ROBOCOPY %RECIPE_DIR%\curl %VCPKG_ROOT%\ports\curl
-ROBOCOPY %RECIPE_DIR%\reproc %VCPKG_ROOT%\ports\reproc
+
+@rem Looks like the .vcpkg-root file is missing in vcpkg package
+TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
 
 SET VCPKG_BUILD_TYPE=release
 vcpkg install libsolv[conda] --triplet x64-windows-static
 vcpkg install "libarchive[bzip2,lz4,lzma,lzo,openssl,zstd]" --triplet x64-windows-static
-vcpkg install "curl" --triplet x64-windows-static
+vcpkg install curl --triplet x64-windows-static
 vcpkg install yaml-cpp --triplet x64-windows-static
 vcpkg install reproc --triplet x64-windows-static
 
