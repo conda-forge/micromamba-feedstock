@@ -35,6 +35,7 @@ requirements:
     - curl >=7.75  # [win]
   host:
     - cli11 >=2.2,<3
+    - cpp-expected
     - cpp-filesystem >=1.5.8
     - nlohmann_json
     - spdlog
