@@ -1,4 +1,4 @@
-{% set version = "0.22.0" %}
+{% set version = "0.23.0" %}
 {% set build_num = 0 %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-    sha256: 2e7e54490f6cd1e1d19551b694912fc5769b03fae73656e1758a11bade0c22d6
+    sha256: cb2db63b4be11c13980fbab1550e31cdb7ba212428307505a7fb6d33e70151a6
     patches:
       - libmamba.patch
 
@@ -34,7 +34,7 @@ requirements:
     # force a recent curl version for windows
     - curl >=7.75  # [win]
   host:
-    - cli11 >=2.0,<3
+    - cli11 >=2.2,<3
     - cpp-filesystem >=1.5.8
     - nlohmann_json
     - spdlog
