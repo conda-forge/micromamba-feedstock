@@ -22,6 +22,7 @@ build:
     - spdlog
     - {{ compiler('c') }}      # [linux]
     - {{ compiler('cxx') }}    # [linux]
+    - python                   # [win]
 
 requirements:
   build:
@@ -31,6 +32,7 @@ requirements:
     - make   # [unix]
     - ninja  # [win]
     - vcpkg  # [win]
+    - python  # [win]
     # force a recent curl version for windows
     - curl >=7.75  # [win]
   host:
