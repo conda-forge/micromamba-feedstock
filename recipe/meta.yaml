@@ -10,6 +10,7 @@ source:
     sha256: cb2db63b4be11c13980fbab1550e31cdb7ba212428307505a7fb6d33e70151a6
     patches:
       - libmamba.patch
+      - fix_build_issues.patch
 
 build:
   number: {{ build_num }}
