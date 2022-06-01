@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-    sha256: 59e2771ad2ea7431a5bbd313cd78b892446de763281a0a81bcea371e371bc937
+    sha256: 86bdf480069dcc0b863da74ca4248942f5aeaa75004ab52d4829ec8b202d9086
     patches:
       - libmamba.patch
 
