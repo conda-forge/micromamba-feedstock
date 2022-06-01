@@ -1,4 +1,4 @@
-{% set version = "0.23.3" %}
+{% set version = "0.24.0" %}
 {% set build_num = 0 %}
 
 package:
@@ -7,10 +7,9 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-    sha256: 7a239fcee1d472d5089786db6020cc6978a833dce8c7bbaae1d04ec1116d6000
+    sha256: 86bdf480069dcc0b863da74ca4248942f5aeaa75004ab52d4829ec8b202d9086
     patches:
       - libmamba.patch
-      - fix_build_issues.patch
 
 build:
   number: {{ build_num }}
