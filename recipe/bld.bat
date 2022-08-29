@@ -3,7 +3,8 @@ if %errorlevel% NEQ 0 exit /b %errorlevel%
 cd build
 
 ROBOCOPY %RECIPE_DIR%\libsolv %VCPKG_ROOT%\ports\libsolv
-IF %errorlevel% NEQ 0 exit /b %errorlevel%
+@rem ROBOCOPY has 0 and 1 as successfull exit codes
+if %errorlevel% NEQ 0 if %errorlevel% NEQ 1 exit /b %errorlevel%
 
 @rem Looks like the .vcpkg-root file is missing in vcpkg package
 TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
