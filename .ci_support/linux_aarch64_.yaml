@@ -24,9 +24,6 @@ libcurl:
 - '7'
 openssl:
 - 1.1.1
-pin_run_as_build:
-  libcurl:
-    max_pin: x
 spdlog:
 - '1.10'
 target_platform:
