@@ -19,7 +19,7 @@ build:
     - libarchive               # [unix]
     - reproc-cpp               # [unix]
     - openssl                  # [unix]
-    - spdlog
+    - spdlog 1.10 *_0
     - {{ compiler('c') }}      # [linux]
     - {{ compiler('cxx') }}    # [linux]
     - python                   # [win]
@@ -39,7 +39,7 @@ requirements:
     - cli11 >=2.2,<3
     - cpp-expected
     - nlohmann_json
-    - spdlog
+    - spdlog 1.10 *_0
     - termcolor-cpp
     - yaml-cpp-static              # [unix]
     # we pin an older curl build for darwin-ssl support
