@@ -1,5 +1,5 @@
 {% set version = "0.27.0" %}
-{% set build_num = 1 %}
+{% set build_num = 2 %}
 
 package:
   name: micromamba
@@ -20,6 +20,7 @@ build:
     - reproc-cpp               # [unix]
     - openssl                  # [unix]
     - spdlog 1.10 *_0
+    - fmt
     - {{ compiler('c') }}      # [linux]
     - {{ compiler('cxx') }}    # [linux]
     - python                   # [win]
@@ -40,6 +41,7 @@ requirements:
     - cpp-expected
     - nlohmann_json
     - spdlog 1.10 *_0
+    - fmt
     - termcolor-cpp
     - yaml-cpp-static              # [unix]
     # we pin an older curl build for darwin-ssl support
