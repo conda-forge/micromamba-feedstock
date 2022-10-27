@@ -20,7 +20,7 @@ build:
     - libarchive-minimal-static   # [unix]
     - reproc-cpp                  # [unix]
     - openssl                     # [unix]
-    - spdlog 1.10 *_0
+    - spdlog
     - fmt
     - {{ compiler('c') }}         # [linux]
     - {{ compiler('cxx') }}       # [linux]
@@ -40,7 +40,7 @@ requirements:
     - cli11 >=2.2,<3
     - cpp-expected
     - nlohmann_json
-    - spdlog 1.10 *_0
+    - spdlog
     - fmt
     - termcolor-cpp
     - yaml-cpp-static              # [unix]
