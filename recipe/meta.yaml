@@ -7,10 +7,18 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
+<<<<<<< HEAD
     sha256: 7303d983b49a1a52b302ceae355af1c05afef3a07aa3ad6dd27c36d64c43f991
     patches:
       - libmamba.patch
       - fix_ssl_init.patch
+||||||| parent of 2849d0a (Remove patch)
+    sha256: cb9ed96ac3b2f96553bd6bf6d7b863903d0ab4872e20418199b5caf285791896
+    patches:
+      - libmamba.patch
+=======
+    sha256: cb9ed96ac3b2f96553bd6bf6d7b863903d0ab4872e20418199b5caf285791896
+>>>>>>> 2849d0a (Remove patch)
 
 build:
   number: {{ build_num }}
