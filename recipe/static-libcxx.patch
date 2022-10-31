@@ -28,17 +28,3 @@ index 6103bf9..6da16f5 100644
                  target_link_options(libmamba-full-static PRIVATE -static-libstdc++)
              elseif (UNIX)
                  set(MAMBA_FORCE_DYNAMIC_LIBS rt dl resolv)
-diff --git a/micromamba/CMakeLists.txt b/micromamba/CMakeLists.txt
-index f8c69bb..a9b83ac 100644
---- a/micromamba/CMakeLists.txt
-+++ b/micromamba/CMakeLists.txt
-@@ -81,6 +81,9 @@ if (${MICROMAMBA_LINKAGE} STREQUAL "FULL_STATIC")
-     target_link_libraries(micromamba PRIVATE libmamba-full-static)
-     if (WIN32)
-         set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-+    elseif (APPLE)
-+        # link with C compiler so that shared libc++ is not linked in
-+        set_target_properties(micromamba PROPERTIES LINKER_LANGUAGE C)
-     endif ()
- elseif (${MICROMAMBA_LINKAGE} STREQUAL "STATIC")
-     target_link_libraries(micromamba PRIVATE libmamba-static)
