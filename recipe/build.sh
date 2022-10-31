@@ -20,3 +20,7 @@ make -j${CPU_COUNT}
 make install
 
 ${STRIP:-strip} ${PREFIX}/bin/micromamba
+
+if [[ "$target_platform" == "osx-"* ]]; then
+  ${OTOOL:-otool} -l ${PREFIX}/bin/micromamba
+fi
