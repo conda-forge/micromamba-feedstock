@@ -1,0 +1,30 @@
+commit 7334cbe4d4403c584f357ee6cdde622a041fddef
+Author: Isuru Fernando <isuruf@gmail.com>
+Date:   Sun Oct 30 23:19:59 2022 -0500
+
+    Link micromamba with static libc++.a and system libc++abi
+
+diff --git a/libmamba/CMakeLists.txt b/libmamba/CMakeLists.txt
+index 6103bf9..6da16f5 100644
+--- a/libmamba/CMakeLists.txt
++++ b/libmamba/CMakeLists.txt
+@@ -300,6 +300,10 @@ macro(libmamba_create_target target_name linkage deps_linkage output_name)
+                 libreproc++.a
+                 libreproc.a
+             )
++            if (APPLE)
++                set(REQUIRED_STATIC_DEPS ${REQUIRED_STATIC_DEPS} libc++.a)
++            endif()
++
+ 
+             set(STATIC_DEPS "")
+             foreach(LIB ${REQUIRED_STATIC_DEPS})
+@@ -323,7 +327,7 @@ macro(libmamba_create_target target_name linkage deps_linkage output_name)
+             endforeach(LIB)
+ 
+             if (APPLE)
+-                set (MAMBA_FORCE_DYNAMIC_LIBS resolv)
++                set (MAMBA_FORCE_DYNAMIC_LIBS resolv c++abi)
+                 target_link_options(libmamba-full-static PRIVATE -static-libstdc++)
+             elseif (UNIX)
+                 set(MAMBA_FORCE_DYNAMIC_LIBS rt dl resolv)

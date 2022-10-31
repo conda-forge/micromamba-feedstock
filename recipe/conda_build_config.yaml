@@ -1,6 +1,7 @@
 libarchive:
 - '3.3'
-c_compiler:    # [win]
-- vs2019       # [win]
-cxx_compiler:  # [win]
-- vs2019       # [win]
+# since we are linking with libc++ statically
+# we need the SDK to be equal or newer than the one
+# libc++ was built with
+MACOSX_SDK_VERSION:  # [osx and x86_64]
+- 10.14              # [osx and x86_64]

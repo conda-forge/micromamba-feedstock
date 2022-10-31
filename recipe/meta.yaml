@@ -1,5 +1,5 @@
 {% set version = "0.27.0" %}
-{% set build_num = 2 %}
+{% set build_num = 3 %}
 
 package:
   name: micromamba
@@ -10,6 +10,7 @@ source:
     sha256: cb9ed96ac3b2f96553bd6bf6d7b863903d0ab4872e20418199b5caf285791896
     patches:
       - libmamba.patch
+      - static-libcxx.patch
 
 build:
   number: {{ build_num }}
