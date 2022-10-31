@@ -13,7 +13,7 @@ index 6103bf9..6da16f5 100644
                  libreproc.a
              )
 +            if (APPLE)
-+                set(REQUIRED_STATIC_DEPS ${REQUIRED_STATIC_LIBS} libc++.a)
++                set(REQUIRED_STATIC_DEPS ${REQUIRED_STATIC_DEPS} libc++.a)
 +            endif()
 +
  
