@@ -17,7 +17,7 @@ build:
   string: {{ build_num }}
   ignore_run_exports_from:
     - libcurl                  # [unix]
-    - libarchive               # [unix]
+    - libarchive-minimal-static               # [unix]
     - reproc-cpp               # [unix]
     - openssl                  # [unix]
     - spdlog 1.10 *_0
@@ -52,7 +52,7 @@ requirements:
     - libcurl-static >=7.86        # [linux]
     - xz-static          # [unix]
     - libssh2-static     # [unix]
-    - libarchive         # [unix]
+    - libarchive-minimal-static         # [unix]
     - krb5-static        # [unix]
     - libsolv-static     # [unix]
     - openssl            {{ openssl }}  # [unix]
