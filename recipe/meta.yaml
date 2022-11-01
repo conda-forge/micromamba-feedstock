@@ -10,7 +10,7 @@ source:
     sha256: 7303d983b49a1a52b302ceae355af1c05afef3a07aa3ad6dd27c36d64c43f991
     patches:
       - libmamba.patch
-      - static-libcxx.patch
+      - fix_ssl_init.patch
 
 build:
   number: {{ build_num }}
