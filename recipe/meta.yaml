@@ -16,22 +16,22 @@ build:
   number: {{ build_num }}
   string: {{ build_num }}
   ignore_run_exports_from:
-    - libcurl                  # [unix]
-    - libarchive-minimal-static               # [unix]
-    - reproc-cpp               # [unix]
-    - openssl                  # [unix]
+    - libcurl                     # [unix]
+    - libarchive-minimal-static   # [unix]
+    - reproc-cpp                  # [unix]
+    - openssl                     # [unix]
     - spdlog 1.10 *_0
     - fmt
-    - {{ compiler('c') }}      # [linux]
-    - {{ compiler('cxx') }}    # [linux]
-    - python                   # [win]
+    - {{ compiler('c') }}         # [linux]
+    - {{ compiler('cxx') }}       # [linux]
+    - python                      # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cmake  # [unix]
-    - make   # [unix]
+    - cmake        # [unix]
+    - make         # [unix]
     - ninja        # [win]
     - vcpkg        # [win]
     - python       # [win]
@@ -45,25 +45,22 @@ requirements:
     - fmt
     - termcolor-cpp
     - yaml-cpp-static              # [unix]
-    # we pin an older curl build for darwin-ssl support
-    - libcurl 7.76.1 *_0           # [osx]
-    - libcurl-static  7.76.1 *_0   # [osx]
-    - libcurl >=7.86               # [linux]
-    - libcurl-static >=7.86        # [linux]
-    - xz-static          # [unix]
-    - libssh2-static     # [unix]
-    - libarchive-minimal-static         # [unix]
-    - krb5-static        # [unix]
-    - libsolv-static     # [unix]
+    - libcurl >=7.86               # [unix]
+    - libcurl-static >=7.86        # [unix]
+    - xz-static                    # [unix]
+    - libssh2-static               # [unix]
+    - libarchive-minimal-static    # [unix]
+    - krb5-static                  # [unix]
+    - libsolv-static               # [unix]
     - openssl            {{ openssl }}  # [unix]
     - libopenssl-static  {{ openssl }}  # [unix]
-    - zstd-static        # [unix]
-    - libnghttp2-static  # [unix]
-    - lz4-c-static       # [unix]
-    - reproc-static      # [unix]
-    - reproc-cpp         # [unix]
-    - reproc-cpp-static  # [unix]
-    - winreg             # [win]
+    - zstd-static                  # [unix]
+    - libnghttp2-static            # [unix]
+    - lz4-c-static                 # [unix]
+    - reproc-static                # [unix]
+    - reproc-cpp                   # [unix]
+    - reproc-cpp-static            # [unix]
+    - winreg                       # [win]
 
 test:
   commands:
