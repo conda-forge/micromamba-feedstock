@@ -14,8 +14,6 @@ cxx_compiler_version:
 - '14'
 fmt:
 - '9'
-libarchive:
-- '3.3'
 libcurl:
 - '7'
 macos_machine:

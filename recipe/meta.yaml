@@ -1,5 +1,5 @@
-{% set version = "0.27.0" %}
-{% set build_num = 3 %}
+{% set version = "1.0.0" %}
+{% set build_num = 0 %}
 
 package:
   name: micromamba
@@ -7,32 +7,31 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-    sha256: cb9ed96ac3b2f96553bd6bf6d7b863903d0ab4872e20418199b5caf285791896
+    sha256: 7303d983b49a1a52b302ceae355af1c05afef3a07aa3ad6dd27c36d64c43f991
     patches:
       - libmamba.patch
-      - static-libcxx.patch
+      - fix_ssl_init.patch
 
 build:
   number: {{ build_num }}
   string: {{ build_num }}
   ignore_run_exports_from:
-    - libcurl                  # [unix]
-    - libarchive               # [unix]
-    - reproc-cpp               # [unix]
-    - openssl                  # [unix]
+    - libcurl                     # [unix]
+    - libarchive-minimal-static   # [unix]
+    - reproc-cpp                  # [unix]
+    - openssl                     # [unix]
     - spdlog 1.10 *_0
     - fmt
-    - {{ compiler('c') }}      # [linux]
-    - {{ compiler('cxx') }}    # [linux]
-    - python                   # [win]
+    - {{ compiler('c') }}         # [linux]
+    - {{ compiler('cxx') }}       # [linux]
+    - python                      # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cmake  # [unix]
-    - make   # [unix]
-    - ninja        # [win]
+    - cmake        # [unix]
+    - ninja
     - vcpkg        # [win]
     - python       # [win]
     - curl >=7.86  # [win]
@@ -45,25 +44,22 @@ requirements:
     - fmt
     - termcolor-cpp
     - yaml-cpp-static              # [unix]
-    # we pin an older curl build for darwin-ssl support
-    - libcurl 7.76.1 *_0           # [osx]
-    - libcurl-static  7.76.1 *_0   # [osx]
-    - libcurl >=7.86               # [linux]
-    - libcurl-static >=7.86        # [linux]
-    - xz-static          # [unix]
-    - libssh2-static     # [unix]
-    - libarchive         # [unix]
-    - krb5-static        # [unix]
-    - libsolv-static     # [unix]
+    - libcurl >=7.86               # [unix]
+    - libcurl-static >=7.86        # [unix]
+    - xz-static                    # [unix]
+    - libssh2-static               # [unix]
+    - libarchive-minimal-static    # [unix]
+    - krb5-static                  # [unix]
+    - libsolv-static               # [unix]
     - openssl            {{ openssl }}  # [unix]
     - libopenssl-static  {{ openssl }}  # [unix]
-    - zstd-static        # [unix]
-    - libnghttp2-static  # [unix]
-    - lz4-c-static       # [unix]
-    - reproc-static      # [unix]
-    - reproc-cpp         # [unix]
-    - reproc-cpp-static  # [unix]
-    - winreg             # [win]
+    - zstd-static                  # [unix]
+    - libnghttp2-static            # [unix]
+    - lz4-c-static                 # [unix]
+    - reproc-static                # [unix]
+    - reproc-cpp                   # [unix]
+    - reproc-cpp-static            # [unix]
+    - winreg                       # [win]
 
 test:
   commands:
@@ -93,11 +89,12 @@ about:
     - LIBLZ4_LICENSE.txt
     - C_ARES_LICENSE.txt
     - LIBEV_LICENSE.txt
-    - CPP_FILESYSTEM_LICENSE.txt
     - LIBNGHTTP2_LICENSE.txt
     - REPROC_LICENSE.txt
     - TERMCOLOR_CPP_LICENSE.txt
     - SPDLOG_LICENSE.txt
+    - FMT_LICENSE.txt
+    - TL_EXPECTED_LICENSE.txt
   license: BSD-3-Clause AND MIT AND OpenSSL
   license_family: BSD
   summary: Micromamba is a tiny version of mamba, the fast conda package installer.

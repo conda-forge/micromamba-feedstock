@@ -1,5 +1,3 @@
-libarchive:
-- '3.3'
 # since we are linking with libc++ statically
 # we need the SDK to be equal or newer than the one
 # libc++ was built with
