@@ -31,8 +31,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake        # [unix]
-    - make         # [unix]
-    - ninja        # [win]
+    - ninja
     - vcpkg        # [win]
     - python       # [win]
     - curl >=7.86  # [win]
@@ -90,11 +89,12 @@ about:
     - LIBLZ4_LICENSE.txt
     - C_ARES_LICENSE.txt
     - LIBEV_LICENSE.txt
-    - CPP_FILESYSTEM_LICENSE.txt
     - LIBNGHTTP2_LICENSE.txt
     - REPROC_LICENSE.txt
     - TERMCOLOR_CPP_LICENSE.txt
     - SPDLOG_LICENSE.txt
+    - FMT_LICENSE.txt
+    - TL_EXPECTED_LICENSE.txt
   license: BSD-3-Clause AND MIT AND OpenSSL
   license_family: BSD
   summary: Micromamba is a tiny version of mamba, the fast conda package installer.

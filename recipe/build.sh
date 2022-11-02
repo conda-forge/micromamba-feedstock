@@ -9,6 +9,7 @@ export CFLAGS="${CFLAGS} -fno-merge-constants"
 export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY=1"
 
 cmake ${CMAKE_ARGS} .. \
+         -GNinja \
          -DCMAKE_INSTALL_PREFIX=${PREFIX} \
          -DCMAKE_BUILD_TYPE="Release" \
          -DBUILD_LIBMAMBA=ON \
@@ -16,8 +17,14 @@ cmake ${CMAKE_ARGS} .. \
          -DBUILD_MICROMAMBA=ON \
          -DMICROMAMBA_LINKAGE=FULL_STATIC
 
-make -j${CPU_COUNT}
-make install
+ninja
+
+ninja install
+
+# remove everything related to `libmamba`
+rm -rf $PREFIX/lib/libmamba*
+rm -rf $PREFIX/include/mamba
+rm -rf $PREFIX/lib/cmake/libmamba
 
 ${STRIP:-strip} ${PREFIX}/bin/micromamba
 
