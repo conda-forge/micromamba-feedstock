@@ -11,7 +11,7 @@ fi
 
 if [[ "$target_platform" == "osx-"* ]]; then
   export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY=1"
-  export LDFLAGS="${LDFLAGS} -Wl,-unexported-symbol,'*'"
+  export LDFLAGS="${LDFLAGS} -Wl,-unexported_symbol,'*'"
 fi
 
 cmake ${CMAKE_ARGS} .. \
