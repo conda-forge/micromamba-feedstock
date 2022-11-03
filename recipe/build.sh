@@ -4,9 +4,15 @@ cd build
 # Conda's binary relocation can result in string changing which can result in errors like
 #    > warning: command substitution: ignored null byte in input
 # https://github.com/mamba-org/mamba/issues/1517
-export CXXFLAGS="${CXXFLAGS} -fno-merge-constants"
-export CFLAGS="${CFLAGS} -fno-merge-constants"
-export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY=1"
+if [[ "$target_platform" == "linux-"* ]]; then
+  export CXXFLAGS="${CXXFLAGS} -fno-merge-constants"
+  export CFLAGS="${CFLAGS} -fno-merge-constants"
+fi
+
+if [[ "$target_platform" == "osx-"* ]]; then
+  export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY=1"
+  export LDFLAGS="${LDFLAGS} -Wl,-unexported-symbol,'*'"
+fi
 
 cmake ${CMAKE_ARGS} .. \
          -GNinja \
