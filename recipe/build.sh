@@ -29,5 +29,9 @@ rm -rf $PREFIX/lib/cmake/libmamba
 ${STRIP:-strip} ${PREFIX}/bin/micromamba
 
 if [[ "$target_platform" == "osx-"* ]]; then
-  ${OTOOL:-otool} -l ${PREFIX}/bin/micromamba
+  OTOOL_OUTPUT=$(${OTOOL:-otool} -L ${PREFIX}/bin/micromamba)
+  if [[ "$OTOOL_OUTPUT" == *libc++.1.dylib* ]]; then
+    echo "micromamba is linked to libc++.1.dlyb"
+    exit 1
+  fi
 fi
