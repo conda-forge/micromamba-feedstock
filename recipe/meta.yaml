@@ -6,11 +6,10 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-    sha256: 7303d983b49a1a52b302ceae355af1c05afef3a07aa3ad6dd27c36d64c43f991
+  # To test the latest mamba, do not merge
+  - git_url: https://github.com/mamba-org/mamba.git
     patches:
       - libmamba.patch
-      - fix_ssl_init.patch
 
 build:
   number: {{ build_num }}
