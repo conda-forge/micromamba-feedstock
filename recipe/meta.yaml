@@ -1,5 +1,5 @@
-{% set version = "1.0.0" %}
-{% set build_num = 1 %}
+{% set version = "1.1.0" %}
+{% set build_num = 0 %}
 
 package:
   name: micromamba
@@ -41,7 +41,6 @@ requirements:
     - nlohmann_json
     - spdlog 1.10 *_0
     - fmt
-    - termcolor-cpp
     - yaml-cpp-static              # [unix]
     - libcurl >=7.86               # [unix]
     - libcurl-static >=7.86        # [unix]
@@ -90,7 +89,6 @@ about:
     - LIBEV_LICENSE.txt
     - LIBNGHTTP2_LICENSE.txt
     - REPROC_LICENSE.txt
-    - TERMCOLOR_CPP_LICENSE.txt
     - SPDLOG_LICENSE.txt
     - FMT_LICENSE.txt
     - TL_EXPECTED_LICENSE.txt
