@@ -1,5 +1,5 @@
-{% set version = "1.0.0" %}
-{% set build_num = 1 %}
+{% set version = "1.1.0" %}
+{% set build_num = 0 %}
 
 package:
   name: micromamba
@@ -7,10 +7,9 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-    sha256: 7303d983b49a1a52b302ceae355af1c05afef3a07aa3ad6dd27c36d64c43f991
+    sha256: e2392cd90221234ae8ea92b37f40829fbe36d80278056269aa1994a5efe7f530
     patches:
       - libmamba.patch
-      - fix_ssl_init.patch
 
 build:
   number: {{ build_num }}
@@ -42,7 +41,6 @@ requirements:
     - nlohmann_json
     - spdlog 1.10 *_0
     - fmt
-    - termcolor-cpp
     - yaml-cpp-static              # [unix]
     - libcurl >=7.86               # [unix]
     - libcurl-static >=7.86        # [unix]
@@ -91,7 +89,6 @@ about:
     - LIBEV_LICENSE.txt
     - LIBNGHTTP2_LICENSE.txt
     - REPROC_LICENSE.txt
-    - TERMCOLOR_CPP_LICENSE.txt
     - SPDLOG_LICENSE.txt
     - FMT_LICENSE.txt
     - TL_EXPECTED_LICENSE.txt
