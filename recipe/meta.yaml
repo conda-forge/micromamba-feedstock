@@ -1,5 +1,5 @@
 {% set version = "1.1.0" %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 package:
   name: micromamba
@@ -33,7 +33,7 @@ requirements:
     - ninja
     - vcpkg        # [win]
     - python       # [win]
-    - curl >=7.86  # [win]
+    - curl >=7.87  # [win]
     - zlib         # [win]
   host:
     - cli11 >=2.2,<3
@@ -42,8 +42,10 @@ requirements:
     - spdlog 1.10 *_0
     - fmt
     - yaml-cpp-static              # [unix]
-    - libcurl >=7.86               # [unix]
-    - libcurl-static >=7.86        # [unix]
+    - libcurl >=7.87               # [linux]
+    - libcurl-static >=7.87        # [linux]
+    - libcurl 7.86                 # [osx]
+    - libcurl-static 7.86          # [osx]
     - xz-static                    # [unix]
     - libssh2-static               # [unix]
     - libarchive-minimal-static    # [unix]
