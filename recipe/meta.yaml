@@ -10,6 +10,7 @@ source:
     sha256: e2392cd90221234ae8ea92b37f40829fbe36d80278056269aa1994a5efe7f530
     patches:
       - libmamba.patch
+      - libmamba_cmake.patch
 
 build:
   number: {{ build_num }}
