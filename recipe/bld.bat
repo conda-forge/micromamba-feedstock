@@ -9,6 +9,8 @@ if %errorlevel% NEQ 0 if %errorlevel% NEQ 1 exit /b %errorlevel%
 @rem Looks like the .vcpkg-root file is missing in vcpkg package
 TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
 
+grep -Hnri b309799e %VCPKG_ROOT%
+
 SET VCPKG_BUILD_TYPE=release
 vcpkg install libsolv[conda] --triplet x64-windows-static
 if %errorlevel% NEQ 0 exit /b %errorlevel%
