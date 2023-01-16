@@ -11,7 +11,7 @@ TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
 
 SET MSYS_FILE=%BUILD_PREFIX%\Library\share\vcpkg\scripts\cmake\vcpkg_acquire_msys.cmake
 sed -i s/b309799e5a9d248ef66eaf11a0bd21bf4e8b9bd5c677c627ec83fa760ce9f0b54ddf1b62cbb436e641fbbde71e3b61cb71ff541d866f8ca7717a3a0dbeb00ebf/a202ddaefa93d8a4b15431dc514e3a6200c47275c5a0027c09cc32b28bc079b1b9a93d5ef65adafdc9aba5f76a42f3303b1492106ddf72e67f1801ebfe6d02cc/g %MSYS_FILE%
-sed -i s/libtool-2.4.6-9/libtool-2.4.7-3/g %BUILD_PREFIX%\Library\share\vcpkg\scripts\cmake\vcpkg_acquire_msys.cmake %MSYS_FILE%
+sed -i s@https://repo.msys2.org/msys/x86_64/libtool-2.4.6-9-x86_64.pkg.tar.xz@https://repo.msys2.org/msys/x86_64/libtool-2.4.7-3-x86_64.pkg.tar.zst@g %MSYS_FILE%
 cat %MSYS_FILE%
 
 SET VCPKG_BUILD_TYPE=release
