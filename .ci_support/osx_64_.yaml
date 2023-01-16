@@ -22,6 +22,8 @@ macos_machine:
 - x86_64-apple-darwin13.4.0
 openssl:
 - 1.1.1
+spdlog:
+- '1.11'
 target_platform:
 - osx-64
 zip_keys:

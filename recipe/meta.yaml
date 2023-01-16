@@ -1,4 +1,4 @@
-{% set version = "1.1.0" %}
+{% set version = "1.2.0" %}
 {% set build_num = 1 %}
 
 package:
@@ -7,10 +7,7 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-    sha256: e2392cd90221234ae8ea92b37f40829fbe36d80278056269aa1994a5efe7f530
-    patches:
-      - libmamba.patch
-      - libmamba_cmake.patch
+    sha256: 63fd8a1dbec811e63d4f9b5e27757af45d08a219d0900c7c7a19e0b177a576b8
 
 build:
   number: {{ build_num }}
@@ -20,7 +17,7 @@ build:
     - libarchive-minimal-static   # [unix]
     - reproc-cpp                  # [unix]
     - openssl                     # [unix]
-    - spdlog 1.10 *_0
+    - spdlog
     - fmt
     - {{ compiler('c') }}         # [linux]
     - {{ compiler('cxx') }}       # [linux]
@@ -40,7 +37,7 @@ requirements:
     - cli11 >=2.2,<3
     - cpp-expected
     - nlohmann_json
-    - spdlog 1.10 *_0
+    - spdlog
     - fmt
     - yaml-cpp-static              # [unix]
     - libcurl >=7.87               # [linux]
