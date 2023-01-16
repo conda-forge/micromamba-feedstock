@@ -1,5 +1,5 @@
-{% set version = "1.2.0" %}
-{% set build_num = 0 %}
+{% set version = "1.1.0" %}
+{% set build_num = 1 %}
 
 package:
   name: micromamba
@@ -31,7 +31,7 @@ requirements:
     - ninja
     - vcpkg        # [win]
     - python       # [win]
-    - curl >=7.86  # [win]
+    - curl >=7.87  # [win]
     - zlib         # [win]
   host:
     - cli11 >=2.2,<3
@@ -39,10 +39,11 @@ requirements:
     - nlohmann_json
     - spdlog
     - fmt
-    - termcolor-cpp
     - yaml-cpp-static              # [unix]
-    - libcurl >=7.86               # [unix]
-    - libcurl-static >=7.86        # [unix]
+    - libcurl >=7.87               # [linux]
+    - libcurl-static >=7.87        # [linux]
+    - libcurl 7.86                 # [osx]
+    - libcurl-static 7.86          # [osx]
     - xz-static                    # [unix]
     - libssh2-static               # [unix]
     - libarchive-minimal-static    # [unix]
@@ -88,7 +89,6 @@ about:
     - LIBEV_LICENSE.txt
     - LIBNGHTTP2_LICENSE.txt
     - REPROC_LICENSE.txt
-    - TERMCOLOR_CPP_LICENSE.txt
     - SPDLOG_LICENSE.txt
     - FMT_LICENSE.txt
     - TL_EXPECTED_LICENSE.txt
