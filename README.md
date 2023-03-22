@@ -1,11 +1,11 @@
-About micromamba
-================
+About micromamba-feedstock
+==========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/micromamba-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/mamba-org/mamba
 
 Package license: BSD-3-Clause AND MIT AND OpenSSL
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/micromamba-feedstock/blob/main/LICENSE.txt)
 
 Summary: Micromamba is a tiny version of mamba, the fast conda package installer.
 
