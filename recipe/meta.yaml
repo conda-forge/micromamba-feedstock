@@ -1,4 +1,4 @@
-{% set version = "1.3.1" %}
+{% set version = "1.4.0" %}
 {% set build_num = 0 %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-  sha256: af66b79bc6b9673209e92b6ce6e52a21a79c55e86960a9d5bb10691cf2b4e327
+  sha256: 890f37e7f84e81b85976d0a26d171406dbbbb02416efcb95bda9f263e10c21b4
 
 build:
   number: {{ build_num }}
@@ -40,10 +40,8 @@ requirements:
     - spdlog
     - fmt
     - yaml-cpp-static              # [unix]
-    - libcurl >=7.87               # [linux]
-    - libcurl-static >=7.87        # [linux]
-    - libcurl 7.86                 # [osx]
-    - libcurl-static 7.86          # [osx]
+    - libcurl >=7.88.1             # [unix]
+    - libcurl-static >=7.88.1      # [unix]
     - xz-static                    # [unix]
     - libssh2-static               # [unix]
     - libarchive-minimal-static    # [unix]
