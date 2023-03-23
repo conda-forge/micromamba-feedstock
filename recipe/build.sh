@@ -11,9 +11,8 @@ cmake -B build \
     -D CMAKE_INSTALL_PREFIX=${PREFIX} \
     -D CMAKE_BUILD_TYPE="Release" \
     -D BUILD_LIBMAMBA=ON \
-    -D BUILD_STATIC_DEPS=ON \
-    -D BUILD_MICROMAMBA=ON \
-    -D MICROMAMBA_LINKAGE=FULL_STATIC
+    -D BUILD_STATIC=ON \
+    -D BUILD_MICROMAMBA=ON
 cmake --build build/ --parallel ${CPU_COUNT}
 cmake --install build/
 
