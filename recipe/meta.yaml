@@ -27,12 +27,12 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cmake        # [unix]
+    - cmake           # [unix]
     - ninja
-    - vcpkg        # [win]
-    - python       # [win]
-    - curl >=7.87  # [win]
-    - zlib         # [win]
+    - vcpkg           # [win]
+    - python          # [win]
+    - curl >=7.87,<8  # [win]
+    - zlib            # [win]
   host:
     - cli11 >=2.2,<3
     - cpp-expected
@@ -40,8 +40,8 @@ requirements:
     - spdlog
     - fmt
     - yaml-cpp-static              # [unix]
-    - libcurl >=7.88.1             # [unix]
-    - libcurl-static >=7.88.1      # [unix]
+    - libcurl >=7.88.1,<8          # [unix]
+    - libcurl-static >=7.88.1,<8   # [unix]
     - xz-static                    # [unix]
     - libssh2-static               # [unix]
     - libarchive-minimal-static    # [unix]
@@ -50,6 +50,7 @@ requirements:
     - openssl            {{ openssl }}  # [unix]
     - libopenssl-static  {{ openssl }}  # [unix]
     - zstd-static                  # [unix]
+    - zlib                         # [unix]
     - libnghttp2-static            # [unix]
     - lz4-c-static                 # [unix]
     - reproc-static                # [unix]
