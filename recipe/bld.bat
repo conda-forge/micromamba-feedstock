@@ -33,9 +33,8 @@ cmake .. ^
     -D CMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows-static\;%CMAKE_PREFIX_PATH%" ^
     -D CMAKE_BUILD_TYPE="Release" ^
     -D BUILD_LIBMAMBA=ON ^
-    -D BUILD_STATIC_DEPS=ON ^
+    -D BUILD_STATIC=ON ^
     -D BUILD_MICROMAMBA=ON ^
-    -D MICROMAMBA_LINKAGE=FULL_STATIC ^
     -G "Ninja"
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 
