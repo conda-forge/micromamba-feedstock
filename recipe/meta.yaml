@@ -46,7 +46,7 @@ requirements:
     - libssh2-static               # [unix]
     - libarchive-minimal-static    # [unix]
     - krb5-static                  # [unix]
-    - libsolv-static               # [unix]
+    - libsolv-static
     - openssl            {{ openssl }}  # [unix]
     - libopenssl-static  {{ openssl }}  # [unix]
     - zstd-static                  # [unix]

@@ -2,10 +2,6 @@ mkdir build
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 cd build
 
-ROBOCOPY %RECIPE_DIR%\libsolv %VCPKG_ROOT%\ports\libsolv
-@rem ROBOCOPY has 0 and 1 as successful exit codes
-if %errorlevel% NEQ 0 if %errorlevel% NEQ 1 exit /b %errorlevel%
-
 @rem Looks like the .vcpkg-root file is missing in vcpkg package
 TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
 
@@ -18,8 +14,6 @@ sed -i s/fdd86f4ffa6e274d6fef1676a4987971b1f2e1ec556eee947adcb4240dc562180afc491
 sed -i s@https://repo.msys2.org/msys/x86_64/msys2-runtime-3.2.0-8-x86_64.pkg.tar.zst@https://repo.msys2.org/msys/x86_64/msys2-runtime-3.4.6-1-x86_64.pkg.tar.zst@g %MSYS_FILE%
 
 SET VCPKG_BUILD_TYPE=release
-vcpkg install libsolv[conda] --triplet x64-windows-static
-if %errorlevel% NEQ 0 exit /b %errorlevel%
 vcpkg install "libarchive[bzip2,lz4,lzma,lzo,openssl,zstd]" --triplet x64-windows-static
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 vcpkg install curl --triplet x64-windows-static
