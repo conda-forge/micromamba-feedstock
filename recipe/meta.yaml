@@ -17,7 +17,7 @@ build:
     - libarchive-minimal-static   # [unix]
     - reproc-cpp                  # [unix]
     - openssl                     # [unix]
-    - libsolv # [win]
+    - libsolv                     # [win]
     - spdlog
     - fmt
     - {{ compiler('c') }}         # [linux]
@@ -48,7 +48,7 @@ requirements:
     - libarchive-minimal-static    # [unix]
     - krb5-static                  # [unix]
     - libsolv-static
-    - libsolv # [win]
+    - libsolv                      # [win]
     - openssl            {{ openssl }}  # [unix]
     - libopenssl-static  {{ openssl }}  # [unix]
     - zstd-static                  # [unix]
