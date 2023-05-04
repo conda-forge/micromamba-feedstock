@@ -7,8 +7,6 @@ vcpkg_from_github(
     PATCHES
         win_static_build.patch
         conda_variant_priorization.patch
-        add_strict_repo_prio_rule.patch
-        memcpy_to_memmove.patch
 )
 
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" BUILD_DYNAMIC_LIBS)
