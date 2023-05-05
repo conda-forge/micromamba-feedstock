@@ -5,7 +5,7 @@ vcpkg_from_github(
     SHA512 2ac9a3e33e1475ccb55028785cb5570b7e63a9f617ee5b08b9320cc8c3b14693028528211ca4a79b9a7d2d31d0058f929e514fb30994945179b3fd6baec901bf
     HEAD_REF master
     PATCHES
-        win_static_build.patch
+        win_export_and_static_build.patch
         conda_variant_priorization.patch
 )
 
