@@ -1,14 +1,12 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO openSUSE/libsolv
-    REF 0.7.19
-    SHA512 dfcebea314d549a15bf5af19db775ff1b1850bfc6fb147b68fe094e43bf1541fcfe22d2f6c6607a6393e01905a086cea606d0b25da2e3ce376d100c4ef4fee00
+    REF 0.7.23
+    SHA512 2ac9a3e33e1475ccb55028785cb5570b7e63a9f617ee5b08b9320cc8c3b14693028528211ca4a79b9a7d2d31d0058f929e514fb30994945179b3fd6baec901bf
     HEAD_REF master
     PATCHES
-        win_static_build.patch
+        win_export_and_static_build.patch
         conda_variant_priorization.patch
-        add_strict_repo_prio_rule.patch
-        memcpy_to_memmove.patch
 )
 
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" BUILD_DYNAMIC_LIBS)
