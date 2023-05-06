@@ -23,7 +23,7 @@ if %errorlevel% NEQ 0 exit /b %errorlevel%
 vcpkg install reproc --triplet x64-windows-static
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 
-SET "CXXFLAGS=%CXXFLAGS% /showIncludes /NODEFAULTLIB:MSVCRT"
+SET "CXXFLAGS=%CXXFLAGS% /showIncludes /NODEFAULTLIB:library"
 SET CMAKE_PREFIX_PATH=%VCPKG_ROOT%\installed\x64-windows-static\;%CMAKE_PREFIX_PATH%
 
 cmake .. ^
