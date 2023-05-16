@@ -1,5 +1,5 @@
 {% set version = "1.4.3" %}
-{% set build_num = 2 %}
+{% set build_num = 0 %}
 
 package:
   name: micromamba
