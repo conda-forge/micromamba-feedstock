@@ -1,9 +1,21 @@
+vcpkg update
+if %errorlevel% NEQ 0 exit /b %errorlevel%
+
+cd %VCPKG_ROOT%
+if %errorlevel% NEQ 0 exit /b %errorlevel%
+git pull
+if %errorlevel% NEQ 0 exit /b %errorlevel%
+
+vcpkg update
+if %errorlevel% NEQ 0 exit /b %errorlevel%
+
+cd %BUILD_PREFIX%
+if %errorlevel% NEQ 0 exit /b %errorlevel%
+
 mkdir build
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 cd build
 
-vcpkg update
-if %errorlevel% NEQ 0 exit /b %errorlevel%
 
 @rem Looks like the .vcpkg-root file is missing in vcpkg package
 TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
