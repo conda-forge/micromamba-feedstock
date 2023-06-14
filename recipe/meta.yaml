@@ -30,7 +30,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake           # [unix]
     - ninja
-    - vcpkg           # [win]
+    - vcpkg-tool           # [win]
     - python          # [win]
     - curl >=7.87,<8  # [win]
     - zlib            # [win]
