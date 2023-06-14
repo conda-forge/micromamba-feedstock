@@ -2,6 +2,9 @@ mkdir build
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 cd build
 
+vcpkg pull
+if %errorlevel% NEQ 0 exit /b %errorlevel%
+
 @rem Looks like the .vcpkg-root file is missing in vcpkg package
 TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
 
