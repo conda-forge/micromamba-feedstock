@@ -1,11 +1,13 @@
 git clone https://github.com/microsoft/vcpkg.git
 if %errorlevel% NEQ 0 exit /b %errorlevel%
-set VCPKG_ROOT=%BUILD_PREFIX%\vcpkg
+echo "current build prefix: %BUILD_PREFIX%"
 
 mkdir build
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 cd build
 
+@REM TODO Make prettier
+set VCPKG_ROOT=.\vcpkg
 
 @rem Looks like the .vcpkg-root file is missing in vcpkg package
 @REM TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
