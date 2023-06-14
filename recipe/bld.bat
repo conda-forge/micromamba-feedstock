@@ -7,7 +7,7 @@ if %errorlevel% NEQ 0 exit /b %errorlevel%
 cd build
 
 @REM TODO Make prettier
-set VCPKG_ROOT=.\vcpkg
+set VCPKG_ROOT=..\vcpkg
 
 @rem Looks like the .vcpkg-root file is missing in vcpkg package
 @REM TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
