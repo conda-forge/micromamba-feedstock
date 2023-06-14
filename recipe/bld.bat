@@ -1,6 +1,3 @@
-vcpkg update
-if %errorlevel% NEQ 0 exit /b %errorlevel%
-
 git clone https://github.com/microsoft/vcpkg.git
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 set VCPKG_ROOT=%BUILD_PREFIX%\vcpkg
