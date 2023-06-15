@@ -6,8 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-  sha256: c173a3767ef7f32a7bd9f2ae1f68728fd4bc7df89b16b97c4c7f2b9fbe373898
+  - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
+    sha256: c173a3767ef7f32a7bd9f2ae1f68728fd4bc7df89b16b97c4c7f2b9fbe373898
+    folder: mamba
+  # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
+  - url: https://github.com/microsoft/vcpkg/archive/dc6188d0eb3f9fd7b53f4e21b1878ea868e34c02.tar.gz  # [win]
+    sha256: bd68c1f05b2f38b26b447e8a9a504a0ac7c468b82237697965665f454687f9da                         # [win]
+    folder: vcpkg                                                                                    # [win]
 
 build:
   number: {{ build_num }}
@@ -29,7 +34,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake           # [unix]
     - ninja
-    - vcpkg           # [win]
+    - vcpkg-tool      # [win]
     - python          # [win]
     - curl >=7.87,<8  # [win]
     - zlib            # [win]
@@ -73,24 +78,24 @@ test:
 about:
   home: https://github.com/mamba-org/mamba
   license_file:
-    - LICENSE
-    - CURL_LICENSE.txt
-    - LIBARCHIVE_LICENSE.txt
-    - KRB5_LICENSE.txt
-    - LIBSOLV_LICENSE.txt
-    - LIBOPENSSL_LICENSE.txt
-    - LIBOPENSSL_3_LICENSE.txt
+    - mamba/LICENSE
     - CLI11_LICENSE.txt
-    - NLOHMANN_JSON_LICENSE.txt
-    - ZSTD_LICENSE.txt
-    - LIBLZ4_LICENSE.txt
+    - CURL_LICENSE.txt
     - C_ARES_LICENSE.txt
+    - FMT_LICENSE.txt
+    - KRB5_LICENSE.txt
+    - LIBARCHIVE_LICENSE.txt
     - LIBEV_LICENSE.txt
+    - LIBLZ4_LICENSE.txt
     - LIBNGHTTP2_LICENSE.txt
+    - LIBOPENSSL_3_LICENSE.txt
+    - LIBOPENSSL_LICENSE.txt
+    - LIBSOLV_LICENSE.txt
+    - NLOHMANN_JSON_LICENSE.txt
     - REPROC_LICENSE.txt
     - SPDLOG_LICENSE.txt
-    - FMT_LICENSE.txt
     - TL_EXPECTED_LICENSE.txt
+    - ZSTD_LICENSE.txt
   license: BSD-3-Clause AND MIT AND OpenSSL
   license_family: BSD
   summary: Micromamba is a tiny version of mamba, the fast conda package installer.
