@@ -1,13 +1,8 @@
-mkdir build
-if %errorlevel% NEQ 0 exit /b %errorlevel%
-cd build
+SET VCPKG_ROOT=%CD%\vcpkg
 
 ROBOCOPY %RECIPE_DIR%\libsolv %VCPKG_ROOT%\ports\libsolv
 @rem ROBOCOPY has 0 and 1 as successful exit codes
 if %errorlevel% NEQ 0 if %errorlevel% NEQ 1 exit /b %errorlevel%
-
-@rem Looks like the .vcpkg-root file is missing in vcpkg package
-TYPE NUL > %VCPKG_ROOT%\.vcpkg-root
 
 SET MSYS_FILE=%BUILD_PREFIX%\Library\share\vcpkg\scripts\cmake\vcpkg_acquire_msys.cmake
 sed -i s/b309799e5a9d248ef66eaf11a0bd21bf4e8b9bd5c677c627ec83fa760ce9f0b54ddf1b62cbb436e641fbbde71e3b61cb71ff541d866f8ca7717a3a0dbeb00ebf/a202ddaefa93d8a4b15431dc514e3a6200c47275c5a0027c09cc32b28bc079b1b9a93d5ef65adafdc9aba5f76a42f3303b1492106ddf72e67f1801ebfe6d02cc/g %MSYS_FILE%
@@ -32,7 +27,8 @@ if %errorlevel% NEQ 0 exit /b %errorlevel%
 SET "CXXFLAGS=%CXXFLAGS% /showIncludes"
 SET CMAKE_PREFIX_PATH=%VCPKG_ROOT%\installed\x64-windows-static\;%CMAKE_PREFIX_PATH%
 
-cmake .. ^
+cmake -S mamba ^
+    -B build ^
     -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -D CMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows-static\;%CMAKE_PREFIX_PATH%" ^
     -D CMAKE_BUILD_TYPE="Release" ^
@@ -42,7 +38,10 @@ cmake .. ^
     -G "Ninja"
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 
-ninja install --verbose
+cmake --build build --parallel %CPU_COUNT%
+if %errorlevel% NEQ 0 exit /b %errorlevel%
+
+cmake --install build
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 
 DEL /Q /F /S "%LIBRARY_PREFIX%\lib\libmamba*"
