@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO openSUSE/libsolv
-    REF 0.7.23
-    SHA512 2ac9a3e33e1475ccb55028785cb5570b7e63a9f617ee5b08b9320cc8c3b14693028528211ca4a79b9a7d2d31d0058f929e514fb30994945179b3fd6baec901bf
+    REF 0.7.24
+    SHA512 a0975d3f80ae8c364d5b32df4c26bc7eb5abb3be81259595848f1f5f74b00e708af3153074041d49383547718e68cee2e82cf4bdeab6221dfdcc605812689d37
     HEAD_REF master
     PATCHES
         win_export_and_static_build.patch

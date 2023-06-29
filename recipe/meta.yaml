@@ -1,4 +1,4 @@
-{% set version = "1.4.4" %}
+{% set version = "1.4.5" %}
 {% set build_num = 0 %}
 
 package:
@@ -7,11 +7,11 @@ package:
 
 source:
   - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-    sha256: 035696ac379b7c6cbf87e912f7fa28c5f16ceaadf8f663d616cf0146e72390bb
+    sha256: 1aedf2ae4fb896af199d3af2acd6c7592957af15297bfcb619b7d13e09ce121a
     folder: mamba
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
-  - url: https://github.com/microsoft/vcpkg/archive/dc6188d0eb3f9fd7b53f4e21b1878ea868e34c02.tar.gz  # [win]
-    sha256: bd68c1f05b2f38b26b447e8a9a504a0ac7c468b82237697965665f454687f9da  # [win]
+  - url: https://github.com/microsoft/vcpkg/archive/8be970aaeaf19fd2663aaf5888478483f9742e55.tar.gz  # [win]
+    sha256: 1d1d3b4b3d1871211d3d7799babfb7443971ed9a51b9eb7018bb94dfdb387076  # [win]
     folder: vcpkg  # [win]
 
 build:
