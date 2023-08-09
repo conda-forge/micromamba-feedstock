@@ -7,7 +7,7 @@ channel_targets:
 cxx_compiler:
 - vs2019
 fmt:
-- '9'
+- '10'
 spdlog:
 - '1.11'
 target_platform:
