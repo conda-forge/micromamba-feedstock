@@ -21,7 +21,7 @@ libcurl:
 openssl:
 - '3'
 spdlog:
-- '1.11'
+- '1.12'
 target_platform:
 - linux-ppc64le
 zip_keys:

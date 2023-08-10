@@ -9,7 +9,7 @@ cxx_compiler:
 fmt:
 - '10'
 spdlog:
-- '1.11'
+- '1.12'
 target_platform:
 - win-64
 zlib:
