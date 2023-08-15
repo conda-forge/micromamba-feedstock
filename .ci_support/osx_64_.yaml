@@ -15,7 +15,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '15'
 fmt:
-- '9'
+- '10'
 libcurl:
 - '8'
 macos_machine:
@@ -23,7 +23,7 @@ macos_machine:
 openssl:
 - '3'
 spdlog:
-- '1.11'
+- '1.12'
 target_platform:
 - osx-64
 zip_keys:
