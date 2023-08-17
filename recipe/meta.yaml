@@ -1,13 +1,27 @@
 {% set version = "1.4.9" %}
+{% set sha256 = "cfa63d261488ac82adf4ed8efe18d39bcccaa40a5fda7b485b110abdb814b36b" %}
 {% set build_num = 0 %}
+
+# A strategy for testing the feedstock locally in mamba CI
+{% if os.environ.get("CI", "") == "local" %}
+  {% set mamba_source_type = "path" %}
+  {% set mamba_source_val = "{}/source".format(os.environ.get("FEEDSTOCK_ROOT", "..")) %}
+  {% set mamba_hash_type = "" %}
+  {% set mamba_hash_val = "" %}
+{% else %}
+  {% set mamba_source_type = "url" %}
+  {% set mamba_source_val = "https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{}.tar.gz".format(version) %}
+  {% set mamba_hash_type = "sha256" %}
+  {% set mamba_hash_val = sha256 %}
+{% endif %}
 
 package:
   name: micromamba
   version: {{ version }}
 
 source:
-  - url: https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{{ version }}.tar.gz
-    sha256: cfa63d261488ac82adf4ed8efe18d39bcccaa40a5fda7b485b110abdb814b36b
+  - "{{ mamba_source_type }}": "{{ mamba_source_val }}"
+    "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
     folder: mamba
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
   - url: https://github.com/microsoft/vcpkg/archive/8be970aaeaf19fd2663aaf5888478483f9742e55.tar.gz  # [win]
