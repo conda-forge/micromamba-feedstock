@@ -90,10 +90,10 @@ test:
     - mkdir %TEMP%\mamba                       # [win]
     - set "MAMBA_ROOT_PREFIX=%TEMP%\mamba"     # [win]
     - micromamba{{ bin_ext }} create -n test --override-channels -c conda-forge --yes python=3.9
-    - ${MAMBA_ROOT_PREFIX}/envs/test/bin/python --version                  # [unix]
-    - %MAMBA_ROOT_PREFIX%\envs\test\Library\bin\python.exe --version       # [win]
-    - ${MAMBA_ROOT_PREFIX}/envs/test/bin/python -c 'import os'             # [unix]
-    - %MAMBA_ROOT_PREFIX%\envs\test\Library\bin\python.exe -c "import os"  # [win]
+    - ${MAMBA_ROOT_PREFIX}/envs/test/bin/python --version                    # [unix]
+    - '%MAMBA_ROOT_PREFIX%\envs\test\Library\bin\python.exe --version'       # [win]
+    - ${MAMBA_ROOT_PREFIX}/envs/test/bin/python -c 'import os'               # [unix]
+    - '%MAMBA_ROOT_PREFIX%\envs\test\Library\bin\python.exe -c "import os"'  # [win]
 
 about:
   home: https://github.com/mamba-org/mamba
