@@ -15,6 +15,10 @@
   {% set mamba_hash_val = sha256 %}
 {% endif %}
 
+# Used for writing generic tests
+{% set bin_ext = "" %}      # [unix]
+{% set bin_ext = ".exe" %}  # [win]
+
 package:
   name: micromamba
   version: {{ version }}
@@ -79,15 +83,17 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/micromamba                                          # [unix]
-    - micromamba --help
-    - export TMPDIR="${TMPDIR:-/tmp}"                                         # [unix and not (ppc64le or aarch64)]
-    - if [ ! -d "${TMPDIR}" ]; then mkdir -p "${TMPDIR}"; fi                  # [unix and not (ppc64le or aarch64)]
-    - stat $TMPDIR                                                            # [unix and not (ppc64le or aarch64)]
-    - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                  # [unix and not (ppc64le or aarch64)]
-    - micromamba create -p $TMPDIR/testenv --override-channels -c conda-forge --yes python=3.9    # [unix and not (ppc64le or aarch64)]
-    - $TMPDIR/testenv/bin/python --version                                    # [unix and not (ppc64le or aarch64)]
-    - $TMPDIR/testenv/bin/python -c 'import ssl'                              # [unix and not (ppc64le or aarch64)]
+    - test -f "${PREFIX}/bin/micromamba"                    # [unix]
+    - if not exist %LIBRARY_BIN%\micromamba.exe (exit 1)  # [win]
+    - micromamba{{ bin_ext }} --help
+    - export MAMBA_ROOT_PREFIX="$(mktemp -d)"  # [unix]
+    - mkdir %TEMP%\mamba                       # [win]
+    - set "MAMBA_ROOT_PREFIX=%TEMP%\mamba"     # [win]
+    - micromamba{{ bin_ext }} create -n test --override-channels -c conda-forge --yes python=3.9
+    - ${MAMBA_ROOT_PREFIX}/envs/test/bin/python --version                  # [unix]
+    - %MAMBA_ROOT_PREFIX%\envs\test\Library\bin\python.exe --version       # [win]
+    - ${MAMBA_ROOT_PREFIX}/envs/test/bin/python -c 'import os'             # [unix]
+    - %MAMBA_ROOT_PREFIX%\envs\test\Library\bin\python.exe -c "import os"  # [win]
 
 about:
   home: https://github.com/mamba-org/mamba
