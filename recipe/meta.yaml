@@ -45,6 +45,7 @@ build:
     - {{ compiler('c') }}         # [linux]
     - {{ compiler('cxx') }}       # [linux]
     - python                      # [win]
+    - libsolv
 
 requirements:
   build:
@@ -62,6 +63,7 @@ requirements:
     - nlohmann_json
     - spdlog
     - fmt
+    - libsolv-static 0.7.24  *_4
     - yaml-cpp-static              # [unix]
     - libcurl >=7.88.1,<8          # [unix]
     - libcurl-static >=7.88.1,<8   # [unix]
@@ -69,7 +71,6 @@ requirements:
     - libssh2-static               # [unix]
     - libarchive-minimal-static    # [unix]
     - krb5-static                  # [unix]
-    - libsolv-static               # [unix]
     - openssl            {{ openssl }}  # [unix]
     - libopenssl-static  {{ openssl }}  # [unix]
     - zstd-static                  # [unix]

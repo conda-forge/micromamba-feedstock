@@ -1,7 +1,6 @@
 SET VCPKG_ROOT=%CD%\vcpkg
 
 SET VCPKG_BUILD_TYPE=release
-vcpkg install --overlay-ports=%RECIPE_DIR%\libsolv libsolv[conda] --triplet x64-windows-static
 
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 vcpkg install "libarchive[bzip2,lz4,lzma,lzo,openssl,zstd]" --triplet x64-windows-static
