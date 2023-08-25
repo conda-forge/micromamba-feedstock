@@ -1,6 +1,6 @@
 {% set version = "1.5.0" %}
 {% set sha256 = "0323e3a380d2a4b2bf20ef2520d271681480a6885b1505c3787e3683cbe58b17" %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -14,6 +14,10 @@
   {% set mamba_hash_type = "sha256" %}
   {% set mamba_hash_val = sha256 %}
 {% endif %}
+
+# Used for writing generic tests
+{% set bin_ext = "" %}      # [unix]
+{% set bin_ext = ".exe" %}  # [win]
 
 package:
   name: micromamba
@@ -79,15 +83,17 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/micromamba                                          # [unix]
-    - micromamba --help
-    - export TMPDIR="${TMPDIR:-/tmp}"                                         # [unix and not (ppc64le or aarch64)]
-    - if [ ! -d "${TMPDIR}" ]; then mkdir -p "${TMPDIR}"; fi                  # [unix and not (ppc64le or aarch64)]
-    - stat $TMPDIR                                                            # [unix and not (ppc64le or aarch64)]
-    - export MAMBA_ROOT_PREFIX=$TMPDIR/mamba                                  # [unix and not (ppc64le or aarch64)]
-    - micromamba create -p $TMPDIR/testenv --override-channels -c conda-forge --yes python=3.9    # [unix and not (ppc64le or aarch64)]
-    - $TMPDIR/testenv/bin/python --version                                    # [unix and not (ppc64le or aarch64)]
-    - $TMPDIR/testenv/bin/python -c 'import ssl'                              # [unix and not (ppc64le or aarch64)]
+    - test -f "${PREFIX}/bin/micromamba"                    # [unix]
+    - if not exist %LIBRARY_BIN%\micromamba.exe (exit 1)  # [win]
+    - micromamba{{ bin_ext }} --help
+    - export MAMBA_ROOT_PREFIX="$(mktemp -d)"  # [unix]
+    - mkdir %TEMP%\mamba                       # [win]
+    - set "MAMBA_ROOT_PREFIX=%TEMP%\mamba"     # [win]
+    - micromamba{{ bin_ext }} create -n test --override-channels -c conda-forge --yes python=3.9
+    - '"${MAMBA_ROOT_PREFIX}/envs/test/bin/python" --version'       # [unix]
+    - '%MAMBA_ROOT_PREFIX%\envs\test\python.exe --version'          # [win]
+    - '"${MAMBA_ROOT_PREFIX}/envs/test/bin/python" -c "import os"'  # [unix]
+    - '%MAMBA_ROOT_PREFIX%\envs\test\python.exe -c "import os"'     # [win]
 
 about:
   home: https://github.com/mamba-org/mamba
