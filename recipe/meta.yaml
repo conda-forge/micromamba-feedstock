@@ -63,7 +63,7 @@ requirements:
     - nlohmann_json
     - spdlog
     - fmt
-    - libsolv-static 0.7.24  *_4
+    - libsolv-static 0.7.24  *_6
     - yaml-cpp-static              # [unix]
     - libcurl >=7.88.1,<8          # [unix]
     - libcurl-static >=7.88.1,<8   # [unix]
