@@ -85,7 +85,7 @@ requirements:
 test:
   commands:
     - test -f "${PREFIX}/bin/micromamba"                    # [unix]
-    - if not exist %LIBRARY_BIN%\micromamba.exe (exit 1)  # [win]
+    - if not exist %LIBRARY_BIN%\micromamba.exe (exit 1)    # [win]
     - micromamba{{ bin_ext }} --help
     - export MAMBA_ROOT_PREFIX="$(mktemp -d)"  # [unix]
     - mkdir %TEMP%\mamba                       # [win]
