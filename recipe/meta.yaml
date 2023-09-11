@@ -1,6 +1,6 @@
-{% set version = "1.5.1" %}
-{% set sha256 = "8760f5d01f307aad28bf04df9affdc077687594cea175b02a4b5ba20933b0920" %}
-{% set build_num = 0 %}
+{% set version = "1.5.0" %}
+{% set sha256 = "0323e3a380d2a4b2bf20ef2520d271681480a6885b1505c3787e3683cbe58b17" %}
+{% set build_num = 1 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -27,6 +27,9 @@ source:
   - "{{ mamba_source_type }}": "{{ mamba_source_val }}"
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
     folder: mamba
+    patches:
+      - 0001-Change-Windows-static-lib-name.patch
+      - 0001-Compile-with-MD.patch
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
   - url: https://github.com/microsoft/vcpkg/archive/8be970aaeaf19fd2663aaf5888478483f9742e55.tar.gz  # [win]
     sha256: 1d1d3b4b3d1871211d3d7799babfb7443971ed9a51b9eb7018bb94dfdb387076  # [win]
@@ -45,12 +48,13 @@ build:
     - {{ compiler('c') }}         # [linux]
     - {{ compiler('cxx') }}       # [linux]
     - python                      # [win]
+    - libsolv
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cmake           # [unix]
+    - cmake
     - ninja
     - vcpkg-tool      # [win]
     - python          # [win]
@@ -62,6 +66,7 @@ requirements:
     - nlohmann_json
     - spdlog
     - fmt
+    - libsolv-static >=0.7.24
     - yaml-cpp-static              # [unix]
     - libcurl >=7.88.1,<8          # [unix]
     - libcurl-static >=7.88.1,<8   # [unix]
@@ -69,7 +74,6 @@ requirements:
     - libssh2-static               # [unix]
     - libarchive-minimal-static    # [unix]
     - krb5-static                  # [unix]
-    - libsolv-static               # [unix]
     - openssl            {{ openssl }}  # [unix]
     - libopenssl-static  {{ openssl }}  # [unix]
     - zstd-static                  # [unix]

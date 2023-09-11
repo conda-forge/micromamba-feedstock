@@ -1,0 +1,53 @@
+From 7f1352d2dac874a74e42f90f4fde94bd98de6384 Mon Sep 17 00:00:00 2001
+From: AntoinePrv <AntoinePrv@users.noreply.github.com>
+Date: Tue, 5 Sep 2023 16:44:39 +0200
+Subject: [PATCH] Compile with /MD
+
+---
+ libmamba/CMakeLists.txt      | 2 +-
+ mamba_package/CMakeLists.txt | 2 +-
+ micromamba/CMakeLists.txt    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/libmamba/CMakeLists.txt b/libmamba/CMakeLists.txt
+index 5aa0e4cf..fe1fbfca 100644
+--- a/libmamba/CMakeLists.txt
++++ b/libmamba/CMakeLists.txt
+@@ -426,7 +426,7 @@ macro(libmamba_create_target target_name linkage output_name)
+         elseif (WIN32)
+ 
+             set(CMAKE_PREFIX_PATH "$ENV{VCPKG_ROOT}/installed/x64-windows-static/")
+-            set_target_properties(${target_name} PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
++            set_target_properties(${target_name} PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+ 
+             # For Windows we have a vcpkg based build system right now.
+             find_package(LibArchive REQUIRED)
+diff --git a/mamba_package/CMakeLists.txt b/mamba_package/CMakeLists.txt
+index ec24f718..bcbf0913 100644
+--- a/mamba_package/CMakeLists.txt
++++ b/mamba_package/CMakeLists.txt
+@@ -50,7 +50,7 @@ mamba_target_add_compile_warnings(mamba-package WARNING_AS_ERROR ${MAMBA_WARNING
+ if (${MAMBA_PACKAGE_LINKAGE} STREQUAL "STATIC")
+     target_link_libraries(mamba-package PRIVATE libmamba-static)
+     if (WIN32)
+-        set_target_properties(mamba-package PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
++        set_target_properties(mamba-package PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+     endif ()
+ else ()
+     target_link_libraries(mamba-package PRIVATE libmamba)
+diff --git a/micromamba/CMakeLists.txt b/micromamba/CMakeLists.txt
+index 8264b795..66542e33 100644
+--- a/micromamba/CMakeLists.txt
++++ b/micromamba/CMakeLists.txt
+@@ -78,7 +78,7 @@ message(STATUS "Micromamba linkage: ${MICROMAMBA_LINKAGE}")
+ if (${MICROMAMBA_LINKAGE} STREQUAL "STATIC")
+     target_link_libraries(micromamba PRIVATE libmamba-static)
+     if (WIN32)
+-        set_target_properties(micromamba PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
++        set_target_properties(micromamba PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+     endif ()
+ else ()
+     target_link_libraries(micromamba PRIVATE libmamba)
+-- 
+2.41.0
+
