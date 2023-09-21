@@ -1,0 +1,86 @@
+From 6cef8bb758680f25d8206de4acfbdddab9ee7b98 Mon Sep 17 00:00:00 2001
+From: AntoinePrv <AntoinePrv@users.noreply.github.com>
+Date: Thu, 21 Sep 2023 16:59:27 +0200
+Subject: [PATCH] Don't force MSVC_RUNTIME
+
+---
+ .github/workflows/static_build.yml | 1 +
+ CMakeLists.txt                     | 6 +++++-
+ libmamba/CMakeLists.txt            | 1 -
+ mamba_package/CMakeLists.txt       | 3 ---
+ micromamba/CMakeLists.txt          | 3 ---
+ 5 files changed, 6 insertions(+), 8 deletions(-)
+
+diff --git a/.github/workflows/static_build.yml b/.github/workflows/static_build.yml
+index 697ce1fc..4e890bb1 100644
+--- a/.github/workflows/static_build.yml
++++ b/.github/workflows/static_build.yml
+@@ -131,6 +131,7 @@ jobs:
+             -B build ^
+             -D CMAKE_CXX_COMPILER_LAUNCHER=sccache ^
+             -D CMAKE_C_COMPILER_LAUNCHER=sccache ^
++            -D CMAKE_MSVC_RUNTIME_LIBRARY="MultiThreaded" ^
+             -D CMAKE_BUILD_TYPE="Release" ^
+             -D BUILD_LIBMAMBA=ON ^
+             -D BUILD_STATIC=ON ^
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 10c87ce8..1b7cc81e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -32,8 +32,12 @@ if (MSVC)
+     # /external:I $ENV{CONDA_PREFIX}: consider the conda env prefix libraries headers as "external" to this project.
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /D_CRT_SECURE_NO_WARNINGS /DNOMINMAX /EHsc /Zc:__cplusplus /MP /experimental:external /external:I $ENV{CONDA_PREFIX}")
+     # Force release mode to avoid debug libraries to be linked
+-    set(CMAKE_BUILD_TYPE Release)
++    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The build type")
+     # add_definitions("-DUNICODE -D_UNICODE")
++    set(
++        MAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
++        CACHE STRING "MSVC runtime library"
++    )
+ endif()
+ 
+ # Variants
+diff --git a/libmamba/CMakeLists.txt b/libmamba/CMakeLists.txt
+index ed1d0782..5767a441 100644
+--- a/libmamba/CMakeLists.txt
++++ b/libmamba/CMakeLists.txt
+@@ -431,7 +431,6 @@ macro(libmamba_create_target target_name linkage output_name)
+         elseif (WIN32)
+ 
+             set(CMAKE_PREFIX_PATH "$ENV{VCPKG_ROOT}/installed/x64-windows-static/")
+-            set_target_properties(${target_name} PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+ 
+             # For Windows we have a vcpkg based build system right now.
+             find_package(LibArchive REQUIRED)
+diff --git a/mamba_package/CMakeLists.txt b/mamba_package/CMakeLists.txt
+index ec24f718..c61e9fde 100644
+--- a/mamba_package/CMakeLists.txt
++++ b/mamba_package/CMakeLists.txt
+@@ -49,9 +49,6 @@ mamba_target_add_compile_warnings(mamba-package WARNING_AS_ERROR ${MAMBA_WARNING
+ 
+ if (${MAMBA_PACKAGE_LINKAGE} STREQUAL "STATIC")
+     target_link_libraries(mamba-package PRIVATE libmamba-static)
+-    if (WIN32)
+-        set_target_properties(mamba-package PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+-    endif ()
+ else ()
+     target_link_libraries(mamba-package PRIVATE libmamba)
+ endif ()
+diff --git a/micromamba/CMakeLists.txt b/micromamba/CMakeLists.txt
+index 8264b795..e223ed12 100644
+--- a/micromamba/CMakeLists.txt
++++ b/micromamba/CMakeLists.txt
+@@ -77,9 +77,6 @@ message(STATUS "Micromamba linkage: ${MICROMAMBA_LINKAGE}")
+ 
+ if (${MICROMAMBA_LINKAGE} STREQUAL "STATIC")
+     target_link_libraries(micromamba PRIVATE libmamba-static)
+-    if (WIN32)
+-        set_target_properties(micromamba PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+-    endif ()
+ else ()
+     target_link_libraries(micromamba PRIVATE libmamba)
+ endif ()
+-- 
+2.41.0
+

@@ -29,7 +29,7 @@ source:
     folder: mamba
     patches:
       - 0001-Change-Windows-static-lib-name.patch
-      - 0001-Compile-with-MD.patch
+      - 0001-Don-t-force-MSVC_RUNTIME.patch
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
   - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2023.08.09.tar.gz  # [win]
     sha256: 241ae285fe27ce3f8478529d9a05e7a49396789fd8618ed62a11c3e4835aaab2     # [win]
