@@ -64,6 +64,7 @@ requirements:
     - cli11 >=2.2,<3
     - cpp-expected
     - nlohmann_json
+    - simdjson-static
     - spdlog
     - fmt
     - libsolv-static >=0.7.24
