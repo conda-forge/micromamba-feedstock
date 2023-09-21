@@ -10,9 +10,10 @@
   {% set mamba_hash_val = "" %}
 {% else %}
   {% set mamba_source_type = "url" %}
-  {% set mamba_source_val = "https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{}.tar.gz".format(version) %}
-  {% set mamba_hash_type = "sha256" %}
-  {% set mamba_hash_val = sha256 %}
+  # Temporary for mamba CI
+  {% set mamba_source_val = "https://github.com/mamba-org/mamba/archive/refs/heads/main.tar.gz" %}
+  {% set mamba_hash_type = "" %}
+  {% set mamba_hash_val = "" %}
 {% endif %}
 
 # Used for writing generic tests
