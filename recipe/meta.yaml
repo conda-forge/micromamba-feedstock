@@ -67,7 +67,7 @@ requirements:
     - spdlog
     - fmt
     - libsolv-static >=0.7.24
-    - yaml-cpp-static              # [unix]
+    - yaml-cpp-static 0.7.0 *_3    # [unix]
     - libcurl >=8.4.0              # [unix]
     - libcurl-static >=8.4.0       # [unix]
     - xz-static                    # [unix]
