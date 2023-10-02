@@ -39,7 +39,6 @@ build:
   ignore_run_exports_from:
     - libcurl                     # [unix]
     - libarchive-minimal-static   # [unix]
-    - reproc-cpp                  # [unix]
     - openssl                     # [unix]
     - spdlog
     - fmt
@@ -67,6 +66,8 @@ requirements:
     - fmt
     - libsolv-static >=0.7.24
     - yaml-cpp-static >=0.8.0
+    - reproc-static >=14.2.4.post0
+    - reproc-cpp-static >=14.2.4.post0
     - libcurl >=7.88.1,<8          # [unix]
     - libcurl-static >=7.88.1,<8   # [unix]
     - xz-static                    # [unix]
@@ -79,9 +80,6 @@ requirements:
     - zlib                         # [unix]
     - libnghttp2-static            # [unix]
     - lz4-c-static                 # [unix]
-    - reproc-static                # [unix]
-    - reproc-cpp                   # [unix]
-    - reproc-cpp-static            # [unix]
     - winreg                       # [win]
 
 test:
