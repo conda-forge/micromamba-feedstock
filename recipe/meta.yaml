@@ -68,8 +68,10 @@ requirements:
     - fmt
     - libsolv-static >=0.7.24
     - yaml-cpp-static              # [unix]
-    - libcurl >=8.4.0              # [unix]
-    - libcurl-static >=8.4.0       # [unix]
+    - libcurl >=8.4.0              # [linux]
+    - libcurl-static >=8.4.0       # [linux]
+    - libcurl <8.0                 # [osx]
+    - libcurl-static <8.0          # [osx]
     - xz-static                    # [unix]
     - libssh2-static               # [unix]
     - libarchive-minimal-static    # [unix]
