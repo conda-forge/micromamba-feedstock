@@ -13,3 +13,7 @@ provider:
   linux_aarch64: default
   linux_ppc64le: default
 test_on_native_only: true
+bot:
+  version_updates:
+    sources:
+    - rawurl
