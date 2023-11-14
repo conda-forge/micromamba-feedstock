@@ -1,6 +1,6 @@
-{% set version = "1.5.1" %}
-{% set sha256 = "8760f5d01f307aad28bf04df9affdc077687594cea175b02a4b5ba20933b0920" %}
-{% set build_num = 2 %}
+{% set version = "1.5.2" %}
+{% set sha256 = "abb692e4b249d1e781e90c887d24eae0c97f80a74e04bdf722bc1aceff68765f" %}
+{% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -67,7 +67,7 @@ requirements:
     - spdlog
     - fmt
     - libsolv-static >=0.7.24
-    - yaml-cpp-static              # [unix]
+    - yaml-cpp-static >=0.8.0
     - libcurl >=8.4.0              # [unix]
     - libcurl-static >=8.4.0       # [unix]
     - xz-static                    # [unix]

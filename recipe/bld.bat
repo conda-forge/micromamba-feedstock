@@ -7,8 +7,6 @@ vcpkg install "libarchive[bzip2,lz4,lzma,lzo,openssl,zstd]" --triplet x64-window
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 vcpkg install curl --triplet x64-windows-static-md
 if %errorlevel% NEQ 0 exit /b %errorlevel%
-vcpkg install yaml-cpp --triplet x64-windows-static-md
-if %errorlevel% NEQ 0 exit /b %errorlevel%
 vcpkg install reproc --triplet x64-windows-static-md
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 
