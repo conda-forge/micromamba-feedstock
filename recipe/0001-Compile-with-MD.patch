@@ -1,0 +1,41 @@
+From b7257ac1b179e9455107f633bb3856e5e8b877d1 Mon Sep 17 00:00:00 2001
+From: AntoinePrv <AntoinePrv@users.noreply.github.com>
+Date: Tue, 14 Nov 2023 15:50:23 +0100
+Subject: [PATCH] No MT
+
+---
+ mamba_package/CMakeLists.txt | 3 ---
+ micromamba/CMakeLists.txt    | 3 ---
+ 2 files changed, 6 deletions(-)
+
+diff --git a/mamba_package/CMakeLists.txt b/mamba_package/CMakeLists.txt
+index ec24f718..c61e9fde 100644
+--- a/mamba_package/CMakeLists.txt
++++ b/mamba_package/CMakeLists.txt
+@@ -49,9 +49,6 @@ mamba_target_add_compile_warnings(mamba-package WARNING_AS_ERROR ${MAMBA_WARNING
+ 
+ if (${MAMBA_PACKAGE_LINKAGE} STREQUAL "STATIC")
+     target_link_libraries(mamba-package PRIVATE libmamba-static)
+-    if (WIN32)
+-        set_target_properties(mamba-package PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+-    endif ()
+ else ()
+     target_link_libraries(mamba-package PRIVATE libmamba)
+ endif ()
+diff --git a/micromamba/CMakeLists.txt b/micromamba/CMakeLists.txt
+index 8264b795..e223ed12 100644
+--- a/micromamba/CMakeLists.txt
++++ b/micromamba/CMakeLists.txt
+@@ -77,9 +77,6 @@ message(STATUS "Micromamba linkage: ${MICROMAMBA_LINKAGE}")
+ 
+ if (${MICROMAMBA_LINKAGE} STREQUAL "STATIC")
+     target_link_libraries(micromamba PRIVATE libmamba-static)
+-    if (WIN32)
+-        set_target_properties(micromamba PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+-    endif ()
+ else ()
+     target_link_libraries(micromamba PRIVATE libmamba)
+ endif ()
+-- 
+2.41.0
+
