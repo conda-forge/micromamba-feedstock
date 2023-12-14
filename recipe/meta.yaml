@@ -1,5 +1,5 @@
-{% set version = "1.5.3" %}
-{% set sha256 = "f13e6e31279a8b526af63d53216cb6582fe0e4989d084260c24b0ab35de58dce" %}
+{% set version = "1.5.5" %}
+{% set sha256 = "fe6e0d223062e7ce616e9d3aaa529cd11f1a46847f6cbaa8e87a6868570e108b" %}
 {% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
