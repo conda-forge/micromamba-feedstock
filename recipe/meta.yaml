@@ -1,5 +1,5 @@
-{% set version = "1.5.5" %}
-{% set sha256 = "fe6e0d223062e7ce616e9d3aaa529cd11f1a46847f6cbaa8e87a6868570e108b" %}
+{% set version = "2.0.0alpha1" %}
+{% set sha256 = "12cabc3e74a0c73e9f2af124e90e38cbe004d6956b4d4b3fdb57cda06c620338" %}
 {% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
@@ -27,9 +27,6 @@ source:
   - "{{ mamba_source_type }}": "{{ mamba_source_val }}"
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
     folder: mamba
-    patches:
-      - 0001-Change-Windows-static-lib-name.patch
-      - 0001-Compile-with-MD.patch
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
   - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2023.08.09.tar.gz  # [win]
     sha256: 241ae285fe27ce3f8478529d9a05e7a49396789fd8618ed62a11c3e4835aaab2     # [win]
@@ -41,7 +38,6 @@ build:
   ignore_run_exports_from:
     - libcurl                     # [unix]
     - libarchive-minimal-static   # [unix]
-    - reproc-cpp                  # [unix]
     - openssl                     # [unix]
     - spdlog
     - fmt
@@ -64,10 +60,13 @@ requirements:
     - cli11 >=2.2,<3
     - cpp-expected
     - nlohmann_json
+    - simdjson-static >=3.3.0
     - spdlog
     - fmt
     - libsolv-static >=0.7.24
     - yaml-cpp-static >=0.8.0
+    - reproc-static >=14.2.4.post0
+    - reproc-cpp-static >=14.2.4.post0
     - libcurl >=8.4.0              # [unix]
     - libcurl-static >=8.4.0       # [unix]
     - xz-static                    # [unix]
@@ -80,9 +79,6 @@ requirements:
     - zlib                         # [unix]
     - libnghttp2-static            # [unix]
     - lz4-c-static                 # [unix]
-    - reproc-static                # [unix]
-    - reproc-cpp                   # [unix]
-    - reproc-cpp-static            # [unix]
     - winreg                       # [win]
 
 test:
