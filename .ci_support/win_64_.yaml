@@ -3,7 +3,7 @@ c_compiler:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge micromamba_rc
+- conda-forge micromamba_dev
 cxx_compiler:
 - vs2019
 fmt:
