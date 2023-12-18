@@ -1,6 +1,6 @@
-{% set version = "1.5.1" %}
-{% set sha256 = "8760f5d01f307aad28bf04df9affdc077687594cea175b02a4b5ba20933b0920" %}
-{% set build_num = 1 %}
+{% set version = "2.0.0alpha1" %}
+{% set sha256 = "12cabc3e74a0c73e9f2af124e90e38cbe004d6956b4d4b3fdb57cda06c620338" %}
+{% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -10,10 +10,9 @@
   {% set mamba_hash_val = "" %}
 {% else %}
   {% set mamba_source_type = "url" %}
-  # Temporary for mamba CI
-  {% set mamba_source_val = "https://github.com/mamba-org/mamba/archive/refs/heads/main.tar.gz" %}
-  {% set mamba_hash_type = "" %}
-  {% set mamba_hash_val = "" %}
+  {% set mamba_source_val = "https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{}.tar.gz".format(version) %}
+  {% set mamba_hash_type = "sha256" %}
+  {% set mamba_hash_val = sha256 %}
 {% endif %}
 
 # Used for writing generic tests
