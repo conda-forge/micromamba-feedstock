@@ -88,14 +88,14 @@ Current release info
 Installing micromamba
 =====================
 
-Installing `micromamba` from the `conda-forge/label/micromamba_rc` channel can be achieved by adding `conda-forge/label/micromamba_rc` to your channels with:
+Installing `micromamba` from the `conda-forge/label/micromamba_dev` channel can be achieved by adding `conda-forge/label/micromamba_dev` to your channels with:
 
 ```
-conda config --add channels conda-forge/label/micromamba_rc
+conda config --add channels conda-forge/label/micromamba_dev
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge/label/micromamba_rc` channel has been enabled, `micromamba` can be installed with `conda`:
+Once the `conda-forge/label/micromamba_dev` channel has been enabled, `micromamba` can be installed with `conda`:
 
 ```
 conda install micromamba
@@ -110,26 +110,26 @@ mamba install micromamba
 It is possible to list all of the versions of `micromamba` available on your platform with `conda`:
 
 ```
-conda search micromamba --channel conda-forge/label/micromamba_rc
+conda search micromamba --channel conda-forge/label/micromamba_dev
 ```
 
 or with `mamba`:
 
 ```
-mamba search micromamba --channel conda-forge/label/micromamba_rc
+mamba search micromamba --channel conda-forge/label/micromamba_dev
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search micromamba --channel conda-forge/label/micromamba_rc
+mamba repoquery search micromamba --channel conda-forge/label/micromamba_dev
 
 # List packages depending on `micromamba`:
-mamba repoquery whoneeds micromamba --channel conda-forge/label/micromamba_rc
+mamba repoquery whoneeds micromamba --channel conda-forge/label/micromamba_dev
 
 # List dependencies of `micromamba`:
-mamba repoquery depends micromamba --channel conda-forge/label/micromamba_rc
+mamba repoquery depends micromamba --channel conda-forge/label/micromamba_dev
 ```
 
 
