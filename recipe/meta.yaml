@@ -35,6 +35,7 @@ source:
 build:
   number: {{ build_num }}
   string: {{ build_num }}
+  skip: True                      # [win]
   ignore_run_exports_from:
     - libcurl                     # [unix]
     - libarchive-minimal-static   # [unix]
