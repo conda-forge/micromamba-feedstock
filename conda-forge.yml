@@ -1,3 +1,7 @@
+bot:
+  version_updates:
+    sources:
+    - rawurl
 build_platform:
   linux_aarch64: linux_64
   linux_ppc64le: linux_64
@@ -12,8 +16,4 @@ github:
 provider:
   linux_aarch64: default
   linux_ppc64le: default
-bot:
-  version_updates:
-    sources:
-    - rawurl
 test: native_and_emulated
