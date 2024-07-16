@@ -1,0 +1,18 @@
+c_compiler:
+- vs2019
+c_stdlib:
+- vs
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge micromamba_dev
+cxx_compiler:
+- vs2019
+fmt:
+- '10'
+spdlog:
+- '1.12'
+target_platform:
+- win-64
+zlib:
+- '1'
