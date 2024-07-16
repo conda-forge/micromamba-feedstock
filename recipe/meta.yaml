@@ -1,6 +1,6 @@
 {% set version = "2.0.0rc0" %}
 {% set sha256 = "db763d00bc37d591c7bdc44702e24381a755aa52ac1d53692eb57ff17d51fe6b" %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -35,7 +35,6 @@ source:
 build:
   number: {{ build_num }}
   string: {{ build_num }}
-  skip: True                      # [win]
   ignore_run_exports_from:
     - libcurl                     # [unix]
     - libarchive-minimal-static   # [unix]
