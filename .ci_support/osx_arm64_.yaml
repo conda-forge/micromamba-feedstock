@@ -27,7 +27,7 @@ macos_machine:
 openssl:
 - '3'
 spdlog:
-- '1.12'
+- '1.14'
 target_platform:
 - osx-arm64
 zip_keys:
