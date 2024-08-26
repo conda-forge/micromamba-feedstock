@@ -1,5 +1,5 @@
-{% set version = "2.0.0rc2" %}
-{% set sha256 = "bfb344822ddeba062413bf5d2df0d07a633c0fdfaf67023e1abdd11a24e83143" %}
+{% set version = "2.0.0rc3" %}
+{% set sha256 = "9b1e7009bb77e9f9724528f8460438aec0a63ae8e27d6c0a6cffce5a584901a8" %}
 {% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
@@ -85,6 +85,7 @@ requirements:
 test:
   commands:
     - test -f "${PREFIX}/bin/micromamba"                    # [unix]
+    - test ! -f "${PREFIX}/etc/profile.d/mamba.sh"          # [unix]
     - if not exist %LIBRARY_BIN%\micromamba.exe (exit 1)  # [win]
     - micromamba{{ bin_ext }} --help
     - export MAMBA_ROOT_PREFIX="$(mktemp -d)"  # [unix]
