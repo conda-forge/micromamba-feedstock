@@ -121,6 +121,7 @@ about:
     - REPROC_LICENSE.txt
     - SPDLOG_LICENSE.txt
     - TL_EXPECTED_LICENSE.txt
+    - ZLIB_LICENSE.txt
     - ZSTD_LICENSE.txt
   license: BSD-3-Clause AND MIT AND OpenSSL
   license_family: BSD
