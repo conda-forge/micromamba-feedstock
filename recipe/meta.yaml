@@ -49,6 +49,7 @@ build:
     - {{ compiler('cxx') }}       # [linux]
     - python                      # [win]
     - libsolv
+    - zlib
 
 requirements:
   build:
