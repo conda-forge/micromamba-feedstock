@@ -1,6 +1,6 @@
 {% set version = "1.5.9" %}
 {% set sha256 = "9ac3fb39fffb9a57a7cc102e885cf49d9bac47ec6446c7d8c850f6fc87b26af6" %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -49,6 +49,7 @@ build:
     - {{ compiler('cxx') }}       # [linux]
     - python                      # [win]
     - libsolv
+    - zlib
 
 requirements:
   build:
@@ -120,6 +121,7 @@ about:
     - REPROC_LICENSE.txt
     - SPDLOG_LICENSE.txt
     - TL_EXPECTED_LICENSE.txt
+    - ZLIB_LICENSE.txt
     - ZSTD_LICENSE.txt
   license: BSD-3-Clause AND MIT AND OpenSSL
   license_family: BSD
