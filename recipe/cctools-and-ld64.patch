@@ -1,0 +1,46 @@
+From f8bb11c8539d96b502a34d2d6001e5474b76b431 Mon Sep 17 00:00:00 2001
+From: Johan Mabille <johan.mabille@gmail.com>
+Date: Mon, 9 Sep 2024 16:53:28 +0200
+Subject: [PATCH 1/4] =?UTF-8?q?Fixed=20micromamba=20static=20build=20after?=
+ =?UTF-8?q?=20cctools=20and=20ld64=20upgrade=20on=20conda=E2=80=A6=20(#343?=
+ =?UTF-8?q?6)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fixed micromamba static build after cctools and ld64 upgrade on conda-forge
+---
+ libmamba/CMakeLists.txt   | 2 +-
+ micromamba/CMakeLists.txt | 3 +++
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/libmamba/CMakeLists.txt b/libmamba/CMakeLists.txt
+index 3ea77f91..8bd51b59 100644
+--- a/libmamba/CMakeLists.txt
++++ b/libmamba/CMakeLists.txt
+@@ -526,7 +526,7 @@ macro(libmamba_create_target target_name linkage output_name)
+ 
+             if(APPLE)
+                 set(MAMBA_FORCE_DYNAMIC_LIBS resolv c++abi)
+-                target_link_options(${target_name} PRIVATE -static-libstdc++)
++                target_link_options(${target_name} PRIVATE -nostdlib++)
+             elseif(UNIX)
+                 set(MAMBA_FORCE_DYNAMIC_LIBS rt dl resolv)
+                 target_link_options(${target_name} PUBLIC -static-libstdc++ -static-libgcc)
+diff --git a/micromamba/CMakeLists.txt b/micromamba/CMakeLists.txt
+index e394e1e8..7414429c 100644
+--- a/micromamba/CMakeLists.txt
++++ b/micromamba/CMakeLists.txt
+@@ -79,6 +79,9 @@ macro(mambaexe_create_target target_name linkage output_name)
+             find_package(libmamba REQUIRED)
+         endif()
+         target_link_libraries(${target_name} PRIVATE mamba::libmamba-static)
++        if(APPLE)
++            target_link_options(${target_name} PRIVATE -nostdlib++)
++        endif()
+         # Dynamic build
+         # =============
+     else()
+-- 
+2.39.3 (Apple Git-145)
+
