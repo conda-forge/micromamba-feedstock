@@ -1,6 +1,6 @@
-{% set version = "2.0.0rc4" %}
-{% set sha256 = "3fef2cbe833ef4c650e4dbd231c6c1abfa5f1a440242c71fccf2d2f6ca10bc6f" %}
-{% set build_num = 1 %}
+{% set version = "2.0.0rc5" %}
+{% set sha256 = "8ac3571a8536201709c0561b4ea59432225f426c3140bbd8b9c0586cdbec2ef9" %}
+{% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -27,8 +27,6 @@ source:
   - "{{ mamba_source_type }}": "{{ mamba_source_val }}"
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
     folder: mamba
-    patches:
-      - cctools-and-ld64.patch 
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
   - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2023.08.09.tar.gz  # [win]
     sha256: 241ae285fe27ce3f8478529d9a05e7a49396789fd8618ed62a11c3e4835aaab2     # [win]
