@@ -28,8 +28,6 @@ source:
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
     folder: mamba
     patches:
-      - 0001-Change-Windows-static-lib-name.patch
-      - 0001-Compile-with-MD.patch
       - 0001-cctools.patch
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
   - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2023.08.09.tar.gz  # [win]
