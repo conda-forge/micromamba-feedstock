@@ -1,6 +1,6 @@
 {% set version = "2.0.0rc6" %}
 {% set sha256 = "d507a7d6854215fed3770d989a447acd801ce30918481dcc1960e98d8dfa9389" %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -28,8 +28,8 @@ source:
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
     folder: mamba
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
-  - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2023.08.09.tar.gz  # [win]
-    sha256: 241ae285fe27ce3f8478529d9a05e7a49396789fd8618ed62a11c3e4835aaab2     # [win]
+  - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2024.08.23.tar.gz  # [win]
+    sha256: d5c63c3ebaa715de71349e08c2af547e164c971f8acfaf62f7ee0fa6c1933f8d     # [win]
     folder: vcpkg  # [win]
 
 build:
