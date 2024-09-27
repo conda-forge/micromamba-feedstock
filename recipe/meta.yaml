@@ -1,6 +1,6 @@
 {% set version = "1.5.10" %}
 {% set sha256 = "38ee4658f66c5e4bf2c33cd3c9c0ebd01fe2e3a6da6ac619cc4702a9072dcc3c" %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -30,8 +30,8 @@ source:
     patches:
       - 0001-all_the_patches.patch
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
-  - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2023.08.09.tar.gz  # [win]
-    sha256: 241ae285fe27ce3f8478529d9a05e7a49396789fd8618ed62a11c3e4835aaab2     # [win]
+  - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2024.07.12.tar.gz  # [win]
+    sha256: 7da785e42b7487fb0e7465188f12c6ce0dfa760ab334d0f4f708bd1fc54081b1     # [win]
     folder: vcpkg  # [win]
 
 build:
