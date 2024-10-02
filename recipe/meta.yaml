@@ -33,8 +33,6 @@ source:
     folder: vcpkg  # [win]
 
 build:
-  # Skipping builds for the creation of the `prerelease` branch.
-  skip: true
   number: {{ build_num }}
   string: {{ build_num }}
   ignore_run_exports_from:
