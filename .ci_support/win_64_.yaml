@@ -9,9 +9,9 @@ channel_targets:
 cxx_compiler:
 - vs2019
 fmt:
-- '10'
+- '11'
 spdlog:
-- '1.12'
+- '1.14'
 target_platform:
 - win-64
 zlib:
