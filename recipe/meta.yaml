@@ -1,6 +1,6 @@
 {% set version = "2.0.2" %}
 {% set sha256 = "52a9ffe51d7da271cd4c5c200346f757531d9b41ef6a9ce9edc86891ce5520bd" %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -69,8 +69,8 @@ requirements:
     - yaml-cpp-static >=0.8.0
     - reproc-static >=14.2.4.post0
     - reproc-cpp-static >=14.2.4.post0
-    - libcurl >=8.4.0,<8.10        # [unix]
-    - libcurl-static >=8.4.0,<8.10  # [unix]
+    - libcurl >=8.4.0              # [unix]
+    - libcurl-static >=8.4.0       # [unix]
     - xz-static                    # [unix]
     - libssh2-static               # [unix]
     - libarchive-minimal-static    # [unix]
