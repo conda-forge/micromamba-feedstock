@@ -1,6 +1,6 @@
-{% set version = "2.0.0" %}
-{% set sha256 = "ea6f29327a7877abb79a1e8a16af2f4a4db4ae84c196bc159205b411db8c7dac" %}
-{% set build_num = 1 %}
+{% set version = "2.0.4alpha1" %}
+{% set sha256 = "18c1121f2694d2036ee96bfaa853b7e172065fff4bd6fda3c020f7d4d3b7e807" %}
+{% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -33,8 +33,6 @@ source:
     folder: vcpkg  # [win]
 
 build:
-  # Skipping builds for the creation of the `prerelease` branch.
-  skip: true
   number: {{ build_num }}
   string: {{ build_num }}
   ignore_run_exports_from:
