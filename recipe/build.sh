@@ -7,12 +7,6 @@ export CXXFLAGS="${CXXFLAGS} -fno-merge-constants"
 export CFLAGS="${CFLAGS} -fno-merge-constants"
 export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY=1"
 
-# Dependency of libsolv-static missing in CMakeLists.txt
-if [[ "$target_platform" == "osx-"* ]]; then
-  export CXXFLAGS="${CXXFLAGS} -framework CoreFoundation -framework CoreServices -framework Security -framework Kerberos"
-  export CFLAGS="${CFLAGS} -framework CoreFoundation -framework CoreServices -framework Security -framework Kerberos"
-fi
-
 cmake -S mamba/ \
     -B build/ \
     -G Ninja \
