@@ -1,7 +1,7 @@
 bot:
   abi_migration_branches:
-    - 1.x
-    - prerelease
+  - 1.x
+  - prerelease
   version_updates:
     sources:
     - rawurl
