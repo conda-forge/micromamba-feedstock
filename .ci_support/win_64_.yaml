@@ -11,7 +11,7 @@ cxx_compiler:
 fmt:
 - '11'
 spdlog:
-- '1.14'
+- '1.15'
 target_platform:
 - win-64
 zlib:
