@@ -1,5 +1,5 @@
-{% set version = "2.0.5.rc0" %}
-{% set sha256 = "ce92bc749636d243de30d21dfdaa76c7e4e95db210b152ac4dae1104b64a1283" %}
+{% set version = "2.0.6.rc0" %}
+{% set sha256 = "4eec032454e24009b3a690788db86f12731153768e028c10361bc81cb5b8c466" %}
 {% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
@@ -10,7 +10,7 @@
   {% set mamba_hash_val = "" %}
 {% else %}
   {% set mamba_source_type = "url" %}
-  {% set mamba_source_val = "https://github.com/mamba-org/mamba/archive/refs/tags/micromamba-{}.tar.gz".format(version) %}
+  {% set mamba_source_val = "https://github.com/mamba-org/mamba/archive/refs/tags/{}.tar.gz".format(version) %}
   {% set mamba_hash_type = "sha256" %}
   {% set mamba_hash_val = sha256 %}
 {% endif %}
