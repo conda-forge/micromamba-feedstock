@@ -69,8 +69,8 @@ requirements:
     - yaml-cpp-static >=0.8.0
     - reproc-static >=14.2.4.post0
     - reproc-cpp-static >=14.2.4.post0
-    - libcurl >=8.4.0,<8.10        # [unix]
-    - libcurl-static >=8.4.0,<8.10  # [unix]
+    - libcurl >=8.4.0              # [unix]
+    - libcurl-static >=8.4.0       # [unix]
     - xz-static                    # [unix]
     - libssh2-static               # [unix]
     - libarchive-minimal-static    # [unix]
