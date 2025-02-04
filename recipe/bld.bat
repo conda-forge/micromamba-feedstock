@@ -3,7 +3,7 @@ SET VCPKG_ROOT=%CD%\vcpkg
 SET VCPKG_BUILD_TYPE=release
 
 if %errorlevel% NEQ 0 exit /b %errorlevel%
-vcpkg install "libarchive[bzip2,lz4,lzma,lzo,openssl,zstd]" --triplet x64-windows-static-md
+vcpkg install "libarchive[bzip2,lz4,lzma,lzo,crypto,zstd]" --triplet x64-windows-static-md
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 vcpkg install curl --triplet x64-windows-static-md
 if %errorlevel% NEQ 0 exit /b %errorlevel%
