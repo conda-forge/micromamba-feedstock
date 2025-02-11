@@ -20,6 +20,7 @@ cmake -S mamba/ \
     -D CMAKE_INSTALL_PREFIX=${PREFIX} \
     -D CMAKE_BUILD_TYPE="Release" \
     -D BUILD_LIBMAMBA=ON \
+    -D MAMBA_WARNING_AS_ERROR=ON \
     -D BUILD_STATIC=ON \
     -D BUILD_MICROMAMBA=ON
 cmake --build build/ --parallel ${CPU_COUNT}
