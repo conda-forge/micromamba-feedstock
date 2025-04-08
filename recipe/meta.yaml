@@ -54,7 +54,6 @@ requirements:
     - {{ stdlib('c') }}
     - cmake
     - ninja
-    - vcpkg-tool      # [win]
     - python          # [win]
     - curl >=8.4.0    # [win]
     - zlib            # [win]
