@@ -3,14 +3,14 @@ SET VCPKG_ROOT=%CD%\vcpkg
 SET VCPKG_BUILD_TYPE=release
 
 :: Run vcpkg bootstrap script
-call %VCPKG_ROOT%\bootstrap-vcpkg.bat
+CALL %VCPKG_ROOT%\bootstrap-vcpkg.bat
 
 SET VCPKG_EXE=%VCPKG_ROOT%\vcpkg.exe
 
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 %VCPKG_EXE% install "libarchive[bzip2,lz4,lzma,lzo,crypto,zstd]" --triplet x64-windows-static-md
 if %errorlevel% NEQ 0 exit /b %errorlevel%
-%VCPKG_EXE% install "yaml-cpp[build]" --triplet x64-windows-static-md
+%VCPKG_EXE% install "curl" --triplet x64-windows-static-md
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 
 SET "CXXFLAGS=%CXXFLAGS% /showIncludes"
