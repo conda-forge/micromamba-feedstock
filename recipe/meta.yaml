@@ -52,7 +52,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
-    - cmake
+    - cmake <4
     - ninja
     - python          # [win]
     - curl >=8.4.0    # [win]
