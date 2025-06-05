@@ -1,5 +1,5 @@
-{% set version = "2.1.1" %}
-{% set sha256 = "789d3d89fe8ca9f06344da21797e3d949ad1ff0ae4c633dc242a333e0ee37485" %}
+{% set version = "2.2.0" %}
+{% set sha256 = "b489d997bb288ada1c9988ed2fe2f8b6e49527487d9f1acf7cd4dd8e965bf32b" %}
 {% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
@@ -63,7 +63,7 @@ requirements:
     - nlohmann_json
     - simdjson-static >=3.3.0
     - spdlog
-    - fmt
+    - fmt >=11.1.0
     - libsolv-static >=0.7.24
     - yaml-cpp-static >=0.8.0
     - reproc-static >=14.2.4.post0
