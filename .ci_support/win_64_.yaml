@@ -1,5 +1,5 @@
 c_compiler:
-- vs2019
+- vs2022
 c_stdlib:
 - vs
 channel_sources:
@@ -7,11 +7,11 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2019
+- vs2022
 fmt:
-- '11.1'
+- '12.0'
 spdlog:
-- '1.15'
+- '1.16'
 target_platform:
 - win-64
 zlib:
