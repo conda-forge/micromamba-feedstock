@@ -17,13 +17,13 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 fmt:
-- '11.2'
+- '12.0'
 libcurl:
 - '8'
 openssl:
 - '3'
 spdlog:
-- '1.15'
+- '1.16'
 target_platform:
 - linux-aarch64
 zip_keys:

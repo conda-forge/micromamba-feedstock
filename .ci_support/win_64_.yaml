@@ -9,9 +9,9 @@ channel_targets:
 cxx_compiler:
 - vs2022
 fmt:
-- '11.2'
+- '12.0'
 spdlog:
-- '1.15'
+- '1.16'
 target_platform:
 - win-64
 zlib:
