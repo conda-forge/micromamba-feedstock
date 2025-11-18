@@ -25,7 +25,7 @@ libcurl:
 macos_machine:
 - arm64-apple-darwin20.0.0
 openssl:
-- '3'
+- '3.5'
 spdlog:
 - '1.16'
 target_platform:
