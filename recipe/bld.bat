@@ -28,6 +28,7 @@ cmake -S mamba ^
     -D CMAKE_PREFIX_PATH="%VCPKG_ROOT%\installed\x64-windows-static-md\;%CMAKE_PREFIX_PATH%" ^
     -D CMAKE_BUILD_TYPE="Release" ^
     -D BUILD_LIBMAMBA=ON ^
+    -D BUILD_LIBMAMBA_SPDLOG=ON ^
     -D BUILD_STATIC=ON ^
     -D BUILD_MICROMAMBA=ON ^
     -G "Ninja"
