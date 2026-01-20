@@ -1,0 +1,20 @@
+c_compiler:
+- vs2022
+c_stdlib:
+- vs
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge micromamba_dev
+cxx_compiler:
+- vs2022
+fmt:
+- '12.1'
+msgpack_c:
+- '6'
+spdlog:
+- '1.17'
+target_platform:
+- win-64
+zlib:
+- '1'
