@@ -68,6 +68,7 @@ requirements:
     - yaml-cpp-static >=0.8.0
     - reproc-static >=14.2.4.post0
     - reproc-cpp-static >=14.2.4.post0
+    - msgpack-c
     - libcurl >=8.4.0                      # [unix]
     - libcurl-static >=8.4.0               # [unix]
     - xz-static                            # [unix]

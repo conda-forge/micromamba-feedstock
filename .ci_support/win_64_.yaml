@@ -5,11 +5,13 @@ c_stdlib:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge micromamba_dev
 cxx_compiler:
 - vs2022
 fmt:
 - '12.1'
+msgpack_c:
+- '6'
 spdlog:
 - '1.17'
 target_platform:

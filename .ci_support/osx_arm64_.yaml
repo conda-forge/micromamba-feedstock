@@ -13,7 +13,7 @@ c_stdlib_version:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge micromamba_dev
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
@@ -24,6 +24,8 @@ libcurl:
 - '8'
 macos_machine:
 - arm64-apple-darwin20.0.0
+msgpack_c:
+- '6'
 openssl:
 - '3.5'
 spdlog:
