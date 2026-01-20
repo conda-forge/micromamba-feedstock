@@ -33,8 +33,6 @@ source:
     folder: vcpkg  # [win]
 
 build:
-  # Skip building for the `dev` branch for now.
-  skip: true
   number: {{ build_num }}
   string: {{ build_num }}
   ignore_run_exports_from:
