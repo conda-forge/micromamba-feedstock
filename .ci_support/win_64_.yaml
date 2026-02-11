@@ -10,8 +10,6 @@ cxx_compiler:
 - vs2022
 fmt:
 - '12.1'
-msgpack_c:
-- '6'
 spdlog:
 - '1.17'
 target_platform:
