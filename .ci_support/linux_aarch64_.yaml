@@ -20,8 +20,6 @@ fmt:
 - '12.1'
 libcurl:
 - '8'
-msgpack_c:
-- '6'
 openssl:
 - '3.5'
 spdlog:
