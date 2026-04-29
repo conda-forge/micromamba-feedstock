@@ -52,15 +52,16 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
-    - cmake <4
+    - cmake
     - ninja
+    - vcpkg-tool      # [win]
     - python          # [win]
     - curl >=8.4.0    # [win]
     - zlib            # [win]
   host:
     - cli11 >=2.2,<3
     - cpp-expected
-    - nlohmann_json
+    - nlohmann_json >=3.12,<4.0
     - simdjson-static >=3.3.0
     - spdlog
     - fmt >=11.1.0
@@ -68,19 +69,20 @@ requirements:
     - yaml-cpp-static >=0.8.0
     - reproc-static >=14.2.4.post0
     - reproc-cpp-static >=14.2.4.post0
-    - libcurl >=8.4.0                      # [unix]
-    - libcurl-static >=8.4.0               # [unix]
-    - xz-static                            # [unix]
-    - libssh2-static                       # [unix]
-    - libarchive-minimal-static * lgpl_*   # [unix]
-    - krb5-static                          # [unix]
-    - openssl                              # [unix]
-    - libopenssl-static                    # [unix]
-    - zstd-static                          # [unix]
-    - zlib                                 # [unix]
-    - libnghttp2-static                    # [unix]
-    - lz4-c-static                         # [unix]
-    - winreg                               # [win]
+    - libmsgpack-c-static
+    - libcurl >=8.4.0              # [unix]
+    - libcurl-static >=8.4.0       # [unix]
+    - xz-static                    # [unix]
+    - libssh2-static               # [unix]
+    - libarchive-minimal-static    # [unix]
+    - krb5-static                  # [unix]
+    - openssl                      # [unix]
+    - libopenssl-static            # [unix]
+    - zstd-static                  # [unix]
+    - zlib                         # [unix]
+    - libnghttp2-static            # [unix]
+    - lz4-c-static                 # [unix]
+    - winreg                       # [win]
 
 test:
   commands:
