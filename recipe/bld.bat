@@ -8,7 +8,7 @@ if %errorlevel% NEQ 0 exit /b %errorlevel%
 
 SET VCPKG_EXE=%VCPKG_ROOT%\vcpkg.exe
 
-%VCPKG_EXE% install "libarchive[bzip2,lz4,lzma,lzo,crypto,zstd]" --triplet x64-windows-static-md
+%VCPKG_EXE% install "libarchive[bzip2,crypto,zstd]" --triplet x64-windows-static-md
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 %VCPKG_EXE% install "curl" --triplet x64-windows-static-md
 if %errorlevel% NEQ 0 exit /b %errorlevel%
