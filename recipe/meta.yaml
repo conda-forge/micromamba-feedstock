@@ -59,7 +59,6 @@ requirements:
     - vcpkg-tool      # [win]
     - python          # [win]
     - curl >=8.4.0    # [win]
-    - zlib            # [win]
   host:
     - cli11 >=2.2,<3
     - cpp-expected
@@ -72,6 +71,7 @@ requirements:
     - reproc-static >=14.2.4.post0
     - reproc-cpp-static >=14.2.4.post0
     - libmsgpack-c-static
+    - zlib
     - libcurl >=8.4.0              # [unix]
     - libcurl-static >=8.4.0       # [unix]
     - xz-static                    # [unix]
@@ -81,7 +81,6 @@ requirements:
     - openssl                      # [unix]
     - libopenssl-static            # [unix]
     - zstd-static                  # [unix]
-    - zlib                         # [unix]
     - libnghttp2-static            # [unix]
     - lz4-c-static                 # [unix]
     - winreg                       # [win]
