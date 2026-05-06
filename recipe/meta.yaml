@@ -1,6 +1,6 @@
 {% set version = "2.6.0" %}
 {% set sha256 = "d3a9eeb7e84c6c107ad40f1e665e38c5af97dac822bd766109988ffbedbcc4a3" %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -27,6 +27,8 @@ source:
   - "{{ mamba_source_type }}": "{{ mamba_source_val }}"
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
     folder: mamba
+    patch:
+      - 0001-maint-Remove-libxml2-as-a-dependency.patch
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
   - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2025.07.25.tar.gz  # [win]
     sha256: dff617c636a6519d4f083e658d404970c9da7d940a974e1d17f855f26a334e2f     # [win]
