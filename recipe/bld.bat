@@ -14,8 +14,6 @@ if %errorlevel% NEQ 0 exit /b %errorlevel%
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 %VCPKG_EXE% install "libiconv" --triplet x64-windows-static-md
 if %errorlevel% NEQ 0 exit /b %errorlevel%
-%VCPKG_EXE% install "libxml2" --triplet x64-windows-static-md
-if %errorlevel% NEQ 0 exit /b %errorlevel%
 
 SET "CXXFLAGS=%CXXFLAGS% /showIncludes"
 SET "CXXFLAGS=%CXXFLAGS% /D YAML_CPP_STATIC_DEFINE"
