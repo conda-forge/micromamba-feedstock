@@ -1,5 +1,5 @@
-{% set version = "2.6.1" %}
-{% set sha256 = "2e8135891b97560f1aedaae8114b711f5b036af0e338ed84c4e7db31c0f679ae" %}
+{% set version = "2.6.2" %}
+{% set sha256 = "cf085e4bbc5a3b2ec9c58761586287431453b604f75a87ea5990e252cab026fe" %}
 {% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
@@ -45,7 +45,7 @@ build:
     - {{ compiler('cxx') }}       # [linux]
     - python                      # [win]
     - libsolv
-    - zlib
+    - zlib <1.3.2
 
 requirements:
   build:
@@ -57,7 +57,7 @@ requirements:
     - vcpkg-tool      # [win]
     - python          # [win]
     - curl >=8.4.0    # [win]
-    - zlib            # [win]
+    - zlib <1.3.2     # [win]
   host:
     - cli11 >=2.2,<3
     - cpp-expected
@@ -79,7 +79,7 @@ requirements:
     - openssl                      # [unix]
     - libopenssl-static            # [unix]
     - zstd-static                  # [unix]
-    - zlib                         # [unix]
+    - zlib <1.3.2                  # [unix]
     - libnghttp2-static            # [unix]
     - lz4-c-static                 # [unix]
     - winreg                       # [win]
