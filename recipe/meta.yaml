@@ -28,8 +28,8 @@ source:
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
     folder: mamba
   # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
-  - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2026.04.27.tar.gz  # [win]
-    sha256: d16031ddc44ca990052a6cee0e76aa240fa01397930dbc5eb054852d1816d860     # [win]
+  - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2025.07.25.tar.gz  # [win]
+    sha256: dff617c636a6519d4f083e658d404970c9da7d940a974e1d17f855f26a334e2f     # [win]
     folder: vcpkg  # [win]
 
 build:
