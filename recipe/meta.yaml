@@ -45,7 +45,7 @@ build:
     - {{ compiler('cxx') }}       # [linux]
     - python                      # [win]
     - libsolv
-    - zlib <1.3.2
+    - zlib
 
 requirements:
   build:
@@ -57,7 +57,6 @@ requirements:
     - vcpkg-tool      # [win]
     - python          # [win]
     - curl >=8.4.0    # [win]
-    - zlib <1.3.2     # [win]
   host:
     - cli11 >=2.2,<3
     - cpp-expected
