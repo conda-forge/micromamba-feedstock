@@ -37,6 +37,8 @@ build:
     - libcurl
     - libarchive-minimal-static
     - openssl
+    - libssh2                     # [win]
+    - libiconv                    # [win]
     - spdlog
     - fmt
     - {{ compiler('c') }}         # [linux]

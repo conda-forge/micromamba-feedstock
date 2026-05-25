@@ -1,15 +1,5 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: Julien Jerphanion <git@jjerphan.xyz>
-Date: Mon, 25 May 2026 12:00:00 +0200
-Subject: [PATCH] fix: Use conda-forge deps on Windows static builds
-
-Allow micromamba Windows builds to link against conda-forge static
-libraries instead of requiring vcpkg.
-
-Signed-off-by: Julien Jerphanion <git@jjerphan.xyz>
----
---- a/libmamba/CMakeLists.txt	2026-05-25 16:21:51.173319083 +0200
-+++ b/libmamba/CMakeLists.txt	2026-05-25 18:36:14.699129487 +0200
+--- a/libmamba/CMakeLists.txt
++++ b/libmamba/CMakeLists.txt
 @@ -577,6 +577,19 @@
  
          elseif(WIN32)
@@ -38,10 +28,37 @@ Signed-off-by: Julien Jerphanion <git@jjerphan.xyz>
  
              # TODO AND CONTEXT: We found a link error in libarchive which lacked a link to XmlLite
              # which is provided by Windows. libarchive has cmake scripts doing the necessary work to
-@@ -608,6 +622,128 @@
+@@ -608,40 +622,170 @@
              set(SYSTEM_PROVIDED_LIBRARIES XmlLite.lib) # required by libarchive
              set(ENABLE_WIN32_XMLLITE ON)
  
+-            # For Windows we have a vcpkg based build system right now.
+-            find_package(LibArchive MODULE REQUIRED)
+-            find_package(CURL CONFIG REQUIRED)
+-            find_library(LIBLZMA_LIBRARIES lzma REQUIRED)
+-            find_library(LZ4_LIBRARY NAMES lz4)
+-            find_library(LZO2_LIBRARY NAMES lzo2)
+-            find_package(zstd CONFIG REQUIRED)
+-            find_library(BZIP2_LIBRARIES NAMES bz2)
+-            find_library(CRYPTO_LIBRARIES NAMES libcrypto)
+-
+-            find_library(ICONV_LIBRARY NAMES libiconv iconv)
+-            find_library(CHARSET_LIBRARY NAMES libcharset charset)
+-            message("Found: ${ICONV_LIBRARY} ${CHARSET_LIBRARY}")
+-
+-            target_link_libraries(
+-                ${target_name}
+-                PUBLIC
+-                    ${CRYPTO_LIBRARIES}
+-                    ${SYSTEM_PROVIDED_LIBRARIES}
+-                    ${LibArchive_LIBRARY}
+-                    ${ICONV_LIBRARY}
+-                    ${CHARSET_LIBRARY}
+-                    zstd::libzstd_static
+-                    ${LZ4_LIBRARY}
+-                    ${LZO2_LIBRARY}
+-                    ${BZIP2_LIBRARIES}
+-                    ${LIBLZMA_LIBRARIES}
 +            if(MAMBA_USE_CONDA_FORGE_DEPS)
 +                set(CMAKE_FIND_LIBRARY_SUFFIXES ".lib" ".a")
 +                find_library(
@@ -79,7 +96,9 @@ Signed-off-by: Julien Jerphanion <git@jjerphan.xyz>
 +                    add_library(CURL::libcurl STATIC IMPORTED)
 +                endif()
 +                set_target_properties(
-+                    CURL::libcurl
+                     CURL::libcurl
+-                    ${sodium_LIBRARY_RELEASE}
+-            )
 +                    PROPERTIES
 +                        IMPORTED_LOCATION "${MAMBA_CURL_LIBRARY}"
 +                        INTERFACE_INCLUDE_DIRECTORIES "${MAMBA_CURL_INCLUDE_DIR}"
@@ -108,10 +127,13 @@ Signed-off-by: Julien Jerphanion <git@jjerphan.xyz>
 +                )
 +                find_library(
 +                    LIBSSH2_LIBRARY
-+                    NAMES libssh2 ssh2
++                    NAMES libssh2_static libssh2
 +                    PATHS "${_mamba_deps_prefix}/lib"
 +                    NO_DEFAULT_PATH
 +                )
++                if(NOT LIBSSH2_LIBRARY)
++                    message(FATAL_ERROR "libssh2 static library not found under ${_mamba_deps_prefix}")
++                endif()
 +                find_library(
 +                    LIBSSL_LIBRARY
 +                    NAMES libssl_static libssl ssl
@@ -164,13 +186,36 @@ Signed-off-by: Julien Jerphanion <git@jjerphan.xyz>
 +                        iphlpapi
 +                )
 +            else()
-             # For Windows we have a vcpkg based build system right now.
-             find_package(LibArchive MODULE REQUIRED)
-             find_package(CURL CONFIG REQUIRED)
-@@ -638,10 +774,15 @@
-                     CURL::libcurl
-                     ${sodium_LIBRARY_RELEASE}
-             )
++                # For Windows we have a vcpkg based build system right now.
++                find_package(LibArchive MODULE REQUIRED)
++                find_package(CURL CONFIG REQUIRED)
++                find_library(LIBLZMA_LIBRARIES lzma REQUIRED)
++                find_library(LZ4_LIBRARY NAMES lz4)
++                find_library(LZO2_LIBRARY NAMES lzo2)
++                find_package(zstd CONFIG REQUIRED)
++                find_library(BZIP2_LIBRARIES NAMES bz2)
++                find_library(CRYPTO_LIBRARIES NAMES libcrypto)
++
++                find_library(ICONV_LIBRARY NAMES libiconv iconv)
++                find_library(CHARSET_LIBRARY NAMES libcharset charset)
++                message("Found: ${ICONV_LIBRARY} ${CHARSET_LIBRARY}")
++
++                target_link_libraries(
++                    ${target_name}
++                    PUBLIC
++                        ${CRYPTO_LIBRARIES}
++                        ${SYSTEM_PROVIDED_LIBRARIES}
++                        ${LibArchive_LIBRARY}
++                        ${ICONV_LIBRARY}
++                        ${CHARSET_LIBRARY}
++                        zstd::libzstd_static
++                        ${LZ4_LIBRARY}
++                        ${LZO2_LIBRARY}
++                        ${BZIP2_LIBRARIES}
++                        ${LIBLZMA_LIBRARIES}
++                        CURL::libcurl
++                        ${sodium_LIBRARY_RELEASE}
++                )
 +            endif()
  
              add_compile_definitions(LIBARCHIVE_STATIC CURL_STATICLIB)
