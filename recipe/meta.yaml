@@ -1,6 +1,6 @@
 {% set version = "2.6.2" %}
 {% set sha256 = "cf085e4bbc5a3b2ec9c58761586287431453b604f75a87ea5990e252cab026fe" %}
-{% set build_num = 1 %}
+{% set build_num = 2 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -27,17 +27,15 @@ source:
   - "{{ mamba_source_type }}": "{{ mamba_source_val }}"
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
     folder: mamba
-  # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
-  - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2025.07.25.tar.gz  # [win]
-    sha256: dff617c636a6519d4f083e658d404970c9da7d940a974e1d17f855f26a334e2f     # [win]
-    folder: vcpkg  # [win]
+    patches:
+      - 0001-fix-Use-conda-forge-deps-on-Windows.patch
 
 build:
   number: {{ build_num }}
   string: {{ build_num }}
   ignore_run_exports_from:
-    - libcurl                     # [unix]
-    - libarchive-minimal-static   # [unix]
+    - libcurl
+    - libarchive-minimal-static
     - openssl                     # [unix]
     - spdlog
     - fmt
@@ -54,9 +52,6 @@ requirements:
     - {{ stdlib('c') }}
     - cmake
     - ninja
-    - vcpkg-tool      # [win]
-    - python          # [win]
-    - curl >=8.4.0    # [win]
   host:
     - cli11 >=2.2,<3
     - cpp-expected
@@ -69,18 +64,20 @@ requirements:
     - reproc-static >=14.2.4.post0
     - reproc-cpp-static >=14.2.4.post0
     - libmsgpack-c-static
+    - libcurl-static >=8.4.0
+    - libarchive-minimal-static
+    - zstd-static
+    # zlib 1.3.2 has breaking changes on Windows: https://github.com/madler/zlib/issues/1181
+    - zlib <1.3.2
     - libcurl >=8.4.0              # [unix]
-    - libcurl-static >=8.4.0       # [unix]
     - xz-static                    # [unix]
     - libssh2-static               # [unix]
-    - libarchive-minimal-static    # [unix]
     - krb5-static                  # [unix]
     - openssl                      # [unix]
     - libopenssl-static            # [unix]
-    - zstd-static                  # [unix]
-    - zlib <1.3.2                  # [unix]
     - libnghttp2-static            # [unix]
     - lz4-c-static                 # [unix]
+    - libiconv                     # [win]
     - winreg                       # [win]
 
 test:

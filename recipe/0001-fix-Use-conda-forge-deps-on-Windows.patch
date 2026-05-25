@@ -1,0 +1,116 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Julien Jerphanion <git@jjerphan.xyz>
+Date: Mon, 25 May 2026 12:00:00 +0200
+Subject: [PATCH] fix: Use conda-forge deps on Windows static builds
+
+Allow micromamba Windows builds to link against conda-forge static
+libraries instead of requiring vcpkg.
+
+Signed-off-by: Julien Jerphanion <git@jjerphan.xyz>
+---
+--- a/libmamba/CMakeLists.txt	2026-05-25 16:21:51.173319083 +0200
++++ b/libmamba/CMakeLists.txt	2026-05-25 16:22:20.985031419 +0200
+@@ -577,6 +577,14 @@
+ 
+         elseif(WIN32)
+ 
++            if(MAMBA_USE_CONDA_FORGE_DEPS)
++                if(NOT DEFINED ENV{CONDA_PREFIX})
++                    message(FATAL_ERROR "MAMBA_USE_CONDA_FORGE_DEPS requires CONDA_PREFIX")
++                endif()
++                set(_mamba_deps_prefix "$ENV{CONDA_PREFIX}/Library")
++                list(PREPEND CMAKE_PREFIX_PATH "${_mamba_deps_prefix}")
++            else()
++
+             # vcpkg: prefer manifest install dir (./vcpkg_installed/$TRIPLET), else classic layout.
+             if(DEFINED VCPKG_TARGET_TRIPLET)
+                 set(_mamba_vcpkg_triplet "${VCPKG_TARGET_TRIPLET}")
+@@ -598,6 +606,7 @@
+                 )
+             endif()
+             list(PREPEND CMAKE_PREFIX_PATH "${_mamba_vcpkg_prefix}" "$ENV{CONDA_PREFIX}/Library")
++            endif()
+ 
+             # TODO AND CONTEXT: We found a link error in libarchive which lacked a link to XmlLite
+             # which is provided by Windows. libarchive has cmake scripts doing the necessary work to
+@@ -608,6 +617,65 @@
+             set(SYSTEM_PROVIDED_LIBRARIES XmlLite.lib) # required by libarchive
+             set(ENABLE_WIN32_XMLLITE ON)
+ 
++            if(MAMBA_USE_CONDA_FORGE_DEPS)
++                set(CMAKE_FIND_LIBRARY_SUFFIXES ".lib" ".a")
++                find_library(
++                    LibArchive_LIBRARY
++                    NAMES archive_static archive libarchive
++                    PATHS "${_mamba_deps_prefix}/lib"
++                    NO_DEFAULT_PATH
++                )
++                find_path(
++                    LibArchive_INCLUDE_DIR
++                    NAMES archive.h
++                    PATHS "${_mamba_deps_prefix}/include"
++                    NO_DEFAULT_PATH
++                )
++                if(NOT LibArchive_LIBRARY OR NOT LibArchive_INCLUDE_DIR)
++                    message(FATAL_ERROR "libarchive not found under ${_mamba_deps_prefix}")
++                endif()
++
++                find_package(CURL REQUIRED)
++                find_package(zstd CONFIG REQUIRED)
++                find_library(
++                    BZIP2_LIBRARIES
++                    NAMES bzip2_static bzip2 libbz2_static libbz2
++                    PATHS "${_mamba_deps_prefix}/lib"
++                    NO_DEFAULT_PATH
++                )
++                find_library(
++                    CRYPTO_LIBRARIES
++                    NAMES libcrypto crypto
++                    PATHS "${_mamba_deps_prefix}/lib"
++                    NO_DEFAULT_PATH
++                )
++                find_library(
++                    ICONV_LIBRARY
++                    NAMES iconv libiconv
++                    PATHS "${_mamba_deps_prefix}/lib"
++                    NO_DEFAULT_PATH
++                )
++                find_library(
++                    CHARSET_LIBRARY
++                    NAMES charset libcharset
++                    PATHS "${_mamba_deps_prefix}/lib"
++                    NO_DEFAULT_PATH
++                )
++                message("Found: ${ICONV_LIBRARY} ${CHARSET_LIBRARY}")
++
++                target_link_libraries(
++                    ${target_name}
++                    PUBLIC
++                        ${CRYPTO_LIBRARIES}
++                        ${SYSTEM_PROVIDED_LIBRARIES}
++                        ${LibArchive_LIBRARY}
++                        ${ICONV_LIBRARY}
++                        ${CHARSET_LIBRARY}
++                        zstd::libzstd_static
++                        ${BZIP2_LIBRARIES}
++                        CURL::libcurl
++                )
++            else()
+             # For Windows we have a vcpkg based build system right now.
+             find_package(LibArchive MODULE REQUIRED)
+             find_package(CURL CONFIG REQUIRED)
+@@ -638,10 +706,13 @@
+                     CURL::libcurl
+                     ${sodium_LIBRARY_RELEASE}
+             )
++            endif()
+ 
+             add_compile_definitions(LIBARCHIVE_STATIC CURL_STATICLIB)
+             include_directories($ENV{CONDA_PREFIX}/Library/include/)
+-            include_directories("${_mamba_vcpkg_prefix}/include/")
++            if(NOT MAMBA_USE_CONDA_FORGE_DEPS)
++                include_directories("${_mamba_vcpkg_prefix}/include/")
++            endif()
+         endif()
+     else()
+         message("   -> Dynamically linking against libmamba (shared) dependencies")
