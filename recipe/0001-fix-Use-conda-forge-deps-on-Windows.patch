@@ -9,7 +9,7 @@ libraries instead of requiring vcpkg.
 Signed-off-by: Julien Jerphanion <git@jjerphan.xyz>
 ---
 --- a/libmamba/CMakeLists.txt	2026-05-25 16:21:51.173319083 +0200
-+++ b/libmamba/CMakeLists.txt	2026-05-25 17:32:29.526082793 +0200
++++ b/libmamba/CMakeLists.txt	2026-05-25 17:48:10.519094279 +0200
 @@ -577,6 +577,19 @@
  
          elseif(WIN32)
@@ -38,7 +38,7 @@ Signed-off-by: Julien Jerphanion <git@jjerphan.xyz>
  
              # TODO AND CONTEXT: We found a link error in libarchive which lacked a link to XmlLite
              # which is provided by Windows. libarchive has cmake scripts doing the necessary work to
-@@ -608,6 +622,58 @@
+@@ -608,6 +622,111 @@
              set(SYSTEM_PROVIDED_LIBRARIES XmlLite.lib) # required by libarchive
              set(ENABLE_WIN32_XMLLITE ON)
  
@@ -60,11 +60,55 @@ Signed-off-by: Julien Jerphanion <git@jjerphan.xyz>
 +                    message(FATAL_ERROR "libarchive not found under ${_mamba_deps_prefix}")
 +                endif()
 +
-+                find_package(CURL REQUIRED)
-+                find_package(zstd CONFIG REQUIRED)
++                find_library(
++                    MAMBA_CURL_LIBRARY
++                    NAMES libcurl_a curl libcurl
++                    PATHS "${_mamba_deps_prefix}/lib"
++                    NO_DEFAULT_PATH
++                )
++                find_path(
++                    MAMBA_CURL_INCLUDE_DIR
++                    NAMES curl/curl.h
++                    PATHS "${_mamba_deps_prefix}/include"
++                    NO_DEFAULT_PATH
++                )
++                if(NOT MAMBA_CURL_LIBRARY OR NOT MAMBA_CURL_INCLUDE_DIR)
++                    message(FATAL_ERROR "libcurl not found under ${_mamba_deps_prefix}")
++                endif()
++                if(NOT TARGET CURL::libcurl)
++                    add_library(CURL::libcurl STATIC IMPORTED)
++                endif()
++                set_target_properties(
++                    CURL::libcurl
++                    PROPERTIES
++                        IMPORTED_LOCATION "${MAMBA_CURL_LIBRARY}"
++                        INTERFACE_INCLUDE_DIRECTORIES "${MAMBA_CURL_INCLUDE_DIR}"
++                        INTERFACE_COMPILE_DEFINITIONS CURL_STATICLIB
++                )
++                find_library(
++                    ZSTD_LIBRARY
++                    NAMES zstd_static libzstd_static zstd
++                    PATHS "${_mamba_deps_prefix}/lib"
++                    NO_DEFAULT_PATH
++                )
++                if(NOT ZSTD_LIBRARY)
++                    message(FATAL_ERROR "zstd static library not found under ${_mamba_deps_prefix}")
++                endif()
 +                find_library(
 +                    BZIP2_LIBRARIES
 +                    NAMES bzip2_static bzip2 libbz2_static libbz2
++                    PATHS "${_mamba_deps_prefix}/lib"
++                    NO_DEFAULT_PATH
++                )
++                find_library(
++                    ZLIB_LIBRARY
++                    NAMES zlibstatic zlib z
++                    PATHS "${_mamba_deps_prefix}/lib"
++                    NO_DEFAULT_PATH
++                )
++                find_library(
++                    LIBSSH2_LIBRARY
++                    NAMES libssh2 ssh2
 +                    PATHS "${_mamba_deps_prefix}/lib"
 +                    NO_DEFAULT_PATH
 +                )
@@ -89,15 +133,24 @@ Signed-off-by: Julien Jerphanion <git@jjerphan.xyz>
 +                        ${LibArchive_LIBRARY}
 +                        ${ICONV_LIBRARY}
 +                        ${CHARSET_LIBRARY}
-+                        zstd::libzstd_static
++                        ${ZSTD_LIBRARY}
 +                        ${BZIP2_LIBRARIES}
++                        ${ZLIB_LIBRARY}
++                        ${LIBSSH2_LIBRARY}
 +                        CURL::libcurl
++                        wldap32
++                        bcrypt
++                        advapi32
++                        crypt32
++                        secur32
++                        ws2_32
++                        iphlpapi
 +                )
 +            else()
              # For Windows we have a vcpkg based build system right now.
              find_package(LibArchive MODULE REQUIRED)
              find_package(CURL CONFIG REQUIRED)
-@@ -638,10 +704,15 @@
+@@ -638,10 +757,15 @@
                      CURL::libcurl
                      ${sodium_LIBRARY_RELEASE}
              )
