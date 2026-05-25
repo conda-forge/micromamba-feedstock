@@ -51,6 +51,7 @@ requirements:
     - {{ stdlib('c') }}
     - cmake
     - ninja
+    - python 3.13   # [win]
   host:
     - cli11 >=2.2,<3
     - cpp-expected
