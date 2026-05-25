@@ -41,7 +41,6 @@ build:
     - fmt
     - {{ compiler('c') }}         # [linux]
     - {{ compiler('cxx') }}       # [linux]
-    - python                      # [win]
     - libsolv
     - zlib
 
