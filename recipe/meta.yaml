@@ -36,7 +36,7 @@ build:
   ignore_run_exports_from:
     - libcurl
     - libarchive-minimal-static
-    - openssl                     # [unix]
+    - openssl
     - spdlog
     - fmt
     - {{ compiler('c') }}         # [linux]
@@ -68,12 +68,12 @@ requirements:
     - libarchive-minimal-static
     - zstd-static
     - zlib
+    - libssh2-static
+    - openssl
+    - libopenssl-static
     - libcurl >=8.4.0              # [unix]
     - xz-static                    # [unix]
-    - libssh2-static               # [unix]
     - krb5-static                  # [unix]
-    - openssl                      # [unix]
-    - libopenssl-static            # [unix]
     - libnghttp2-static            # [unix]
     - lz4-c-static                 # [unix]
     - libiconv                     # [win]
