@@ -14,12 +14,6 @@ libcurl:
 - '8'
 libiconv:
 - '1'
-pin_run_as_build:
-  python:
-    min_pin: x.x
-    max_pin: x.x
-python:
-- 3.12.* *_cpython
 spdlog:
 - '1.17'
 target_platform:
