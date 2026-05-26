@@ -12,8 +12,6 @@ cmake -S mamba ^
     -D BUILD_LIBMAMBA_SPDLOG=ON ^
     -D BUILD_STATIC=ON ^
     -D BUILD_MICROMAMBA=ON ^
-    -D MAMBA_USE_CONDA_FORGE_DEPS=ON ^
-    -D MAMBA_DEPS_PREFIX=%LIBRARY_PREFIX% ^
     -G "Ninja"
 if %errorlevel% NEQ 0 exit /b %errorlevel%
 
