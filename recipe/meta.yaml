@@ -29,6 +29,7 @@ source:
     folder: mamba
     patches:
       - 0001-fix-Use-conda-forge-deps-on-Windows.patch
+      - 0002-msvc-align-external-warning-level.patch
 
 build:
   number: {{ build_num }}
