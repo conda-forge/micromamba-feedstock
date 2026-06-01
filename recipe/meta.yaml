@@ -80,16 +80,19 @@ requirements:
 
 test:
   requires:
+    - m2-grep         # [win]
+    - m2-sed          # [win]
+    - m2-coreutils    # [win]
     - m2w64-binutils  # [win]
   source_files:
     - mamba/dev/check_micromamba_windows_dlls.sh       # [win]
     - mamba/dev/micromamba_windows_allowed_dlls.tsv    # [win]
   commands:
-    - test -f "${PREFIX}/bin/micromamba"                    # [unix]
-    - test ! -f "${PREFIX}/etc/profile.d/mamba.sh"          # [unix]
+    - test -f "${PREFIX}/bin/micromamba"                  # [unix]
+    - test ! -f "${PREFIX}/etc/profile.d/mamba.sh"        # [unix]
     - if not exist %LIBRARY_BIN%\micromamba.exe (exit 1)  # [win]
     - micromamba{{ bin_ext }} --help
-    - bash mamba/dev/check_micromamba_windows_dlls.sh "%LIBRARY_BIN%\micromamba.exe"  # [win]
+    - set "PATH=%CONDA_PREFIX%\Library\usr\bin;%CONDA_PREFIX%\Library\mingw-w64\bin;%PATH%" && bash mamba/dev/check_micromamba_windows_dlls.sh "%LIBRARY_BIN%\micromamba.exe"  # [win]
     - export MAMBA_ROOT_PREFIX="$(mktemp -d)"  # [unix]
     - mkdir %TEMP%\mamba                       # [win]
     - set "MAMBA_ROOT_PREFIX=%TEMP%\mamba"     # [win]
