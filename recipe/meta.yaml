@@ -57,14 +57,14 @@ requirements:
     - nlohmann_json >=3.12,<4.0
     - simdjson-static >=3.3.0
     - spdlog
-    - fmt >=11.1.0
+    - fmt
     - libsolv-static >=0.7.24
     - yaml-cpp-static >=0.8.0
     - reproc-static >=14.2.4.post0
     - reproc-cpp-static >=14.2.4.post0
     - libmsgpack-c-static
-    - libcurl >=8.4.0
-    - libcurl-static >=8.4.0
+    - libcurl
+    - libcurl-static
     - xz-static                    # [unix]
     - libssh2-static
     - libarchive-minimal-static
@@ -79,11 +79,17 @@ requirements:
     - winreg                       # [win]
 
 test:
+  requires:
+    - m2w64-binutils  # [win]
+  source_files:
+    - mamba/dev/check_micromamba_windows_dlls.sh       # [win]
+    - mamba/dev/micromamba_windows_allowed_dlls.tsv    # [win]
   commands:
     - test -f "${PREFIX}/bin/micromamba"                    # [unix]
     - test ! -f "${PREFIX}/etc/profile.d/mamba.sh"          # [unix]
     - if not exist %LIBRARY_BIN%\micromamba.exe (exit 1)  # [win]
     - micromamba{{ bin_ext }} --help
+    - bash mamba/dev/check_micromamba_windows_dlls.sh "%LIBRARY_BIN%\micromamba.exe"  # [win]
     - export MAMBA_ROOT_PREFIX="$(mktemp -d)"  # [unix]
     - mkdir %TEMP%\mamba                       # [win]
     - set "MAMBA_ROOT_PREFIX=%TEMP%\mamba"     # [win]
