@@ -80,6 +80,7 @@ requirements:
 
 test:
   requires:
+    - m2-bash         # [win]
     - m2-grep         # [win]
     - m2-sed          # [win]
     - m2-coreutils    # [win]
