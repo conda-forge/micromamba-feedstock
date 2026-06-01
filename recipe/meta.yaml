@@ -1,5 +1,5 @@
-{% set version = "2.6.0.rc5" %}
-{% set sha256 = "7271f15cd3dc7cf08376c07d1bb9f2f954d5e30ebdc31fe6e238b5ba43b08153" %}
+{% set version = "2.7.0.alpha0" %}
+{% set sha256 = "676bba8f9f643c4d0e733da78301e8575328e15b4c23171173091b64d93f15d9" %}
 {% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
@@ -27,10 +27,6 @@ source:
   - "{{ mamba_source_type }}": "{{ mamba_source_val }}"
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
     folder: mamba
-  # VCPKG comes with its own (short-lived) metadata which can be already outdated in the latest release
-  - url: https://github.com/microsoft/vcpkg/archive/refs/tags/2025.07.25.tar.gz  # [win]
-    sha256: dff617c636a6519d4f083e658d404970c9da7d940a974e1d17f855f26a334e2f     # [win]
-    folder: vcpkg  # [win]
 
 build:
   number: {{ build_num }}
@@ -54,42 +50,50 @@ requirements:
     - {{ stdlib('c') }}
     - cmake
     - ninja
-    - vcpkg-tool      # [win]
     - python          # [win]
-    - curl >=8.4.0    # [win]
-    - zlib            # [win]
   host:
     - cli11 >=2.2,<3
     - cpp-expected
     - nlohmann_json >=3.12,<4.0
     - simdjson-static >=3.3.0
     - spdlog
-    - fmt >=11.1.0
+    - fmt
     - libsolv-static >=0.7.24
     - yaml-cpp-static >=0.8.0
     - reproc-static >=14.2.4.post0
     - reproc-cpp-static >=14.2.4.post0
     - libmsgpack-c-static
-    - libcurl >=8.4.0              # [unix]
-    - libcurl-static >=8.4.0       # [unix]
+    - libcurl
+    - libcurl-static
     - xz-static                    # [unix]
-    - libssh2-static               # [unix]
-    - libarchive-minimal-static    # [unix]
+    - libssh2-static
+    - libarchive-minimal-static
     - krb5-static                  # [unix]
-    - openssl                      # [unix]
-    - libopenssl-static            # [unix]
-    - zstd-static                  # [unix]
-    - zlib                         # [unix]
+    - openssl
+    - libopenssl-static
+    - zstd-static
+    - zlib
     - libnghttp2-static            # [unix]
     - lz4-c-static                 # [unix]
+    - libiconv                     # [win]
     - winreg                       # [win]
 
 test:
+  requires:
+    - m2-bash         # [win]
+    - m2-grep         # [win]
+    - m2-sed          # [win]
+    - m2-coreutils    # [win]
+    - binutils        # [win]
+  source_files:
+    - mamba/dev/check_micromamba_windows_dlls.sh       # [win]
+    - mamba/dev/micromamba_windows_allowed_dlls.tsv    # [win]
   commands:
-    - test -f "${PREFIX}/bin/micromamba"                    # [unix]
-    - test ! -f "${PREFIX}/etc/profile.d/mamba.sh"          # [unix]
+    - test -f "${PREFIX}/bin/micromamba"                  # [unix]
+    - test ! -f "${PREFIX}/etc/profile.d/mamba.sh"        # [unix]
     - if not exist %LIBRARY_BIN%\micromamba.exe (exit 1)  # [win]
     - micromamba{{ bin_ext }} --help
+    - set "PATH=%CONDA_PREFIX%\Library\usr\bin;%CONDA_PREFIX%\Library\mingw-w64\bin;%PATH%" && bash mamba/dev/check_micromamba_windows_dlls.sh "%LIBRARY_BIN%\micromamba.exe"  # [win]
     - export MAMBA_ROOT_PREFIX="$(mktemp -d)"  # [unix]
     - mkdir %TEMP%\mamba                       # [win]
     - set "MAMBA_ROOT_PREFIX=%TEMP%\mamba"     # [win]

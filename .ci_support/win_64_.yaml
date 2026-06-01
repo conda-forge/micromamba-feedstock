@@ -10,6 +10,12 @@ cxx_compiler:
 - vs2022
 fmt:
 - '12.1'
+libcurl:
+- '8'
+libiconv:
+- '1'
+openssl:
+- '3.5'
 spdlog:
 - '1.17'
 target_platform:
