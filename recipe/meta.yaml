@@ -84,7 +84,7 @@ test:
     - m2-grep         # [win]
     - m2-sed          # [win]
     - m2-coreutils    # [win]
-    - m2w64-binutils  # [win]
+    - binutils        # [win]
   source_files:
     - mamba/dev/check_micromamba_windows_dlls.sh       # [win]
     - mamba/dev/micromamba_windows_allowed_dlls.tsv    # [win]
