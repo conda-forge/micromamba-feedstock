@@ -26,6 +26,7 @@ package:
 source:
   - "{{ mamba_source_type }}": "{{ mamba_source_val }}"
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
+    patches: 0001-psl-dependencies.patch
     folder: mamba
 
 build:
