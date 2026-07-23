@@ -1,6 +1,6 @@
 echo ON
 
-cmake -S mamba ^
+cmake %CMAKE_ARGS% -S mamba ^
     -B build ^
     -D CMAKE_MSVC_RUNTIME_LIBRARY="MultiThreadedDLL" ^
     -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
