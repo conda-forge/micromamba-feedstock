@@ -1,5 +1,5 @@
-{% set version = "2.7.0.alpha0" %}
-{% set sha256 = "676bba8f9f643c4d0e733da78301e8575328e15b4c23171173091b64d93f15d9" %}
+{% set version = "2.9.0.rc0" %}
+{% set sha256 = "2cc16d2426210a0570ee74a42bfdf4b983961b3c6291f3092322077f5415110d" %}
 {% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
@@ -65,6 +65,7 @@ requirements:
     - libmsgpack-c-static
     - libcurl
     - libcurl-static
+    - libpsl-static
     - xz-static                    # [unix]
     - libssh2-static
     - libarchive-minimal-static
