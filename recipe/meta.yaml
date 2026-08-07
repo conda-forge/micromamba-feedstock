@@ -1,6 +1,6 @@
-{% set version = "2.8.1" %}
-{% set sha256 = "5f8f206ed5951e45dc3c9bf5aad80d38312d34d9fadc9cc00886e6ab93569e53" %}
-{% set build_num = 1 %}
+{% set version = "2.9.0" %}
+{% set sha256 = "57befdcc985b07f95d1a495569ac249a270c71167d111374ff08443154821e1d" %}
+{% set build_num = 0 %}
 
 # A strategy for testing the feedstock locally in mamba CI
 {% if os.environ.get("CI", "") == "local" %}
@@ -26,7 +26,6 @@ package:
 source:
   - "{{ mamba_source_type }}": "{{ mamba_source_val }}"
     "{{ mamba_hash_type }}": "{{ mamba_hash_val }}"
-    patches: 0001-psl-dependencies.patch
     folder: mamba
 
 build:
