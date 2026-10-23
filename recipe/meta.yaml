@@ -78,6 +78,7 @@ requirements:
     - lz4-c-static                 # [unix]
     - libiconv                     # [win]
     - winreg                       # [win]
+    - howardhinnant_date           # [osx]
 
 test:
   requires:
